@@ -88,7 +88,7 @@ export default function RootLayout({
           `
         }} />
       </head>
-      <body className={`font-sans antialiased`} style={{ margin: 0, padding: 0, overflow: 'hidden', height: '100vh' }} suppressHydrationWarning>
+      <body className={`font-sans antialiased`} suppressHydrationWarning>
         {children}
         <Analytics />
       </body>
