@@ -1,7 +1,0 @@
-# Node modules
-node_modules/
-.next/
-
-
-# Ignore all files named all.ext
-all.ext
