@@ -2,11 +2,11 @@
 @import "tw-animate-css";
 
 :root {
-  /* Primary Colors - Dark Blue Theme */
+  /* Primary Colors - Dark Blue Theme (Matching Logo) */
   --color-dark-blue: #001f3f;
   --color-blue: #0052cc;
-  --color-blue-light: #3b82f6;
-  --color-blue-accent: #1e40af;
+  --color-blue-light: #60a5fa;
+  --color-blue-accent: #003366;
   --color-white: #ffffff;
   --color-light-gray: #f5f5f5;
   --color-medium-gray: #e0e0e0;
@@ -24,7 +24,7 @@
   --secondary-foreground: #ffffff;
   --muted: #f5f5f5;
   --muted-foreground: #666666;
-  --accent: #3b82f6;
+  --accent: #60a5fa;
   --accent-foreground: #ffffff;
   --destructive: #ff4444;
   --destructive-foreground: #ffffff;
@@ -33,8 +33,8 @@
   --ring: #0052cc;
   --chart-1: #0052cc;
   --chart-2: #001f3f;
-  --chart-3: #3b82f6;
-  --chart-4: #1e40af;
+  --chart-3: #60a5fa;
+  --chart-4: #003366;
   --chart-5: #e0e0e0;
   --radius: 0.625rem;
   --sidebar: #ffffff;
@@ -54,7 +54,7 @@
   --card-foreground: #ffffff;
   --popover: #0a1a2f;
   --popover-foreground: #ffffff;
-  --primary: #3b82f6;
+  --primary: #60a5fa;
   --primary-foreground: #ffffff;
   --secondary: #ffffff;
   --secondary-foreground: #001f3f;

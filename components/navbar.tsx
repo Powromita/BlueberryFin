@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { ChevronDownIcon, ShoppingCartIcon, UserIcon } from "@heroicons/react/24/outline"
+import { motion } from "framer-motion"
+import { ChevronDownIcon } from "@heroicons/react/24/outline"
+import { Logo } from "./logo"
 
 const services = [
   { name: "IPO Advisory & Readiness", href: "/services/ipo-advisory" },
@@ -15,8 +17,6 @@ const services = [
 
 export function Navbar() {
   const [servicesOpen, setServicesOpen] = useState(false)
-  const [coreTeamOpen, setCoreTeamOpen] = useState(false)
-  const [profileOpen, setProfileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -27,23 +27,70 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const scrollToContact = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    const contactSection = document.getElementById("contact")
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+  }
+
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/95 backdrop-blur shadow-lg" : "bg-white/80 backdrop-blur"
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+        scrolled 
+          ? "bg-white/95 backdrop-blur-lg shadow-xl border-b border-gray-200" 
+          : "bg-white/90 backdrop-blur-md"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Left: Logo, Home, Services */}
           <div className="flex items-center gap-8">
-            <Link href="/" className="flex items-center gap-2 group">
-              <span className="font-bold text-lg text-dark-blue group-hover:text-blue-600 transition-colors">
-                Blueberry
-              </span>
+            <Link href="/" className="flex items-center gap-4 group">
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Logo size="md" animate={false} className="group-hover:opacity-80 transition-opacity" />
+              </motion.div>
+              <div className="flex flex-col">
+                <motion.span 
+                  className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] tracking-tight leading-none"
+                  animate={{
+                    backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  style={{
+                    backgroundSize: '200% 200%',
+                  }}
+                >
+                  BLUEBERRYFIN
+                </motion.span>
+                <motion.span 
+                  className="font-medium text-sm bg-clip-text text-transparent bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] tracking-wide leading-none mt-0.5"
+                  animate={{
+                    backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  style={{
+                    backgroundSize: '200% 200%',
+                  }}
+                >
+                  CAPITAL
+                </motion.span>
+              </div>
             </Link>
 
-            <Link href="/" className="text-foreground hover:text-primary transition-colors font-medium">
+            <Link href="/" className="text-gray-700 hover:text-[#0052cc] transition-colors font-medium text-[15px]">
               Home
             </Link>
 
@@ -53,86 +100,56 @@ export function Navbar() {
               onMouseEnter={() => setServicesOpen(true)}
               onMouseLeave={() => setServicesOpen(false)}
             >
-              <button className="flex items-center gap-2 px-4 py-2 text-foreground hover:text-primary transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-[#0052cc] transition-colors font-medium text-[15px]">
                 Services
-                <ChevronDownIcon className={`w-4 h-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
+                <ChevronDownIcon className={`w-4 h-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
               </button>
 
               {servicesOpen && (
-                <div className="absolute left-0 mt-0 w-56 bg-white rounded-lg shadow-xl border border-border">
-                  {services.map((service) => (
-                    <Link
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute left-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden backdrop-blur-md z-50"
+                >
+                  {services.map((service, idx) => (
+                    <motion.div
                       key={service.href}
-                      href={service.href}
-                      className="block px-4 py-3 text-sm hover:bg-blue-50 hover:text-primary transition-colors first:rounded-t-lg last:rounded-b-lg"
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.05 }}
                     >
-                      {service.name}
-                    </Link>
+                      <Link
+                        href={service.href}
+                        className="block px-4 py-3 text-sm text-gray-900 hover:bg-blue-50 hover:text-[#0052cc] transition-all duration-200 font-medium border-b border-gray-100 last:border-b-0"
+                      >
+                        {service.name}
+                      </Link>
+                    </motion.div>
                   ))}
-                </div>
+                </motion.div>
               )}
             </div>
           </div>
 
-          {/* Right: Core Team, Cart, Profile */}
-          <div className="flex items-center gap-8">
-            {/* Core Team Dropdown - Hover triggered */}
-            <div
-              className="relative group"
-              onMouseEnter={() => setCoreTeamOpen(true)}
-              onMouseLeave={() => setCoreTeamOpen(false)}
+          {/* Right: Core Team, Contact Us */}
+          <div className="flex items-center gap-6">
+            {/* Core Team - Regular Link (No Dropdown) */}
+            <Link 
+              href="/core-team" 
+              className="text-gray-700 hover:text-[#0052cc] transition-colors font-medium text-[15px]"
             >
-              <button className="flex items-center gap-2 px-4 py-2 text-foreground hover:text-primary transition-colors">
-                Core Team
-                <ChevronDownIcon className={`w-4 h-4 transition-transform ${coreTeamOpen ? "rotate-180" : ""}`} />
-              </button>
-
-              {coreTeamOpen && (
-                <div className="absolute right-0 mt-0 w-48 bg-white rounded-lg shadow-xl border border-border">
-                  <Link
-                    href="/core-team"
-                    className="block px-4 py-3 text-sm hover:bg-blue-50 transition-colors rounded-lg"
-                  >
-                    Team Members
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            <Link href="/cart" className="p-2 hover:bg-blue-50 rounded-lg transition-colors group">
-              <ShoppingCartIcon className="w-6 h-6 text-foreground group-hover:text-primary" />
+              Core Team
             </Link>
 
-            {/* Profile Dropdown - Hover triggered */}
-            <div
-              className="relative group"
-              onMouseEnter={() => setProfileOpen(true)}
-              onMouseLeave={() => setProfileOpen(false)}
+            {/* Contact Us Button */}
+            <button
+              onClick={scrollToContact}
+              className="px-6 py-2.5 bg-gradient-to-r from-[#001f3f] to-[#0052cc] hover:from-[#002b4d] hover:to-[#0066ff] rounded-lg text-white font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              <button className="p-2 hover:bg-blue-50 rounded-lg transition-colors group">
-                <UserIcon className="w-6 h-6 text-foreground group-hover:text-primary" />
-              </button>
-
-              {profileOpen && (
-                <div className="absolute right-0 mt-0 w-48 bg-white rounded-lg shadow-xl border border-border">
-                  <Link
-                    href="/signin"
-                    className="block px-4 py-3 text-sm hover:bg-blue-50 transition-colors rounded-t-lg"
-                  >
-                    Sign In
-                  </Link>
-                  <Link href="/signup" className="block px-4 py-3 text-sm hover:bg-blue-50 transition-colors">
-                    Create Account
-                  </Link>
-                  <Link
-                    href="/profile"
-                    className="block px-4 py-3 text-sm hover:bg-blue-50 transition-colors rounded-b-lg"
-                  >
-                    My Profile
-                  </Link>
-                </div>
-              )}
-            </div>
+              Contact Us
+            </button>
           </div>
         </div>
       </div>

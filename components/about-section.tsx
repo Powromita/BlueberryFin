@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { useInView } from "react-intersection-observer"
+import { motion } from "framer-motion"
 
 export function AboutSection() {
   const { ref, inView } = useInView({
@@ -12,80 +13,134 @@ export function AboutSection() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
 
   return (
-    <section ref={ref} className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div
-          className={`transition-all duration-1000 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+    <section ref={ref} className="py-16 bg-white relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#001f3f]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-[#0052cc]/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Centered Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center mb-20"
         >
-          {/* Centered Title */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-dark-blue mb-4">About Us</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto rounded-full" />
-          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#001f3f] mb-6 tracking-tight">About Us</h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] mx-auto rounded-full" />
+        </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Image Side */}
-            <div
-              className={`relative transition-all duration-700 ${inView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"}`}
+        {/* Centered Content */}
+        <div className="max-w-4xl mx-auto">
+          {/* Text Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="text-center mb-16 space-y-6"
+          >
+            <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+              <span className="font-bold text-[#001f3f]">Blueberry Financial Advisory</span> is a new age financial
+              advisory firm dedicated to catering to the financial needs of corporates and high net worth individuals.
+            </p>
+            <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+              Our team is organized into two powerful verticals that drive comprehensive financial solutions:
+            </p>
+          </motion.div>
+
+          {/* Verticals Cards - Premium Hover Effects */}
+          <div className="grid md:grid-cols-2 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              animate={inView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.95 }}
+              transition={{ delay: 0.4, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              onMouseEnter={() => setHoveredCard(0)}
+              onMouseLeave={() => setHoveredCard(null)}
+              className={`p-8 rounded-2xl border-2 cursor-pointer transition-all duration-500 relative overflow-hidden group ${
+                hoveredCard === 0
+                  ? "bg-gradient-to-br from-[#001f3f]/10 to-[#003366]/10 border-[#001f3f] shadow-2xl scale-105"
+                  : "bg-gradient-to-br from-gray-50 to-white border-gray-200 hover:border-[#0052cc] hover:shadow-xl"
+              }`}
             >
-              <div className="aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-blue-100">
-                <img
-                  src="/professional-finance-team-meeting.jpg"
-                  alt="Finance team discussing strategies"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-blue/10 to-transparent" />
-              </div>
-            </div>
+              {/* Animated background gradient on hover */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-[#001f3f]/5 to-transparent opacity-0 group-hover:opacity-100"
+                transition={{ duration: 0.3 }}
+              />
+              
+              {/* Shimmer effect */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100"
+                animate={{
+                  x: hoveredCard === 0 ? ["-100%", "200%"] : "-100%",
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: hoveredCard === 0 ? Infinity : 0,
+                  ease: "linear",
+                  repeatDelay: 0.5,
+                }}
+              />
 
-            {/* Text Side */}
-            <div
-              className={`transition-all duration-700 delay-200 ${inView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"}`}
+              <h3 className="text-2xl font-bold text-[#001f3f] mb-3 relative z-10 group-hover:text-[#0052cc] transition-colors duration-300">
+                Finance Think Tank
+              </h3>
+              <p className="text-gray-600 leading-relaxed relative z-10">
+                Strategic financial analysis and advisory services tailored to your corporate objectives.
+              </p>
+
+              {/* Bottom accent line */}
+              <motion.div
+                className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 50, scale: 0.95 }}
+              animate={inView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.95 }}
+              transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              onMouseEnter={() => setHoveredCard(1)}
+              onMouseLeave={() => setHoveredCard(null)}
+              className={`p-8 rounded-2xl border-2 cursor-pointer transition-all duration-500 relative overflow-hidden group ${
+                hoveredCard === 1
+                  ? "bg-gradient-to-br from-[#003366]/10 to-[#001f3f]/10 border-[#001f3f] shadow-2xl scale-105"
+                  : "bg-gradient-to-br from-white to-gray-50 border-gray-200 hover:border-[#0052cc] hover:shadow-xl"
+              }`}
             >
-              <div className="space-y-4 text-muted-foreground mb-8">
-                <p className="text-lg leading-relaxed">
-                  <span className="font-bold text-dark-blue">Blueberry Financial Advisory</span> is a new age financial
-                  advisory firm dedicated to catering to the financial needs of corporates and high net worth
-                  individuals.
-                </p>
-                <p className="text-lg leading-relaxed">
-                  Our team is organized into two powerful verticals that drive comprehensive financial solutions:
-                </p>
-              </div>
+              {/* Animated background gradient on hover */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-[#003366]/5 to-transparent opacity-0 group-hover:opacity-100"
+                transition={{ duration: 0.3 }}
+              />
+              
+              {/* Shimmer effect */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100"
+                animate={{
+                  x: hoveredCard === 1 ? ["-100%", "200%"] : "-100%",
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: hoveredCard === 1 ? Infinity : 0,
+                  ease: "linear",
+                  repeatDelay: 0.5,
+                }}
+              />
 
-              {/* Verticals with Hover Effects */}
-              <div className="space-y-4">
-                <div
-                  onMouseEnter={() => setHoveredCard(0)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                  className={`p-6 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
-                    hoveredCard === 0
-                      ? "bg-gradient-to-br from-blue-50 to-blue-100 border-blue-600 shadow-lg scale-105"
-                      : "bg-gradient-to-br from-blue-50 to-white border-blue-200 hover:border-blue-400"
-                  }`}
-                >
-                  <h3 className="text-xl font-bold text-dark-blue mb-2">Finance Think Tank</h3>
-                  <p className="text-muted-foreground">
-                    Strategic financial analysis and advisory services tailored to your corporate objectives.
-                  </p>
-                </div>
+              <h3 className="text-2xl font-bold text-[#001f3f] mb-3 relative z-10 group-hover:text-[#0052cc] transition-colors duration-300">
+                Execution Think Tank
+              </h3>
+              <p className="text-gray-600 leading-relaxed relative z-10">
+                Hands-on execution and implementation expertise to bring strategies to life.
+              </p>
 
-                <div
-                  onMouseEnter={() => setHoveredCard(1)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                  className={`p-6 rounded-xl border-2 cursor-pointer transition-all duration-300 ${
-                    hoveredCard === 1
-                      ? "bg-gradient-to-br from-blue-100 to-blue-50 border-blue-600 shadow-lg scale-105"
-                      : "bg-gradient-to-br from-white to-blue-50 border-blue-200 hover:border-blue-400"
-                  }`}
-                >
-                  <h3 className="text-xl font-bold text-dark-blue mb-2">Execution Think Tank</h3>
-                  <p className="text-muted-foreground">
-                    Hands-on execution and implementation expertise to bring strategies to life.
-                  </p>
-                </div>
-              </div>
-            </div>
+              {/* Bottom accent line */}
+              <motion.div
+                className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#003366] via-[#0052cc] to-[#003366] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+              />
+            </motion.div>
           </div>
         </div>
       </div>
