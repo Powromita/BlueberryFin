@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Navbar } from "@/components/navbar"
 import { HeroSection } from "@/components/hero-section"
 import { AboutSection } from "@/components/about-section"
@@ -13,6 +13,38 @@ import { LoadingAnimation } from "@/components/loading-animation"
 
 export default function Home() {
   const [showWebsite, setShowWebsite] = useState(false)
+  const [shouldShowAnimation, setShouldShowAnimation] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    
+    // Check if user navigated here from another page in the app
+    const isInternalNavigation = sessionStorage.getItem("internalNavigation") === "true"
+    
+    if (isInternalNavigation) {
+      // Coming from another page - skip animation
+      sessionStorage.removeItem("internalNavigation")
+      setShowWebsite(true)
+      
+      // Ensure scroll is unlocked immediately
+      setTimeout(() => {
+        document.documentElement.style.overflow = "visible"
+        document.body.style.overflow = "visible"
+        document.documentElement.style.height = "auto"
+        document.body.style.height = "auto"
+        document.documentElement.style.scrollBehavior = "smooth"
+      }, 50)
+    } else {
+      // Fresh load or refresh - show animation
+      setShouldShowAnimation(true)
+      // Lock scroll during loading
+      document.documentElement.style.overflow = "hidden"
+      document.body.style.overflow = "hidden"
+      document.documentElement.style.height = "100vh"
+      document.body.style.height = "100vh"
+    }
+  }, [])
 
   const handleLoadingComplete = () => {
     // Ensure scroll is at top
@@ -37,9 +69,16 @@ export default function Home() {
     }, 200)
   }
 
+  // Prevent hydration mismatch
+  if (!mounted) {
+    return null
+  }
+
   return (
     <>
-      {!showWebsite && <LoadingAnimation onComplete={handleLoadingComplete} />}
+      {shouldShowAnimation && !showWebsite && (
+        <LoadingAnimation onComplete={handleLoadingComplete} />
+      )}
       
       {showWebsite && (
         <main className="min-h-screen">

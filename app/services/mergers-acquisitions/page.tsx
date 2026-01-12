@@ -7,12 +7,20 @@ import { motion } from "framer-motion"
 import { ArrowLeftIcon } from "@heroicons/react/24/outline"
 
 export default function MergersAcquisitions() {
+  const handleBackToHome = () => {
+    sessionStorage.setItem("internalNavigation", "true")
+  }
+
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
 
       <section className="pt-32 pb-20 max-w-4xl mx-auto px-4">
-        <Link href="/" className="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all mb-8">
+        <Link 
+          href="/" 
+          onClick={handleBackToHome}
+          className="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all mb-8"
+        >
           <ArrowLeftIcon className="w-5 h-5" />
           Back to Home
         </Link>

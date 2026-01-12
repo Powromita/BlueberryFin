@@ -27,6 +27,10 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const markInternalNavigation = () => {
+    sessionStorage.setItem("internalNavigation", "true")
+  }
+
   const scrollToContact = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     const contactSection = document.getElementById("contact")
@@ -122,6 +126,7 @@ export function Navbar() {
                     >
                       <Link
                         href={service.href}
+                        onClick={markInternalNavigation}
                         className="block px-4 py-3 text-sm text-gray-900 hover:bg-blue-50 hover:text-[#0052cc] transition-all duration-200 font-medium border-b border-gray-100 last:border-b-0"
                       >
                         {service.name}
@@ -137,7 +142,8 @@ export function Navbar() {
           <div className="flex items-center gap-6">
             {/* Core Team - Regular Link (No Dropdown) */}
             <Link 
-              href="/core-team" 
+              href="/core-team"
+              onClick={markInternalNavigation}
               className="text-gray-700 hover:text-[#0052cc] transition-colors font-medium text-[15px]"
             >
               Core Team
