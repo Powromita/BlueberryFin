@@ -13,18 +13,14 @@ export function LoadingAnimation({ onComplete }: { onComplete: () => void }) {
   useEffect(() => {
     setMounted(true)
     
-    // Force scroll to top immediately
+    // Force scroll to top immediately and lock scroll
     window.scrollTo(0, 0)
     document.documentElement.scrollTop = 0
     document.body.scrollTop = 0
-
-    // Check if this is the first visit
-    const hasVisited = sessionStorage.getItem("hasVisited")
-    if (hasVisited === "true") {
-      // Skip loading animation if already visited
-      onComplete()
-      return
-    }
+    document.documentElement.style.overflow = "hidden"
+    document.body.style.overflow = "hidden"
+    document.documentElement.style.height = "100vh"
+    document.body.style.height = "100vh"
 
     // Animation sequence
     const logoMoveTimeout = setTimeout(() => {
@@ -42,7 +38,6 @@ export function LoadingAnimation({ onComplete }: { onComplete: () => void }) {
       document.body.scrollTop = 0
       
       setIsTransitioning(true)
-      sessionStorage.setItem("hasVisited", "true")
       setTimeout(() => {
         onComplete()
       }, 1000)
@@ -56,12 +51,6 @@ export function LoadingAnimation({ onComplete }: { onComplete: () => void }) {
   }, [onComplete])
 
   if (!mounted) {
-    return null
-  }
-
-  // Check again to avoid showing if already visited
-  const hasVisited = typeof window !== "undefined" ? sessionStorage.getItem("hasVisited") === "true" : false
-  if (hasVisited) {
     return null
   }
 

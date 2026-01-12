@@ -3,69 +3,14 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
-import { LoadingAnimation } from "./loading-animation"
 import { Logo } from "./logo"
 
 export function HeroSection() {
-  const [showWebsite, setShowWebsite] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const [shouldShowLoading, setShouldShowLoading] = useState(false)
 
   useEffect(() => {
     setMounted(true)
-    
-    // Ensure we're at the top of the page
-    window.scrollTo(0, 0)
-    document.documentElement.scrollTop = 0
-    document.body.scrollTop = 0
-    
-    // Check if already visited in this session
-    const hasVisited = sessionStorage.getItem("hasVisited")
-    if (hasVisited === "true") {
-      setShowWebsite(true)
-      document.documentElement.style.overflow = "visible"
-      document.body.style.overflow = "visible"
-      document.documentElement.style.height = "auto"
-      document.body.style.height = "auto"
-      document.documentElement.style.scrollBehavior = "smooth"
-    } else {
-      // Show loading animation
-      setShouldShowLoading(true)
-      // Lock scroll during loading
-      document.documentElement.style.overflow = "hidden"
-      document.body.style.overflow = "hidden"
-      document.documentElement.style.height = "100vh"
-      document.body.style.height = "100vh"
-      // Prevent any hash scrolling
-      if (window.location.hash) {
-        window.history.replaceState(null, "", window.location.pathname)
-      }
-    }
   }, [])
-
-  const handleLoadingComplete = () => {
-    // Ensure we're at the top
-    window.scrollTo(0, 0)
-    document.documentElement.scrollTop = 0
-    document.body.scrollTop = 0
-    
-    // Remove any hash from URL
-    if (window.location.hash) {
-      window.history.replaceState(null, "", window.location.pathname)
-    }
-    
-    // Small delay to allow transition to complete
-    setTimeout(() => {
-      setShowWebsite(true)
-      setShouldShowLoading(false)
-      // Unlock scroll when website is shown
-      document.documentElement.style.overflow = "visible"
-      document.body.style.overflow = "visible"
-      document.documentElement.style.height = "auto"
-      document.body.style.height = "auto"
-      document.documentElement.style.scrollBehavior = "smooth"
-    }, 100)
-  }
 
   // Prevent hydration mismatch
   if (!mounted) {
@@ -74,18 +19,11 @@ export function HeroSection() {
 
   return (
     <>
-      {/* Loading Animation - Only on first visit */}
-      <AnimatePresence>
-        {shouldShowLoading && (
-          <LoadingAnimation onComplete={handleLoadingComplete} />
-        )}
-      </AnimatePresence>
-
       {/* Hero Section - Modern White & Purple Style */}
-      {showWebsite && (
+      <>
       <motion.section
         id="home"
-        className="relative min-h-screen pt-20 overflow-hidden bg-white"
+        className="relative h-screen pt-20 overflow-hidden bg-white flex items-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -122,7 +60,7 @@ export function HeroSection() {
         </div>
 
         {/* Content Container - Modern Centered Layout */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-24 z-10">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
           {/* Decorative Elements - Behind content */}
           {/* Left Abstract Element */}
           <motion.div
@@ -194,7 +132,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="text-center mb-12"
+            className="text-center"
           >
             {/* Main Heading */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
@@ -305,13 +243,24 @@ export function HeroSection() {
               </div>
             </motion.div>
           </motion.div>
+        </div>
+      </motion.section>
 
-          {/* Feature Cards - Below stats */}
+      {/* Feature Cards - Separate section that appears after scroll */}
+      <motion.section
+        className="relative py-16 bg-gradient-to-b from-white to-blue-50/30"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.5, duration: 0.8 }}
-            className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto"
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="grid md:grid-cols-3 gap-6"
           >
             <Link href="#contact" className="block group">
               <motion.div
@@ -372,7 +321,7 @@ export function HeroSection() {
           </motion.div>
         </div>
       </motion.section>
-      )}
+      </>
     </>
   )
 }

@@ -75,7 +75,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-8 text-center text-sm text-white/70">
-          <p>&copy; {currentYear} Blueberry Financial Advisory. All rights reserved.</p>
+          <p>&copy; {currentYear} BlueberryFin Capital. All rights reserved.</p>
         </div>
       </div>
     </footer>
