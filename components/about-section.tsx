@@ -17,7 +17,7 @@ export function AboutSection() {
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-[#001f3f]/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-[#0052cc]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-[#1e40af]/5 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -29,7 +29,7 @@ export function AboutSection() {
           className="text-center mb-20"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#001f3f] mb-6 tracking-tight">About Us</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] mx-auto rounded-full" />
+          <div className="w-24 h-1 bg-gradient-to-r from-[#1e3a8a] via-[#1e40af] to-[#1e3a8a] mx-auto rounded-full" />
         </motion.div>
 
         {/* Centered Content */}
@@ -61,7 +61,7 @@ export function AboutSection() {
               className={`p-8 rounded-2xl border-2 cursor-pointer transition-all duration-500 relative overflow-hidden group ${
                 hoveredCard === 0
                   ? "bg-gradient-to-br from-[#001f3f]/10 to-[#003366]/10 border-[#001f3f] shadow-2xl scale-105"
-                  : "bg-gradient-to-br from-gray-50 to-white border-gray-200 hover:border-[#0052cc] hover:shadow-xl"
+                  : "bg-gradient-to-br from-gray-50 to-white border-gray-200 hover:border-[#1e40af] hover:shadow-xl"
               }`}
             >
               {/* Animated background gradient on hover */}
@@ -84,7 +84,7 @@ export function AboutSection() {
                 }}
               />
 
-              <h3 className="text-2xl font-bold text-[#001f3f] mb-3 relative z-10 group-hover:text-[#0052cc] transition-colors duration-300">
+              <h3 className="text-2xl font-bold text-[#1e3a8a] mb-3 relative z-10 group-hover:text-[#1e40af] transition-colors duration-300">
                 Finance Think Tank
               </h3>
               <p className="text-gray-600 leading-relaxed relative z-10">
@@ -93,7 +93,7 @@ export function AboutSection() {
 
               {/* Bottom accent line */}
               <motion.div
-                className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+                className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1e3a8a] via-[#1e40af] to-[#1e3a8a] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
               />
             </motion.div>
 
@@ -106,7 +106,7 @@ export function AboutSection() {
               className={`p-8 rounded-2xl border-2 cursor-pointer transition-all duration-500 relative overflow-hidden group ${
                 hoveredCard === 1
                   ? "bg-gradient-to-br from-[#003366]/10 to-[#001f3f]/10 border-[#001f3f] shadow-2xl scale-105"
-                  : "bg-gradient-to-br from-white to-gray-50 border-gray-200 hover:border-[#0052cc] hover:shadow-xl"
+                  : "bg-gradient-to-br from-white to-gray-50 border-gray-200 hover:border-[#1e40af] hover:shadow-xl"
               }`}
             >
               {/* Animated background gradient on hover */}
@@ -129,7 +129,7 @@ export function AboutSection() {
                 }}
               />
 
-              <h3 className="text-2xl font-bold text-[#001f3f] mb-3 relative z-10 group-hover:text-[#0052cc] transition-colors duration-300">
+              <h3 className="text-2xl font-bold text-[#1e3a8a] mb-3 relative z-10 group-hover:text-[#1e40af] transition-colors duration-300">
                 Execution Think Tank
               </h3>
               <p className="text-gray-600 leading-relaxed relative z-10">
@@ -138,7 +138,7 @@ export function AboutSection() {
 
               {/* Bottom accent line */}
               <motion.div
-                className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#003366] via-[#0052cc] to-[#003366] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
+                className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#1e3a8a] via-[#1e40af] to-[#1e3a8a] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"
               />
             </motion.div>
           </div>

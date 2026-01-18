@@ -32,9 +32,9 @@ export function ClientsSection() {
           className="text-center"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#001f3f] to-[#0052cc]">Clients</span>
+            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1e3a8a] to-[#1e40af]">Clients</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] mx-auto rounded-full mb-4" />
+          <div className="w-24 h-1 bg-gradient-to-r from-[#1e3a8a] via-[#1e40af] to-[#1e3a8a] mx-auto rounded-full mb-4" />
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Trusted by leading organizations across industries
           </p>
@@ -67,11 +67,11 @@ export function ClientsSection() {
             {clients.map((client, idx) => (
               <motion.div
                 key={`client-1-${idx}`}
-                className="flex-shrink-0 px-8 py-6 bg-white rounded-xl border-2 border-gray-200 hover:border-[#0052cc] transition-all duration-300 shadow-lg hover:shadow-2xl min-w-[280px] mx-4"
+                className="flex-shrink-0 px-8 py-6 bg-white rounded-xl border-2 border-gray-200 hover:border-[#1e40af] transition-all duration-300 shadow-lg hover:shadow-2xl min-w-[280px] mx-4"
                 whileHover={{ y: -5 }}
               >
                 <div className="flex items-center justify-center h-16">
-                  <span className="text-xl font-bold text-gray-900 hover:text-[#0052cc] transition-colors text-center">
+                  <span className="text-xl font-bold text-gray-900 hover:text-[#1e40af] transition-colors text-center">
                     {client}
                   </span>
                 </div>
@@ -81,11 +81,11 @@ export function ClientsSection() {
             {clients.map((client, idx) => (
               <motion.div
                 key={`client-2-${idx}`}
-                className="flex-shrink-0 px-8 py-6 bg-white rounded-xl border-2 border-gray-200 hover:border-[#0052cc] transition-all duration-300 shadow-lg hover:shadow-2xl min-w-[280px] mx-4"
+                className="flex-shrink-0 px-8 py-6 bg-white rounded-xl border-2 border-gray-200 hover:border-[#1e40af] transition-all duration-300 shadow-lg hover:shadow-2xl min-w-[280px] mx-4"
                 whileHover={{ y: -5 }}
               >
                 <div className="flex items-center justify-center h-16">
-                  <span className="text-xl font-bold text-gray-900 hover:text-[#0052cc] transition-colors text-center">
+                  <span className="text-xl font-bold text-gray-900 hover:text-[#1e40af] transition-colors text-center">
                     {client}
                   </span>
                 </div>

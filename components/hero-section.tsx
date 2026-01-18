@@ -23,21 +23,35 @@ export function HeroSection() {
       <>
       <motion.section
         id="home"
-        className="relative h-screen pt-20 overflow-hidden bg-white flex items-center"
+        className="relative h-screen pt-20 overflow-hidden bg-gradient-to-b from-blue-50 via-white to-blue-50 flex items-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        {/* Subtle gradient accents */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-white to-blue-50/30"></div>
+        {/* Rich Financial Background Pattern */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Grid background pattern */}
+          <svg className="absolute inset-0 w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#0052cc" strokeWidth="0.5"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
 
-        {/* Premium Animated Orbs - Subtle */}
+          {/* Gradient accents */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/40 via-transparent to-blue-50/40"></div>
+        </div>
+
+        {/* Premium Animated Orbs - Enhanced */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Large orb - top left */}
           <motion.div
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-200/20 to-blue-300/10 rounded-full blur-3xl"
+            className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-300/30 to-blue-200/10 rounded-full blur-3xl"
             animate={{
               scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
+              opacity: [0.4, 0.6, 0.4],
             }}
             transition={{
               duration: 12,
@@ -45,14 +59,28 @@ export function HeroSection() {
               ease: "easeInOut",
             }}
           />
+          {/* Large orb - bottom right */}
           <motion.div
-            className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-tl from-blue-200/20 to-[#001f3f]/10 rounded-full blur-3xl"
+            className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-tl from-blue-300/25 to-[#001f3f]/15 rounded-full blur-3xl"
             animate={{
               scale: [1.1, 1, 1.1],
-              opacity: [0.2, 0.4, 0.2],
+              opacity: [0.3, 0.5, 0.3],
             }}
             transition={{
               duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          {/* Accent orb - top right */}
+          <motion.div
+            className="absolute top-1/3 right-1/3 w-72 h-72 bg-gradient-to-bl from-[#0052cc]/20 to-blue-200/10 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.15, 1],
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{
+              duration: 14,
               repeat: Infinity,
               ease: "easeInOut",
             }}

@@ -2,9 +2,13 @@
 
 import { useState, useEffect } from "react"
 import { Navbar } from "@/components/navbar"
-import { HeroSection } from "@/components/hero-section"
+import { HeroWith3DMoneyAnimation } from "@/components/hero-3d-money"
+import { InteractiveImageBackground } from "@/components/interactive-image-background"
 import { AboutSection } from "@/components/about-section"
 import { ServicesSection } from "@/components/services-section"
+import { FeaturesHighlight } from "@/components/features-highlight"
+import { StatsSection } from "@/components/stats-section"
+import { ProcessTimeline } from "@/components/process-timeline"
 import { ClientsSection } from "@/components/clients-section"
 import { ContactSection } from "@/components/contact-section"
 import { EndingSection } from "@/components/ending-section"
@@ -83,8 +87,12 @@ export default function Home() {
       {showWebsite && (
         <main className="min-h-screen">
           <Navbar />
-          <HeroSection />
+          <HeroWith3DMoneyAnimation />
+          <InteractiveImageBackground />
           <AboutSection />
+          <FeaturesHighlight />
+          <StatsSection />
+          <ProcessTimeline />
           <ServicesSection />
           <ClientsSection />
           <EndingSection />

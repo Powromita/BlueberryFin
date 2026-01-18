@@ -53,7 +53,7 @@ export function ContactSection() {
           className="text-center mb-20"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#001f3f] mb-6 tracking-tight">Get in Touch</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] mx-auto rounded-full mb-6" />
+          <div className="w-24 h-1 bg-gradient-to-r from-[#1e3a8a] via-[#1e40af] to-[#1e3a8a] mx-auto rounded-full mb-6" />
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Reach out to discuss your financial goals. We're here to help you succeed.
           </p>
