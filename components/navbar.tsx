@@ -41,11 +41,10 @@ export function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        scrolled 
-          ? "bg-white/95 backdrop-blur-lg shadow-xl border-b border-gray-200" 
+      className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled
+          ? "bg-white/95 backdrop-blur-lg shadow-xl border-b border-gray-200"
           : "bg-white/90 backdrop-blur-md"
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
@@ -59,7 +58,7 @@ export function Navbar() {
                 <Logo size="md" animate={false} className="group-hover:opacity-80 transition-opacity" />
               </motion.div>
               <div className="flex flex-col">
-                <motion.span 
+                <motion.span
                   className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] tracking-tight leading-none"
                   animate={{
                     backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
@@ -75,7 +74,7 @@ export function Navbar() {
                 >
                   BLUEBERRYFIN
                 </motion.span>
-                <motion.span 
+                <motion.span
                   className="font-medium text-sm bg-clip-text text-transparent bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] tracking-wide leading-none mt-0.5"
                   animate={{
                     backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
@@ -94,7 +93,7 @@ export function Navbar() {
               </div>
             </Link>
 
-            <Link href="/" className="text-gray-700 hover:text-[#0052cc] transition-colors font-medium text-[15px]">
+            <Link href="/" className="text-gray-700 hover:text-[#0052cc] transition-colors font-medium text-lg">
               Home
             </Link>
 
@@ -104,7 +103,7 @@ export function Navbar() {
               onMouseEnter={() => setServicesOpen(true)}
               onMouseLeave={() => setServicesOpen(false)}
             >
-              <button className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-[#0052cc] transition-colors font-medium text-[15px]">
+              <button className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-[#0052cc] transition-colors font-medium text-lg">
                 Services
                 <ChevronDownIcon className={`w-4 h-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
               </button>
@@ -141,10 +140,10 @@ export function Navbar() {
           {/* Right: Core Team, Contact Us */}
           <div className="flex items-center gap-6">
             {/* Core Team - Regular Link (No Dropdown) */}
-            <Link 
+            <Link
               href="/core-team"
               onClick={markInternalNavigation}
-              className="text-gray-700 hover:text-[#0052cc] transition-colors font-medium text-[15px]"
+              className="text-gray-700 hover:text-[#0052cc] transition-colors font-medium text-lg"
             >
               Core Team
             </Link>
