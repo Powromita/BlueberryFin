@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Navbar } from "@/components/navbar"
 import { HeroSection } from "@/components/hero-section"
+import { InteractiveImageBackground } from "@/components/interactive-image-background"
 import { AboutSection } from "@/components/about-section"
 import { ServicesSection } from "@/components/services-section"
 import { ClientsSection } from "@/components/clients-section"
@@ -84,6 +85,7 @@ export default function Home() {
         <main className="min-h-screen">
           <Navbar />
           <HeroSection />
+          <InteractiveImageBackground />
           <AboutSection />
           <ServicesSection />
           <ClientsSection />
