@@ -65,8 +65,8 @@ export function FeaturesHighlight() {
           </p>
         </motion.div>
 
-        {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Features Grid - Icon Focus */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, idx) => {
             const IconComponent = feature.icon
             return (
@@ -78,54 +78,41 @@ export function FeaturesHighlight() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1, duration: 0.6 }}
-                className="group relative"
+                className="group relative text-center"
               >
+                {/* Icon container - Large and prominent */}
                 <motion.div
-                  className="h-full p-6 rounded-2xl bg-white border-2 border-gray-200 transition-all duration-300 cursor-pointer overflow-hidden"
+                  className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-6 transition-all duration-300 mx-auto shadow-lg`}
                   animate={{
-                    borderColor: hoveredIndex === idx ? "#1e40af" : "#e5e7eb",
+                    scale: hoveredIndex === idx ? 1.2 : 1,
+                    rotate: hoveredIndex === idx ? 10 : 0,
                     boxShadow: hoveredIndex === idx 
-                      ? "0 20px 40px rgba(0, 82, 204, 0.15)" 
-                      : "0 4px 6px rgba(0, 0, 0, 0.07)",
+                      ? "0 20px 40px rgba(0, 82, 204, 0.3)" 
+                      : "0 10px 20px rgba(0, 0, 0, 0.1)",
                   }}
                 >
-                  {/* Background gradient on hover */}
-                  <motion.div
-                    className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none`}
-                  />
-
-                  {/* Icon container */}
-                  <motion.div
-                    className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-4 transition-all duration-300`}
-                    animate={{
-                      scale: hoveredIndex === idx ? 1.1 : 1,
-                      rotate: hoveredIndex === idx ? 5 : 0,
-                    }}
-                  >
-                    <IconComponent className="w-7 h-7" />
-                  </motion.div>
-
-                  {/* Content */}
-                  <div className="relative z-10">
-                    <h3 className="text-lg font-bold text-[#1e3a8a] mb-2 group-hover:text-[#1e40af] transition-colors duration-300">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </div>
-
-                  {/* Bottom accent line */}
-                  <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#1e40af] to-transparent"
-                    initial={{ scaleX: 0, opacity: 0 }}
-                    animate={{
-                      scaleX: hoveredIndex === idx ? 1 : 0,
-                      opacity: hoveredIndex === idx ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.3 }}
-                  />
+                  <IconComponent className="w-10 h-10" />
                 </motion.div>
+
+                {/* Content */}
+                <div className="relative z-10">
+                  <h3 className="text-lg font-bold text-[#001f3f] mb-3 group-hover:text-[#0052cc] transition-colors duration-300">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+
+                {/* Subtle background highlight on hover */}
+                <motion.div
+                  className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#0052cc]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
+                  initial={{ scale: 0.8 }}
+                  animate={{
+                    scale: hoveredIndex === idx ? 1.1 : 0.8,
+                    opacity: hoveredIndex === idx ? 1 : 0,
+                  }}
+                />
               </motion.div>
             )
           })}
