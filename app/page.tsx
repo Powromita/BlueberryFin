@@ -12,6 +12,7 @@ import { EndingSection } from "@/components/ending-section"
 import { Footer } from "@/components/footer"
 import { LoadingAnimation } from "@/components/loading-animation"
 import { ProcessTimeline } from "@/components/process-timeline"
+import { FeaturesHighlight } from "@/components/features-highlight"
 
 export default function Home() {
   const [showWebsite, setShowWebsite] = useState(false)
@@ -88,6 +89,7 @@ export default function Home() {
           <HeroSection />
           <InteractiveImageBackground />
           <AboutSection />
+          <FeaturesHighlight />
           <ProcessTimeline />
           <ServicesSection />
           <ClientsSection />
