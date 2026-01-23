@@ -14,32 +14,48 @@ export function EndingSection() {
   return (
     <section
       ref={ref}
-      className="py-24 bg-gradient-to-br from-[#001f3f] via-[#002b4d] to-[#003366] text-white relative overflow-hidden"
+      className="py-24 bg-gradient-to-b from-white via-blue-50/30 to-white relative overflow-hidden"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-[#0052cc]/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#60a5fa]/10 rounded-full blur-3xl" />
+        <motion.div 
+          className="absolute top-0 left-0 w-96 h-96 bg-[#001f3f]/8 rounded-full blur-3xl"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
+        <motion.div 
+          className="absolute bottom-0 right-0 w-96 h-96 bg-[#0052cc]/8 rounded-full blur-3xl"
+          animate={{ scale: [1.1, 1, 1.1], opacity: [0.5, 0.8, 0.5] }}
+          transition={{ duration: 10, repeat: Infinity }}
+        />
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center mb-20"
+        >
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#001f3f] mb-6 tracking-tight">
+            Ready to Transform Your Financial Future?
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] mx-auto rounded-full mb-6" />
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Partner with Blueberry Financial Advisory to access expert guidance tailored to your unique financial goals.
+            Our dedicated team is committed to driving your success.
+          </p>
+        </motion.div>
+
         {/* Section Content */}
         <div className="grid md:grid-cols-2 gap-16 items-center">
           {/* Left Side - Text */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="relative z-10"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 text-white leading-tight tracking-tight">
-              Ready to Transform Your Financial Future?
-            </h2>
-
-            <p className="text-lg md:text-xl text-white/95 mb-8 leading-relaxed font-medium">
-              Partner with Blueberry Financial Advisory to access expert guidance tailored to your unique financial goals.
-              Our dedicated team is committed to driving your success.
-            </p>
-
             <ul className="space-y-5 mb-10">
               {[
                 "Personalized financial strategies",
@@ -54,11 +70,11 @@ export function EndingSection() {
                   className="flex items-center gap-4"
                 >
                   <motion.span
-                    className="w-3 h-3 bg-[#60a5fa] rounded-full flex-shrink-0"
+                    className="w-3 h-3 bg-[#0052cc] rounded-full flex-shrink-0"
                     animate={inView ? { scale: [1, 1.2, 1] } : { scale: 1 }}
                     transition={{ delay: 0.3 + idx * 0.1 + 0.3, duration: 0.4 }}
                   />
-                  <span className="text-white/90 font-medium text-base md:text-lg">
+                  <span className="text-gray-700 font-medium text-base md:text-lg">
                     {item}
                   </span>
                 </motion.li>
@@ -74,11 +90,11 @@ export function EndingSection() {
             >
               <Link href="#contact" className="group">
                 <motion.button
-                  className="px-10 py-5 bg-white text-[#001f3f] rounded-xl font-bold text-lg
+                  className="px-10 py-5 bg-gradient-to-r from-[#001f3f] to-[#0052cc] text-white rounded-xl font-bold text-lg
                   transition-all duration-300 relative overflow-hidden
-                  hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]
-                  flex items-center gap-3 justify-center border-2 border-white"
-                  whileHover={{ scale: 1.05 }}
+                  hover:shadow-xl hover:shadow-[#0052cc]/30
+                  flex items-center gap-3 justify-center"
+                  whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0, 82, 204, 0.3)" }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <span className="relative z-10">Start Your Journey</span>
@@ -92,9 +108,6 @@ export function EndingSection() {
                   >
                     <ArrowRightIcon className="w-5 h-5 relative z-10" />
                   </motion.div>
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-[#0052cc] to-[#60a5fa] opacity-0 group-hover:opacity-10 transition-opacity duration-300"
-                  />
                 </motion.button>
               </Link>
             </motion.div>
@@ -120,12 +133,12 @@ export function EndingSection() {
                   animate={inView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.9 }}
                   transition={{ delay: 0.4 + i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                   whileHover={{ scale: 1.05, y: -5 }}
-                  className="p-8 bg-white/10 backdrop-blur-lg rounded-2xl border-2 border-white/20
-                  hover:bg-white/15 transition-all duration-500 hover:border-[#60a5fa] hover:shadow-2xl hover:shadow-[#60a5fa]/20 relative overflow-hidden group"
+                  className="p-8 bg-gradient-to-br from-gray-50 to-white rounded-2xl border-2 border-gray-200
+                  hover:bg-white transition-all duration-500 hover:border-[#0052cc] hover:shadow-2xl hover:shadow-[#0052cc]/20 relative overflow-hidden group"
                 >
                   {/* Shimmer effect */}
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-[#0052cc]/5 to-transparent"
                     animate={{
                       x: ["-100%", "200%"],
                     }}
@@ -136,13 +149,13 @@ export function EndingSection() {
                       repeatDelay: 2,
                     }}
                   />
-                  <h3 className="text-5xl font-bold text-[#60a5fa] mb-4 relative z-10">
+                  <h3 className="text-5xl font-bold text-[#0052cc] mb-4 relative z-10">
                     {item.value}
                   </h3>
-                  <p className="text-white font-bold text-lg md:text-xl mb-3 relative z-10">
+                  <p className="text-[#001f3f] font-bold text-lg md:text-xl mb-3 relative z-10">
                     {item.label}
                   </p>
-                  <p className="text-white/80 text-sm md:text-base leading-relaxed relative z-10">
+                  <p className="text-gray-600 text-sm md:text-base leading-relaxed relative z-10">
                     {item.desc}
                   </p>
                 </motion.div>

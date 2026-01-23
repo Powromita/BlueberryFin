@@ -1,14 +1,23 @@
 "use client"
 
+import { useState } from "react"
 import { useInView } from "react-intersection-observer"
 import { motion } from "framer-motion"
-import { EnvelopeIcon, PhoneIcon, MapPinIcon, ClockIcon } from "@heroicons/react/24/outline"
+import { EnvelopeIcon, PhoneIcon, MapPinIcon, ClockIcon, PaperAirplaneIcon } from "@heroicons/react/24/outline"
 
 export function ContactSection() {
   const { ref, inView } = useInView({
-    threshold: 0.2,
+    threshold: 0.1,
     triggerOnce: true,
   })
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  })
+
+  const [focusedField, setFocusedField] = useState<string | null>(null)
 
   const contactItems = [
     {
@@ -38,10 +47,11 @@ export function ContactSection() {
   ]
 
   return (
-    <section id="contact" ref={ref} className="py-24 bg-white relative overflow-hidden">
-      {/* Background decorative elements */}
+    <section id="contact" ref={ref} className="py-24 bg-gradient-to-b from-white via-blue-50/30 to-white relative overflow-hidden">
+      {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#001f3f]/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#001f3f]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#0052cc]/5 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -50,127 +60,204 @@ export function ContactSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#001f3f] mb-6 tracking-tight">Get in Touch</h2>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#001f3f] mb-6 tracking-tight">
+            Get in Touch
+          </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] mx-auto rounded-full mb-6" />
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Reach out to discuss your financial goals. We're here to help you succeed.
+            Have a question or want to discuss your financial goals? We're here to help.
           </p>
         </motion.div>
 
-        {/* Contact Info and Form - Two Column */}
-        <div className="grid md:grid-cols-2 gap-16 mb-16">
-          {/* Left Side - Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h3 className="text-2xl font-bold text-[#001f3f] mb-8">Contact Information</h3>
-            <div className="space-y-6">
-              {contactItems.map((item, idx) => {
-                const Icon = item.icon
-                return (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.6, delay: idx * 0.1 }}
-                    className="flex gap-4 group"
-                  >
-                    <div className="flex-shrink-0">
-                      <motion.div
-                        className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#001f3f] to-[#003366] flex items-center justify-center text-white shadow-lg"
-                        whileHover={{ scale: 1.1 }}
+        {/* Contact Info Cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {contactItems.map((item, idx) => {
+            const Icon = item.icon
+            
+            return (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                whileHover={{ y: -8, scale: 1.03 }}
+                className="group"
+              >
+                <div className="h-full p-8 bg-white rounded-2xl border-2 border-gray-200 hover:border-[#0052cc] hover:shadow-2xl hover:shadow-[#0052cc]/20 transition-all duration-300 shadow-md relative overflow-hidden">
+                  {/* Top accent bar */}
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  {/* Background gradient on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#0052cc]/0 to-[#001f3f]/0 group-hover:from-[#0052cc]/5 group-hover:to-[#001f3f]/5 transition-all duration-300 rounded-2xl" />
+                  
+                  {/* Decorative corner element */}
+                  <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-[#0052cc]/10 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  <div className="relative z-10">
+                    {/* Icon Container - New Design */}
+                    <div className="mb-6 flex items-center justify-between">
+                      <motion.div 
+                        className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#001f3f] to-[#0052cc] flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 relative"
+                        whileHover={{ rotate: [0, -5, 5, 0], scale: 1.1 }}
+                        transition={{ duration: 0.3 }}
                       >
-                        <Icon className="w-6 h-6" />
+                        <Icon className="w-6 h-6 text-white" />
+                        {/* Glow effect */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#0052cc] to-[#001f3f] rounded-xl blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-300 -z-10" />
                       </motion.div>
+                      {/* Number badge */}
+                      <div className="w-8 h-8 rounded-full bg-[#0052cc]/10 flex items-center justify-center text-[#0052cc] font-bold text-sm group-hover:bg-[#0052cc] group-hover:text-white transition-all duration-300">
+                        {idx + 1}
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="font-bold text-[#001f3f] mb-1 group-hover:text-[#0052cc] transition-colors duration-300">
-                        {item.title}
-                      </h4>
-                      {item.link ? (
-                        <a
-                          href={item.link}
-                          className="text-gray-600 hover:text-[#0052cc] transition-colors whitespace-pre-line text-sm leading-relaxed"
-                        >
-                          {item.details}
-                        </a>
-                      ) : (
-                        <p className="text-gray-600 whitespace-pre-line text-sm leading-relaxed">{item.details}</p>
-                      )}
-                    </div>
-                  </motion.div>
-                )
-              })}
+                    
+                    {/* Content */}
+                    <h3 className="text-xl font-bold text-[#001f3f] mb-4 group-hover:text-[#0052cc] transition-colors duration-300">
+                      {item.title}
+                    </h3>
+                    {item.link ? (
+                      <a
+                        href={item.link}
+                        className="text-gray-600 hover:text-[#0052cc] transition-colors whitespace-pre-line text-sm leading-relaxed block font-medium group-hover:font-semibold"
+                      >
+                        {item.details}
+                      </a>
+                    ) : (
+                      <p className="text-gray-600 whitespace-pre-line text-sm leading-relaxed font-medium">
+                        {item.details}
+                      </p>
+                    )}
+                  </div>
+                  
+                  {/* Bottom accent line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#0052cc] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+              </motion.div>
+            )
+          })}
+        </div>
+
+        {/* Form and Map Section */}
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="bg-white rounded-2xl border border-gray-200 p-8 md:p-10 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="mb-8">
+                <h3 className="text-2xl md:text-3xl font-bold text-[#001f3f] mb-2">
+                  Send us a Message
+                </h3>
+                <p className="text-gray-600 text-sm md:text-base">
+                  Fill out the form below and we'll get back to you soon.
+                </p>
+              </div>
+
+              <form className="space-y-6">
+                <div>
+                  <label 
+                    htmlFor="name"
+                    className={`block text-sm font-semibold text-[#001f3f] mb-2.5 transition-colors duration-200 ${
+                      focusedField === 'name' ? 'text-[#0052cc]' : ''
+                    }`}
+                  >
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    type="text"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onFocus={() => setFocusedField('name')}
+                    onBlur={() => setFocusedField(null)}
+                    className="w-full px-4 py-3.5 rounded-lg border border-gray-300 bg-white text-[#001f3f] placeholder:text-gray-400 focus:border-[#0052cc] focus:outline-none focus:ring-2 focus:ring-[#0052cc]/20 transition-all duration-200 text-base leading-normal"
+                    style={{ textAlign: 'left', verticalAlign: 'middle' }}
+                    placeholder="Your name"
+                  />
+                </div>
+                
+                <div>
+                  <label 
+                    htmlFor="email"
+                    className={`block text-sm font-semibold text-[#001f3f] mb-2.5 transition-colors duration-200 ${
+                      focusedField === 'email' ? 'text-[#0052cc]' : ''
+                    }`}
+                  >
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onFocus={() => setFocusedField('email')}
+                    onBlur={() => setFocusedField(null)}
+                    className="w-full px-4 py-3.5 rounded-lg border border-gray-300 bg-white text-[#001f3f] placeholder:text-gray-400 focus:border-[#0052cc] focus:outline-none focus:ring-2 focus:ring-[#0052cc]/20 transition-all duration-200 text-base leading-normal align-middle"
+                    style={{ textAlign: 'left', display: 'block', lineHeight: '1.5' }}
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+                
+                <div>
+                  <label 
+                    htmlFor="message"
+                    className={`block text-sm font-semibold text-[#001f3f] mb-2.5 transition-colors duration-200 ${
+                      focusedField === 'message' ? 'text-[#0052cc]' : ''
+                    }`}
+                  >
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    rows={6}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    onFocus={() => setFocusedField('message')}
+                    onBlur={() => setFocusedField(null)}
+                    className="w-full px-4 py-3.5 rounded-lg border border-gray-300 bg-white text-[#001f3f] placeholder:text-gray-400 focus:border-[#0052cc] focus:outline-none focus:ring-2 focus:ring-[#0052cc]/20 transition-all duration-200 resize-none text-base leading-relaxed"
+                    style={{ textAlign: 'left', verticalAlign: 'top' }}
+                    placeholder="Tell us how we can help you..."
+                  />
+                </div>
+                
+                <motion.button
+                  type="submit"
+                  className="w-full px-6 py-4 bg-gradient-to-r from-[#001f3f] to-[#0052cc] text-white font-semibold rounded-lg hover:shadow-xl hover:shadow-[#0052cc]/30 transition-all duration-300 flex items-center justify-center gap-2 text-base"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <span>Send Message</span>
+                  <PaperAirplaneIcon className="w-5 h-5" />
+                </motion.button>
+              </form>
             </div>
           </motion.div>
 
-          {/* Right Side - Quick Form */}
+          {/* Map */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-            transition={{ duration: 0.8 }}
-            className="bg-gradient-to-br from-white to-gray-50 rounded-2xl border-2 border-gray-200 p-8 hover:border-[#0052cc] hover:shadow-2xl transition-all duration-500"
+            initial={{ opacity: 0, x: 30 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="h-full"
           >
-            <h3 className="text-2xl font-bold text-[#001f3f] mb-6">Get In Touch</h3>
-            <form className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-[#001f3f] mb-2">Name</label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-[#0052cc] focus:outline-none transition-colors"
-                  placeholder="Your name"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-[#001f3f] mb-2">Email</label>
-                <input
-                  type="email"
-                  className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-[#0052cc] focus:outline-none transition-colors"
-                  placeholder="Your email"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-[#001f3f] mb-2">Message</label>
-                <textarea
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-[#0052cc] focus:outline-none transition-colors resize-none"
-                  placeholder="Your message"
-                />
-              </div>
-              <motion.button
-                type="submit"
-                className="w-full px-6 py-3 bg-gradient-to-r from-[#001f3f] to-[#0052cc] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Send Message
-              </motion.button>
-            </form>
+            <div className="h-full rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.5447654326746!2d72.81285!3d19.03599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce9a19c5d8cd%3A0x5a2d9d8c5b8d4c5a!2sBandra-Worli%20Sea%20Link!5e0!3m2!1sen!2sin!4v1234567890"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: "500px" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="rounded-2xl"
+              />
+            </div>
           </motion.div>
         </div>
-
-        {/* Map */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          className="rounded-2xl overflow-hidden shadow-2xl border-2 border-gray-200 h-96 hover:border-[#001f3f] transition-colors duration-500"
-        >
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.5447654326746!2d72.81285!3d19.03599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce9a19c5d8cd%3A0x5a2d9d8c5b8d4c5a!2sBandra-Worli%20Sea%20Link!5e0!3m2!1sen!2sin!4v1234567890"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="hover:opacity-90 transition-opacity duration-500"
-          />
-        </motion.div>
       </div>
     </section>
   )

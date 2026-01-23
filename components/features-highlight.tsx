@@ -15,25 +15,25 @@ const features = [
     icon: SparklesIcon,
     title: "Premium Analytics",
     description: "Real-time insights and comprehensive financial analytics to make informed decisions",
-    color: "from-yellow-500 to-yellow-600",
+    color: "from-[#001f3f] to-[#0052cc]",
   },
   {
     icon: CheckCircleIcon,
     title: "Verified Expertise",
     description: "Industry-leading professionals with proven track records in financial advisory",
-    color: "from-green-500 to-green-600",
+    color: "from-[#0052cc] to-[#60a5fa]",
   },
   {
     icon: LightBulbIcon,
     title: "Strategic Planning",
     description: "Customized strategies tailored to your unique business goals and challenges",
-    color: "from-blue-500 to-blue-600",
+    color: "from-[#001f3f] to-[#003366]",
   },
   {
     icon: UserGroupIcon,
     title: "Dedicated Support",
     description: "Personal relationship managers available 24/7 for your financial needs",
-    color: "from-purple-500 to-purple-600",
+    color: "from-[#0052cc] to-[#003366]",
   },
 ]
 
@@ -41,11 +41,11 @@ export function FeaturesHighlight() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   return (
-    <section className="relative py-20 bg-gradient-to-r from-blue-50 via-white to-blue-50 overflow-hidden">
+    <section className="relative py-20 bg-white overflow-hidden">
       {/* Decorative background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-100/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-100/20 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-0 w-96 h-96 bg-[#001f3f]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#0052cc]/5 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -129,7 +129,7 @@ export function FeaturesHighlight() {
           <p className="text-gray-600 mb-6">Ready to transform your financial journey?</p>
           <Link href="#contact">
             <motion.button
-              className="px-8 py-4 bg-gradient-to-r from-[#1e3a8a] to-[#1e40af] text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              className="px-8 py-4 bg-gradient-to-r from-[#001f3f] to-[#0052cc] text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
