@@ -148,7 +148,7 @@ export function HeroSection() {
               className="text-center"
             >
               {/* Main Heading */}
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 md:mb-8 leading-tight drop-shadow-lg px-4 sm:px-0">
                 Enhance your
                 <br />
                 Finance with BlueberryFin
@@ -156,7 +156,7 @@ export function HeroSection() {
 
               {/* Subtext */}
               <motion.p
-                className="text-xl md:text-2xl text-gray-200 font-medium max-w-2xl mx-auto leading-relaxed mb-8 drop-shadow-md"
+                className="text-lg sm:text-xl md:text-2xl text-gray-200 font-medium max-w-2xl mx-auto leading-relaxed mb-8 md:mb-10 drop-shadow-md px-4 sm:px-0"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
@@ -188,7 +188,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.9, duration: 0.8 }}
-                className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
+                className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto px-2 sm:px-0"
               >
                 <div className="text-center">
                   <motion.h3

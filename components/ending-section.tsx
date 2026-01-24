@@ -35,9 +35,9 @@ export function EndingSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20 px-2 sm:px-0"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#001f3f] mb-6 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#001f3f] mb-4 md:mb-6 tracking-tight">
             Ready to Transform Your Financial Future?
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] mx-auto rounded-full mb-6" />
@@ -48,7 +48,7 @@ export function EndingSection() {
         </motion.div>
 
         {/* Section Content */}
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
           {/* Left Side - Text */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -90,10 +90,10 @@ export function EndingSection() {
             >
               <Link href="#contact" className="group">
                 <motion.button
-                  className="px-10 py-5 bg-gradient-to-r from-[#001f3f] to-[#0052cc] text-white rounded-xl font-bold text-lg
+                  className="px-6 md:px-10 py-4 md:py-5 bg-gradient-to-r from-[#001f3f] to-[#0052cc] text-white rounded-lg md:rounded-xl font-bold text-base md:text-lg
                   transition-all duration-300 relative overflow-hidden
                   hover:shadow-xl hover:shadow-[#0052cc]/30
-                  flex items-center gap-3 justify-center"
+                  flex items-center gap-3 justify-center w-full md:w-auto"
                   whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0, 82, 204, 0.3)" }}
                   whileTap={{ scale: 0.95 }}
                 >

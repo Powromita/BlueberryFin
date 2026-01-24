@@ -60,9 +60,9 @@ export function ContactSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#001f3f] mb-6 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#001f3f] mb-4 md:mb-6 tracking-tight px-2 sm:px-0">
             Get in Touch
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] mx-auto rounded-full mb-6" />
@@ -72,7 +72,7 @@ export function ContactSection() {
         </motion.div>
 
         {/* Contact Info Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12 md:mb-16">
           {contactItems.map((item, idx) => {
             const Icon = item.icon
             
@@ -85,7 +85,7 @@ export function ContactSection() {
                 whileHover={{ y: -8, scale: 1.03 }}
                 className="group"
               >
-                <div className="h-full p-8 bg-white rounded-2xl border-2 border-gray-200 hover:border-[#0052cc] hover:shadow-2xl hover:shadow-[#0052cc]/20 transition-all duration-300 shadow-md relative overflow-hidden">
+                <div className="h-full p-4 sm:p-6 md:p-8 bg-white rounded-xl sm:rounded-2xl border-2 border-gray-200 hover:border-[#0052cc] hover:shadow-2xl hover:shadow-[#0052cc]/20 transition-all duration-300 shadow-md relative overflow-hidden">
                   {/* Top accent bar */}
                   <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
@@ -140,7 +140,7 @@ export function ContactSection() {
         </div>
 
         {/* Form and Map Section */}
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
           {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}

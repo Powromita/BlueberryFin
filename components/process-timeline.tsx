@@ -78,12 +78,12 @@ export function ProcessTimeline() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-12 md:mb-20 px-2 sm:px-0"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#001f3f] mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#001f3f] mb-4\">
             Our Process
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-lg text-gray-600 max-w-2xl mx-auto\">
             A structured approach to achieving your financial goals
           </p>
         </motion.div>

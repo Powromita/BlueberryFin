@@ -4,7 +4,7 @@ import { useInView } from "react-intersection-observer"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { 
+import {
   ArrowRightIcon,
   ChartBarIcon,
   CurrencyDollarIcon,
@@ -65,7 +65,22 @@ const services = [
   },
 ]
 
-const ServiceCard = ({ service, idx, inView }) => {
+interface Service {
+  title: string
+  description: string
+  briefInfo: string
+  href: string
+  icon: React.ElementType
+  color: string
+}
+
+interface ServiceCardProps {
+  service: Service
+  idx: number
+  inView: boolean
+}
+
+const ServiceCard = ({ service, idx, inView }: ServiceCardProps) => {
   const [isHovered, setIsHovered] = useState(false)
   const IconComponent = service.icon
 
@@ -90,10 +105,9 @@ const ServiceCard = ({ service, idx, inView }) => {
         >
           {/* Background gradient */}
           <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
-          
+
           {/* Card content */}
-          <div className="h-full p-8 bg-gradient-to-br from-gray-50 to-white rounded-2xl border-2 border-gray-200 cursor-pointer transition-all duration-300 group-hover:border-[#0052cc] group-hover:shadow-2xl relative overflow-hidden">
-            
+          <div className="h-full p-4 sm:p-6 md:p-8 bg-gradient-to-br from-gray-50 to-white rounded-xl sm:rounded-2xl border-2 border-gray-200 cursor-pointer transition-all duration-300 group-hover:border-[#0052cc] group-hover:shadow-2xl relative overflow-hidden">
             {/* Animated background pattern on hover */}
             <motion.div
               className="absolute -inset-0 bg-gradient-to-r from-[#0052cc]/0 via-[#0052cc]/0 to-[#0052cc]/0 group-hover:from-[#0052cc]/5 group-hover:via-transparent group-hover:to-[#0052cc]/5 transition-all duration-300"
@@ -102,7 +116,7 @@ const ServiceCard = ({ service, idx, inView }) => {
             />
 
             {/* Icon container */}
-            <motion.div 
+            <motion.div
               className={`mb-6 flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} text-white transition-all duration-300`}
               animate={{
                 scale: isHovered ? 1.1 : 1,
@@ -126,8 +140,8 @@ const ServiceCard = ({ service, idx, inView }) => {
             <motion.div
               className="relative z-10"
               initial={{ opacity: 0, height: 0 }}
-              animate={{ 
-                opacity: isHovered ? 1 : 0, 
+              animate={{
+                opacity: isHovered ? 1 : 0,
                 height: isHovered ? "auto" : 0,
               }}
               transition={{ duration: 0.3 }}
@@ -138,7 +152,7 @@ const ServiceCard = ({ service, idx, inView }) => {
                 </p>
               </div>
             </motion.div>
-            
+
             {/* Read More Link */}
             <div className="flex items-center text-[#001f3f] font-semibold group-hover:text-[#0052cc] transition-colors duration-300 relative z-10">
               <span>Read More</span>
@@ -175,19 +189,19 @@ export function ServicesSection() {
   })
 
   return (
-    <section 
-      id="services" 
-      ref={ref} 
+    <section
+      id="services"
+      ref={ref}
       className="py-24 bg-gradient-to-b from-white via-blue-50/30 to-white relative overflow-hidden"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div 
+        <motion.div
           className="absolute top-0 left-0 w-96 h-96 bg-[#001f3f]/8 rounded-full blur-3xl"
           animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
           transition={{ duration: 8, repeat: Infinity }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-0 right-0 w-96 h-96 bg-[#0052cc]/8 rounded-full blur-3xl"
           animate={{ scale: [1.1, 1, 1.1], opacity: [0.5, 0.8, 0.5] }}
           transition={{ duration: 10, repeat: Infinity }}
@@ -212,20 +226,20 @@ export function ServicesSection() {
             </h2>
           </motion.div>
           <div className="w-24 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] mx-auto rounded-full mb-6" />
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-2 sm:px-0"
           >
             Comprehensive financial advisory solutions for your corporate and personal financial goals
             <br />
-            <span className="text-sm text-[#0052cc] mt-2 inline-block">✨ Hover over services for detailed insights</span>
+            <span className="text-xs sm:text-sm text-[#0052cc] mt-2 inline-block">✨ Tap or hover over services for detailed insights</span>
           </motion.p>
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, idx) => (
             <ServiceCard key={service.href} service={service} idx={idx} inView={inView} />
           ))}

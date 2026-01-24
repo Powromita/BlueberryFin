@@ -55,18 +55,18 @@ export function FeaturesHighlight() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16 px-2 sm:px-0"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-[#001f3f] mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#001f3f] mb-4">
             Why Choose BlueberryFin?
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
             Experience world-class financial advisory with cutting-edge technology and expert guidance
           </p>
         </motion.div>
 
         {/* Features Grid - Icon Focus */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {features.map((feature, idx) => {
             const IconComponent = feature.icon
             return (
