@@ -4,6 +4,8 @@ import { useState } from "react"
 import { useInView } from "react-intersection-observer"
 import { motion } from "framer-motion"
 import { EnvelopeIcon, PhoneIcon, MapPinIcon, ClockIcon, PaperAirplaneIcon } from "@heroicons/react/24/outline"
+import emailjs from '@emailjs/browser'
+import { toast } from "sonner"
 
 export function ContactSection() {
   const { ref, inView } = useInView({
@@ -18,6 +20,97 @@ export function ContactSection() {
   })
 
   const [focusedField, setFocusedField] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    
+    // Validation
+    if (!formData.name.trim()) {
+      toast.error("Please enter your name")
+      return
+    }
+    
+    if (!formData.email.trim()) {
+      toast.error("Please enter your email")
+      return
+    }
+    
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid email address")
+      return
+    }
+    
+    if (!formData.message.trim()) {
+      toast.error("Please enter a message")
+      return
+    }
+
+    setIsSubmitting(true)
+
+    try {
+      // EmailJS configuration
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+      const autoReplyTemplateId = process.env.NEXT_PUBLIC_EMAILJS_AUTOREPLY_TEMPLATE_ID
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error("EmailJS configuration is missing. Please check your .env.local file.")
+      }
+
+      // Send notification email to website owner (sm091849@gmail.com)
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          to_email: "sm091849@gmail.com",
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          reply_to: formData.email,
+        },
+        publicKey
+      )
+
+      // Send auto-reply confirmation email to the sender (if template is configured)
+      if (autoReplyTemplateId) {
+        try {
+          await emailjs.send(
+            serviceId,
+            autoReplyTemplateId,
+            {
+              to_email: formData.email,
+              to_name: formData.name,
+              from_name: formData.name,
+              message: formData.message,
+            },
+            publicKey
+          )
+        } catch (autoReplyError) {
+          // Log auto-reply error but don't fail the main submission
+          console.warn("Auto-reply email failed:", autoReplyError)
+        }
+      }
+
+      // Success
+      toast.success("Message sent successfully! We'll get back to you soon.")
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      })
+    } catch (error) {
+      console.error("EmailJS Error:", error)
+      toast.error("Failed to send message. Please try again or contact us directly via email.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   const contactItems = [
     {
@@ -157,7 +250,7 @@ export function ContactSection() {
                 </p>
               </div>
 
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label 
                     htmlFor="name"
@@ -174,7 +267,8 @@ export function ContactSection() {
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     onFocus={() => setFocusedField('name')}
                     onBlur={() => setFocusedField(null)}
-                    className="w-full px-4 py-3.5 rounded-lg border border-gray-300 bg-white text-[#001f3f] placeholder:text-gray-400 focus:border-[#0052cc] focus:outline-none focus:ring-2 focus:ring-[#0052cc]/20 transition-all duration-200 text-base leading-normal"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3.5 rounded-lg border border-gray-300 bg-white text-[#001f3f] placeholder:text-gray-400 focus:border-[#0052cc] focus:outline-none focus:ring-2 focus:ring-[#0052cc]/20 transition-all duration-200 text-base leading-normal disabled:opacity-50 disabled:cursor-not-allowed"
                     style={{ textAlign: 'left', verticalAlign: 'middle' }}
                     placeholder="Your name"
                   />
@@ -196,7 +290,8 @@ export function ContactSection() {
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     onFocus={() => setFocusedField('email')}
                     onBlur={() => setFocusedField(null)}
-                    className="w-full px-4 py-3.5 rounded-lg border border-gray-300 bg-white text-[#001f3f] placeholder:text-gray-400 focus:border-[#0052cc] focus:outline-none focus:ring-2 focus:ring-[#0052cc]/20 transition-all duration-200 text-base leading-normal align-middle"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3.5 rounded-lg border border-gray-300 bg-white text-[#001f3f] placeholder:text-gray-400 focus:border-[#0052cc] focus:outline-none focus:ring-2 focus:ring-[#0052cc]/20 transition-all duration-200 text-base leading-normal align-middle disabled:opacity-50 disabled:cursor-not-allowed"
                     style={{ textAlign: 'left', display: 'block', lineHeight: '1.5' }}
                     placeholder="your.email@example.com"
                   />
@@ -218,7 +313,8 @@ export function ContactSection() {
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     onFocus={() => setFocusedField('message')}
                     onBlur={() => setFocusedField(null)}
-                    className="w-full px-4 py-3.5 rounded-lg border border-gray-300 bg-white text-[#001f3f] placeholder:text-gray-400 focus:border-[#0052cc] focus:outline-none focus:ring-2 focus:ring-[#0052cc]/20 transition-all duration-200 resize-none text-base leading-relaxed"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3.5 rounded-lg border border-gray-300 bg-white text-[#001f3f] placeholder:text-gray-400 focus:border-[#0052cc] focus:outline-none focus:ring-2 focus:ring-[#0052cc]/20 transition-all duration-200 resize-none text-base leading-relaxed disabled:opacity-50 disabled:cursor-not-allowed"
                     style={{ textAlign: 'left', verticalAlign: 'top' }}
                     placeholder="Tell us how we can help you..."
                   />
@@ -226,12 +322,25 @@ export function ContactSection() {
                 
                 <motion.button
                   type="submit"
-                  className="w-full px-6 py-4 bg-gradient-to-r from-[#001f3f] to-[#0052cc] text-white font-semibold rounded-lg hover:shadow-xl hover:shadow-[#0052cc]/30 transition-all duration-300 flex items-center justify-center gap-2 text-base"
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
+                  disabled={isSubmitting}
+                  className="w-full px-6 py-4 bg-gradient-to-r from-[#001f3f] to-[#0052cc] text-white font-semibold rounded-lg hover:shadow-xl hover:shadow-[#0052cc]/30 transition-all duration-300 flex items-center justify-center gap-2 text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                  whileHover={!isSubmitting ? { scale: 1.02, y: -2 } : {}}
+                  whileTap={!isSubmitting ? { scale: 0.98 } : {}}
                 >
-                  <span>Send Message</span>
-                  <PaperAirplaneIcon className="w-5 h-5" />
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Send Message</span>
+                      <PaperAirplaneIcon className="w-5 h-5" />
+                    </>
+                  )}
                 </motion.button>
               </form>
             </div>
