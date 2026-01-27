@@ -2,46 +2,26 @@
 
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { useState } from "react"
-import {
-  ChatBubbleLeftRightIcon,
-  ChartBarIcon,
-  LightBulbIcon,
-  RocketLaunchIcon,
-  ArrowPathIcon,
-  ClockIcon,
-} from "@heroicons/react/24/outline"
+import Link from "next/link"
 
 const steps = [
   {
-    title: "Consultation",
-    description: "Understand your financial goals and requirements through personalized consultation",
-    icon: ChatBubbleLeftRightIcon,
-    duration: "1-2 Days",
+    title: "Benchmarking",
+    description: "Our dedicated consultant benchmarks your current policy against industry leaders, spotting opportunities for improvement.",
+    badge: "STEP 1",
+    badgeColor: "bg-yellow-400",
   },
   {
-    title: "Analysis",
-    description: "Deep dive analysis of your financial situation and market opportunities",
-    icon: ChartBarIcon,
-    duration: "3-5 Days",
+    title: "Customized Plan",
+    description: "We craft a comprehensive plan that fits your vision and budget perfectly.",
+    badge: "STEP 2",
+    badgeColor: "bg-blue-400",
   },
   {
-    title: "Strategy",
-    description: "Develop customized financial strategies aligned with your objectives",
-    icon: LightBulbIcon,
-    duration: "1 Week",
-  },
-  {
-    title: "Execution",
-    description: "Implement strategies with regular monitoring and adjustments",
-    icon: RocketLaunchIcon,
-    duration: "Ongoing",
-  },
-  {
-    title: "Review",
-    description: "Continuous performance tracking and optimization for maximum returns",
-    icon: ArrowPathIcon,
-    duration: "Quarterly",
+    title: "Smooth Onboarding",
+    description: "Expert-led sessions ensure your team actually understands and values their benefits.",
+    badge: "STEP 3",
+    badgeColor: "bg-green-400",
   },
 ]
 
@@ -51,188 +31,177 @@ export function ProcessTimeline() {
     triggerOnce: true,
   })
 
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-
   return (
     <section 
       ref={ref}
-      className="relative py-24 bg-gradient-to-b from-blue-50 to-white overflow-hidden"
+      className="relative py-12 md:py-14 bg-[#f5f0eb] overflow-hidden"
     >
       {/* Background decorations */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          className="absolute top-1/3 left-0 w-80 h-80 bg-blue-200/10 rounded-full blur-3xl"
+          className="absolute top-1/3 left-0 w-80 h-80 bg-[#0f2c59]/5 rounded-full blur-3xl"
           animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 8, repeat: Infinity }}
         />
         <motion.div
-          className="absolute bottom-1/3 right-0 w-80 h-80 bg-blue-200/10 rounded-full blur-3xl"
+          className="absolute bottom-1/3 right-0 w-80 h-80 bg-[#2563eb]/5 rounded-full blur-3xl"
           animate={{ scale: [1.1, 1, 1.1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 10, repeat: Infinity }}
         />
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-12 md:mb-20 px-2 sm:px-0"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#001f3f] mb-4\">
-            Our Process
-          </h2>
-          <p className="text-base sm:text-lg md:text-lg text-gray-600 max-w-2xl mx-auto\">
-            A structured approach to achieving your financial goals
-          </p>
-        </motion.div>
-
-        {/* Timeline Steps - Vertical on mobile, horizontal with connector on desktop */}
-        <div className="hidden lg:flex justify-between items-start gap-4 mb-20">
-          {steps.map((step, idx) => {
-            const IconComponent = step.icon
-            return (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 40 }}
-              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-              transition={{
-                delay: idx * 0.1,
-                duration: 0.6,
-              }}
-              onMouseEnter={() => setHoveredIndex(idx)}
-              onMouseLeave={() => setHoveredIndex(null)}
-              className="flex-1 flex flex-col items-center text-center relative"
-              style={{ minWidth: 0 }}
-            >
-              {/* Connector line */}
-              {idx < steps.length - 1 && (
-                <motion.div
-                  className="absolute top-8 left-1/2 w-full h-1 bg-gradient-to-r from-[#1e40af] to-transparent z-0"
-                  initial={{ scaleX: 0 }}
-                  animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
-                  transition={{
-                    delay: idx * 0.15 + 0.3,
-                    duration: 0.6,
-                    origin: "left",
-                  }}
-                />
-              )}
-
-              {/* Step Card */}
-              <motion.div
-                className="relative w-full flex flex-col items-center text-center"
-                animate={{
-                  scale: hoveredIndex === idx ? 1.05 : 1,
-                }}
-                transition={{ duration: 0.3 }}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* LEFT SIDE - Large Headline (4 columns) */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-4"
+          >
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#0f2c59] leading-tight mb-6">
+              We've reimagined financial advisory and business partnerships.
+            </h2>
+            <p className="text-gray-600 text-base leading-relaxed mb-8">
+              No misselling. No pressure. No jargon. Just genuine expertise and care to help you create the perfect financial strategy for your business.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link
+                href="/contact"
+                onClick={() => sessionStorage.setItem("internalNavigation", "true")}
+                className="px-6 py-3 bg-[#0f2c59] hover:bg-[#2563eb] text-white font-semibold rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
               >
-                {/* Icon Circle */}
-                <motion.div
-                  className="w-16 h-16 rounded-full bg-gradient-to-br from-[#1e3a8a] to-[#1e40af] text-white flex items-center justify-center mb-4 shadow-lg relative z-10"
-                  animate={{
-                    scale: hoveredIndex === idx ? 1.2 : 1,
-                    boxShadow: hoveredIndex === idx 
-                      ? "0 0 30px rgba(0, 82, 204, 0.6)"
-                      : "0 4px 12px rgba(0, 31, 63, 0.2)",
-                  }}
-                >
-                  <IconComponent className="w-7 h-7" />
-                </motion.div>
+                TALK TO SALES
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link
+                href="/services/ipo-advisory"
+                onClick={() => sessionStorage.setItem("internalNavigation", "true")}
+                className="px-6 py-3 border-2 border-[#0f2c59] text-[#0f2c59] hover:bg-[#0f2c59] hover:text-white font-semibold rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                VIEW ADMIN JOURNEY
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </motion.div>
 
-                {/* Number */}
-                <motion.div
-                  className="absolute top-0 right-0 w-8 h-8 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 text-white text-sm font-bold flex items-center justify-center shadow-lg z-20"
-                  animate={{
-                    scale: hoveredIndex === idx ? 1.2 : 1,
-                  }}
-                >
-                  {idx + 1}
-                </motion.div>
+          {/* CENTER - Illustration (4 columns) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="lg:col-span-4 hidden lg:block"
+          >
+            <div className="relative w-full h-[320px]">
+              {/* Illustrated city skyline with financial dashboard */}
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-blue-500/10 rounded-2xl flex items-center justify-center overflow-hidden">
+                {/* City buildings */}
+                <div className="absolute bottom-0 left-0 right-0 flex items-end justify-center gap-2 px-8">
+                  <motion.div 
+                    className="w-12 h-24 bg-gradient-to-t from-[#0f2c59] to-[#2563eb] rounded-t-lg opacity-80"
+                    animate={{ height: [96, 104, 96] }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                  />
+                  <motion.div 
+                    className="w-16 h-36 bg-gradient-to-t from-purple-600 to-purple-400 rounded-t-lg opacity-80"
+                    animate={{ height: [144, 136, 144] }}
+                    transition={{ duration: 5, repeat: Infinity }}
+                  />
+                  <motion.div 
+                    className="w-12 h-28 bg-gradient-to-t from-[#2563eb] to-blue-400 rounded-t-lg opacity-80"
+                    animate={{ height: [112, 120, 112] }}
+                    transition={{ duration: 4.5, repeat: Infinity }}
+                  />
+                  <motion.div 
+                    className="w-20 h-44 bg-gradient-to-t from-pink-600 to-pink-400 rounded-t-lg opacity-80"
+                    animate={{ height: [176, 168, 176] }}
+                    transition={{ duration: 6, repeat: Infinity }}
+                  />
+                  <motion.div 
+                    className="w-12 h-32 bg-gradient-to-t from-[#0f2c59] to-[#2563eb] rounded-t-lg opacity-80"
+                    animate={{ height: [128, 136, 128] }}
+                    transition={{ duration: 5.5, repeat: Infinity }}
+                  />
+                </div>
 
-                {/* Content Box - Fixed height for all boxes */}
+                {/* Floating dashboard card */}
                 <motion.div
-                  className="w-full p-8 rounded-2xl bg-white border-2 border-gray-200 h-[320px] flex flex-col justify-between transition-all duration-300"
-                  animate={{
-                    borderColor: hoveredIndex === idx ? "#1e40af" : "#e5e7eb",
-                    boxShadow: hoveredIndex === idx
-                      ? "0 20px 40px rgba(0, 82, 204, 0.15)"
-                      : "0 4px 6px rgba(0, 0, 0, 0.07)",
-                  }}
+                  className="absolute top-1/4 left-1/2 transform -translate-x-1/2 bg-[#f5f0eb] rounded-xl shadow-2xl p-4 w-60 border-2 border-gray-100"
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{ duration: 4, repeat: Infinity }}
                 >
-                  <div className="flex-1 flex flex-col justify-start overflow-hidden">
-                    <h3 className="text-xl font-bold text-[#1e3a8a] mb-4 group-hover:text-[#1e40af] transition-colors">
-                      {step.title}
-                    </h3>
-                    <p className="text-base text-gray-600 leading-relaxed">
-                      {step.description}
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-2 h-2 rounded-full bg-green-500" />
+                    <span className="text-xs font-semibold text-[#0f2c59]">Current Policy Score</span>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-[10px] text-gray-600">Basic Coverage</span>
+                      <div className="flex gap-0.5">
+                        {[1, 2, 3].map((i) => (
+                          <div key={i} className="w-2.5 h-2.5 rounded-sm bg-red-400" />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-[10px] text-gray-600">Family Benefits</span>
+                      <div className="flex gap-0.5">
+                        {[1].map((i) => (
+                          <div key={i} className="w-2.5 h-2.5 rounded-sm bg-red-400" />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-[10px] text-gray-600">Inclusive Benefits</span>
+                      <div className="flex gap-0.5">
+                        {[1, 2, 3].map((i) => (
+                          <div key={i} className="w-2.5 h-2.5 rounded-sm bg-red-400" />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-3 pt-3 border-t border-gray-200">
+                    <p className="text-[9px] text-gray-500 leading-relaxed">
+                      Improve your policy by addressing these gaps
                     </p>
                   </div>
-                  <motion.div
-                    className="mt-6 pt-5 border-t border-gray-200 flex items-center justify-center gap-2 flex-shrink-0"
-                    animate={{
-                      opacity: hoveredIndex === idx ? 1 : 0.7,
-                    }}
-                  >
-                    <ClockIcon className="w-4 h-4 text-[#1e40af]" />
-                    <p className="text-[#1e40af] font-semibold text-base">
-                      {step.duration}
-                    </p>
-                  </motion.div>
                 </motion.div>
-              </motion.div>
-            </motion.div>
-            )
-          })}
-        </div>
-
-        {/* Mobile view */}
-        <div className="lg:hidden space-y-6">
-          {steps.map((step, idx) => {
-            const IconComponent = step.icon
-            return (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, x: -40 }}
-              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -40 }}
-              transition={{ delay: idx * 0.1, duration: 0.6 }}
-              className="flex gap-4"
-            >
-              {/* Left badge */}
-              <div className="flex flex-col items-center">
-                <motion.div
-                  className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1e3a8a] to-[#1e40af] text-white flex items-center justify-center shadow-lg"
-                  whileHover={{ scale: 1.1 }}
-                >
-                  <IconComponent className="w-6 h-6" />
-                </motion.div>
-                {idx < steps.length - 1 && (
-                  <div className="w-1 h-8 bg-gradient-to-b from-[#1e40af] to-transparent mt-2" />
-                )}
               </div>
+            </div>
+          </motion.div>
 
-              {/* Right content */}
+          {/* RIGHT SIDE - Process Steps (4 columns) - Simple text, no cards */}
+          <div className="lg:col-span-4 space-y-4">
+            {steps.map((step, idx) => (
               <motion.div
-                className="flex-1 p-4 rounded-xl bg-white border-2 border-gray-200 hover:border-[#1e40af] transition-all duration-300"
-                whileHover={{ y: -4, boxShadow: "0 12px 24px rgba(0, 82, 204, 0.1)" }}
+                key={idx}
+                initial={{ opacity: 0, x: 30 }}
+                animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+                transition={{ duration: 0.6, delay: idx * 0.15 }}
               >
-                <h3 className="text-lg font-bold text-[#001f3f] mb-1">
+                {/* Badge */}
+                <div className={`inline-block ${step.badgeColor} text-[#0f2c59] text-xs font-bold px-3 py-1 rounded mb-2`}>
+                  {step.badge}
+                </div>
+                
+                {/* Title */}
+                <h3 className="text-xl font-bold text-[#0f2c59] mb-1.5">
                   {step.title}
                 </h3>
-                <p className="text-sm text-gray-600 mb-2">
+                
+                {/* Description */}
+                <p className="text-gray-600 text-sm leading-relaxed">
                   {step.description}
                 </p>
-                <div className="flex items-center gap-1.5">
-                  <ClockIcon className="w-3.5 h-3.5 text-[#1e40af]" />
-                  <p className="text-[#1e40af] text-xs font-semibold">
-                    {step.duration}
-                  </p>
-                </div>
               </motion.div>
-            </motion.div>
-            )
-          })}
+            ))}
+          </div>
         </div>
       </div>
     </section>

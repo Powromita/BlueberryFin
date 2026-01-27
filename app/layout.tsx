@@ -1,12 +1,22 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Outfit, Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "sonner"
 import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+// Option 2: Modern Professional
+const outfit = Outfit({ 
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+})
+
+const inter = Inter({ 
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: "Blueberry Fin - Financial Advisory",
@@ -89,7 +99,7 @@ export default function RootLayout({
           `
         }} />
       </head>
-      <body className={`font-sans antialiased`} suppressHydrationWarning>
+      <body className={`${outfit.variable} ${inter.variable} font-sans antialiased`} suppressHydrationWarning>
         {children}
         <Toaster position="top-center" richColors />
         <Analytics />

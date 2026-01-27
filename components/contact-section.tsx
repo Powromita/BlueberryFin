@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useInView } from "react-intersection-observer"
 import { motion } from "framer-motion"
-import { EnvelopeIcon, PhoneIcon, MapPinIcon, ClockIcon, PaperAirplaneIcon } from "@heroicons/react/24/outline"
+import { PaperAirplaneIcon, CheckCircleIcon } from "@heroicons/react/24/outline"
 import emailjs from '@emailjs/browser'
 import { toast } from "sonner"
 
@@ -16,6 +16,8 @@ export function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    company: "",
+    phone: "",
     message: "",
   })
 
@@ -25,7 +27,6 @@ export function ContactSection() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     
-    // Validation
     if (!formData.name.trim()) {
       toast.error("Please enter your name")
       return
@@ -36,32 +37,23 @@ export function ContactSection() {
       return
     }
     
-    // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(formData.email)) {
       toast.error("Please enter a valid email address")
-      return
-    }
-    
-    if (!formData.message.trim()) {
-      toast.error("Please enter a message")
       return
     }
 
     setIsSubmitting(true)
 
     try {
-      // EmailJS configuration
       const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
       const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
-      const autoReplyTemplateId = process.env.NEXT_PUBLIC_EMAILJS_AUTOREPLY_TEMPLATE_ID
       const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
 
       if (!serviceId || !templateId || !publicKey) {
-        throw new Error("EmailJS configuration is missing. Please check your .env.local file.")
+        throw new Error("EmailJS configuration is missing.")
       }
 
-      // Send notification email to website owner (sm091849@gmail.com)
       await emailjs.send(
         serviceId,
         templateId,
@@ -69,301 +61,205 @@ export function ContactSection() {
           to_email: "sm091849@gmail.com",
           from_name: formData.name,
           from_email: formData.email,
+          company: formData.company,
+          phone: formData.phone,
           message: formData.message,
           reply_to: formData.email,
         },
         publicKey
       )
 
-      // Send auto-reply confirmation email to the sender (if template is configured)
-      if (autoReplyTemplateId) {
-        try {
-          await emailjs.send(
-            serviceId,
-            autoReplyTemplateId,
-            {
-              to_email: formData.email,
-              to_name: formData.name,
-              from_name: formData.name,
-              message: formData.message,
-            },
-            publicKey
-          )
-        } catch (autoReplyError) {
-          // Log auto-reply error but don't fail the main submission
-          console.warn("Auto-reply email failed:", autoReplyError)
-        }
-      }
-
-      // Success
       toast.success("Message sent successfully! We'll get back to you soon.")
       
-      // Reset form
       setFormData({
         name: "",
         email: "",
+        company: "",
+        phone: "",
         message: "",
       })
     } catch (error) {
       console.error("EmailJS Error:", error)
-      toast.error("Failed to send message. Please try again or contact us directly via email.")
+      toast.error("Failed to send message. Please try again.")
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  const contactItems = [
-    {
-      icon: EnvelopeIcon,
-      title: "Email",
-      details: "tatsat.mehta@gmail.com",
-      link: "mailto:tatsat.mehta@gmail.com",
-    },
-    {
-      icon: PhoneIcon,
-      title: "Phone",
-      details: "+91 9870333395",
-      link: "tel:+919870333395",
-    },
-    {
-      icon: MapPinIcon,
-      title: "Address",
-      details: "16-A AJAY COLONY OPP, JAIN TEMPLE\nNIZAMPURA, VADODARA - 390002\nGUJARAT, BHARAT",
-      link: null,
-    },
-    {
-      icon: ClockIcon,
-      title: "Hours",
-      details: "09:00 am – 05:00 pm",
-      link: null,
-    },
+  const benefits = [
+    "Custom recommendations. Expert guidance. Better coverage for your business.",
+    "High quality financial solutions like IPO advisory, fundraising & more",
+    "Day 1 support for your team and their families. Parents covered.",
+    "Setup and go live in days, not months.",
   ]
 
   return (
-    <section id="contact" ref={ref} className="py-24 bg-gradient-to-b from-white via-blue-50/30 to-white relative overflow-hidden">
+    <section id="contact" ref={ref} className="py-24 md:py-32 bg-[#0f2c59] relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#001f3f]/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#0052cc]/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#2563eb]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#2563eb]/10 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-12 md:mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#001f3f] mb-4 md:mb-6 tracking-tight px-2 sm:px-0">
-            Get in Touch
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] mx-auto rounded-full mb-6" />
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Have a question or want to discuss your financial goals? We're here to help.
-          </p>
-        </motion.div>
-
-        {/* Contact Info Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12 md:mb-16">
-          {contactItems.map((item, idx) => {
-            const Icon = item.icon
-            
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                whileHover={{ y: -8, scale: 1.03 }}
-                className="group"
-              >
-                <div className="h-full p-4 sm:p-6 md:p-8 bg-white rounded-xl sm:rounded-2xl border-2 border-gray-200 hover:border-[#0052cc] hover:shadow-2xl hover:shadow-[#0052cc]/20 transition-all duration-300 shadow-md relative overflow-hidden">
-                  {/* Top accent bar */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  {/* Background gradient on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#0052cc]/0 to-[#001f3f]/0 group-hover:from-[#0052cc]/5 group-hover:to-[#001f3f]/5 transition-all duration-300 rounded-2xl" />
-                  
-                  {/* Decorative corner element */}
-                  <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-br from-[#0052cc]/10 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  <div className="relative z-10">
-                    {/* Icon Container - New Design */}
-                    <div className="mb-6 flex items-center justify-between">
-                      <motion.div 
-                        className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#001f3f] to-[#0052cc] flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 relative"
-                        whileHover={{ rotate: [0, -5, 5, 0], scale: 1.1 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <Icon className="w-6 h-6 text-white" />
-                        {/* Glow effect */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#0052cc] to-[#001f3f] rounded-xl blur-md opacity-0 group-hover:opacity-50 transition-opacity duration-300 -z-10" />
-                      </motion.div>
-                      {/* Number badge */}
-                      <div className="w-8 h-8 rounded-full bg-[#0052cc]/10 flex items-center justify-center text-[#0052cc] font-bold text-sm group-hover:bg-[#0052cc] group-hover:text-white transition-all duration-300">
-                        {idx + 1}
-                      </div>
-                    </div>
-                    
-                    {/* Content */}
-                    <h3 className="text-xl font-bold text-[#001f3f] mb-4 group-hover:text-[#0052cc] transition-colors duration-300">
-                      {item.title}
-                    </h3>
-                    {item.link ? (
-                      <a
-                        href={item.link}
-                        className="text-gray-600 hover:text-[#0052cc] transition-colors whitespace-pre-line text-sm leading-relaxed block font-medium group-hover:font-semibold"
-                      >
-                        {item.details}
-                      </a>
-                    ) : (
-                      <p className="text-gray-600 whitespace-pre-line text-sm leading-relaxed font-medium">
-                        {item.details}
-                      </p>
-                    )}
-                  </div>
-                  
-                  {/* Bottom accent line */}
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#0052cc] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-              </motion.div>
-            )
-          })}
-        </div>
-
-        {/* Form and Map Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-          {/* Contact Form */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* LEFT SIDE - Headline & Benefits */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.8 }}
+            className="text-white"
           >
-            <div className="bg-white rounded-2xl border border-gray-200 p-8 md:p-10 shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <div className="mb-8">
-                <h3 className="text-2xl md:text-3xl font-bold text-[#001f3f] mb-2">
-                  Send us a Message
-                </h3>
-                <p className="text-gray-600 text-sm md:text-base">
-                  Fill out the form below and we'll get back to you soon.
-                </p>
-              </div>
+            <h2 className="text-5xl md:text-6xl lg:text-7xl leading-tight mb-6" style={{ fontFamily: 'GT Alpina Standard, Verdana, sans-serif' }}>
+              Get A Quote For Financial Advisory.
+            </h2>
+            <p className="text-xl text-blue-100 mb-12 leading-relaxed">
+              Custom recommendations. Expert guidance. Better coverage for your business.
+            </p>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label 
-                    htmlFor="name"
-                    className={`block text-sm font-semibold text-[#001f3f] mb-2.5 transition-colors duration-200 ${
-                      focusedField === 'name' ? 'text-[#0052cc]' : ''
-                    }`}
-                  >
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    onFocus={() => setFocusedField('name')}
-                    onBlur={() => setFocusedField(null)}
-                    disabled={isSubmitting}
-                    className="w-full px-4 py-3.5 rounded-lg border border-gray-300 bg-white text-[#001f3f] placeholder:text-gray-400 focus:border-[#0052cc] focus:outline-none focus:ring-2 focus:ring-[#0052cc]/20 transition-all duration-200 text-base leading-normal disabled:opacity-50 disabled:cursor-not-allowed"
-                    style={{ textAlign: 'left', verticalAlign: 'middle' }}
-                    placeholder="Your name"
-                  />
-                </div>
-                
-                <div>
-                  <label 
-                    htmlFor="email"
-                    className={`block text-sm font-semibold text-[#001f3f] mb-2.5 transition-colors duration-200 ${
-                      focusedField === 'email' ? 'text-[#0052cc]' : ''
-                    }`}
-                  >
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    onFocus={() => setFocusedField('email')}
-                    onBlur={() => setFocusedField(null)}
-                    disabled={isSubmitting}
-                    className="w-full px-4 py-3.5 rounded-lg border border-gray-300 bg-white text-[#001f3f] placeholder:text-gray-400 focus:border-[#0052cc] focus:outline-none focus:ring-2 focus:ring-[#0052cc]/20 transition-all duration-200 text-base leading-normal align-middle disabled:opacity-50 disabled:cursor-not-allowed"
-                    style={{ textAlign: 'left', display: 'block', lineHeight: '1.5' }}
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-                
-                <div>
-                  <label 
-                    htmlFor="message"
-                    className={`block text-sm font-semibold text-[#001f3f] mb-2.5 transition-colors duration-200 ${
-                      focusedField === 'message' ? 'text-[#0052cc]' : ''
-                    }`}
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={6}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    onFocus={() => setFocusedField('message')}
-                    onBlur={() => setFocusedField(null)}
-                    disabled={isSubmitting}
-                    className="w-full px-4 py-3.5 rounded-lg border border-gray-300 bg-white text-[#001f3f] placeholder:text-gray-400 focus:border-[#0052cc] focus:outline-none focus:ring-2 focus:ring-[#0052cc]/20 transition-all duration-200 resize-none text-base leading-relaxed disabled:opacity-50 disabled:cursor-not-allowed"
-                    style={{ textAlign: 'left', verticalAlign: 'top' }}
-                    placeholder="Tell us how we can help you..."
-                  />
-                </div>
-                
-                <motion.button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full px-6 py-4 bg-gradient-to-r from-[#001f3f] to-[#0052cc] text-white font-semibold rounded-lg hover:shadow-xl hover:shadow-[#0052cc]/30 transition-all duration-300 flex items-center justify-center gap-2 text-base disabled:opacity-50 disabled:cursor-not-allowed"
-                  whileHover={!isSubmitting ? { scale: 1.02, y: -2 } : {}}
-                  whileTap={!isSubmitting ? { scale: 0.98 } : {}}
+            {/* Benefits List */}
+            <div className="space-y-4 mb-12">
+              {benefits.map((benefit, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                  transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
+                  className="flex items-start gap-3"
                 >
-                  {isSubmitting ? (
-                    <>
-                      <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      <span>Sending...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Send Message</span>
-                      <PaperAirplaneIcon className="w-5 h-5" />
-                    </>
-                  )}
-                </motion.button>
-              </form>
+                  <CheckCircleIcon className="w-6 h-6 text-[#2563eb] flex-shrink-0 mt-0.5" />
+                  <p className="text-blue-100 leading-relaxed">{benefit}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Company Logos Placeholder */}
+            <div>
+              <p className="text-blue-200 text-sm mb-4">Join 100+ companies building a culture of financial excellence</p>
+              <div className="flex flex-wrap gap-6 items-center opacity-60">
+                {/* Placeholder for company logos */}
+                <div className="text-white/40 text-xs font-semibold">RELIANCE</div>
+                <div className="text-white/40 text-xs font-semibold">TATA</div>
+                <div className="text-white/40 text-xs font-semibold">INFOSYS</div>
+                <div className="text-white/40 text-xs font-semibold">HDFC</div>
+              </div>
             </div>
           </motion.div>
 
-          {/* Map */}
+          {/* RIGHT SIDE - Form Card */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="h-full"
+            transition={{ duration: 0.8 }}
           >
-            <div className="h-full rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.5447654326746!2d72.81285!3d19.03599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce9a19c5d8cd%3A0x5a2d9d8c5b8d4c5a!2sBandra-Worli%20Sea%20Link!5e0!3m2!1sen!2sin!4v1234567890"
-                width="100%"
-                height="100%"
-                style={{ border: 0, minHeight: "500px" }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="rounded-2xl"
-              />
+            <div className="bg-[#f5f0eb] rounded-2xl p-8 md:p-10 shadow-2xl">
+              <h3 className="text-2xl font-serif text-[#0f2c59] mb-2">
+                Build your plan <span className="italic">with BlueberryFin</span>
+              </h3>
+              
+              <form onSubmit={handleSubmit} className="space-y-5 mt-6">
+                {/* Name */}
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onFocus={() => setFocusedField("name")}
+                    onBlur={() => setFocusedField(null)}
+                    className="w-full px-0 py-3 border-b-2 border-gray-300 focus:border-[#2563eb] bg-transparent outline-none transition-colors text-gray-800 placeholder-gray-400"
+                    required
+                  />
+                </div>
+
+                {/* Email */}
+                <div>
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onFocus={() => setFocusedField("email")}
+                    onBlur={() => setFocusedField(null)}
+                    className="w-full px-0 py-3 border-b-2 border-gray-300 focus:border-[#2563eb] bg-transparent outline-none transition-colors text-gray-800 placeholder-gray-400"
+                    required
+                  />
+                </div>
+
+                {/* Company */}
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Company Name"
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    onFocus={() => setFocusedField("company")}
+                    onBlur={() => setFocusedField(null)}
+                    className="w-full px-0 py-3 border-b-2 border-gray-300 focus:border-[#2563eb] bg-transparent outline-none transition-colors text-gray-800 placeholder-gray-400"
+                  />
+                </div>
+
+                {/* Phone */}
+                <div>
+                  <input
+                    type="tel"
+                    placeholder="Phone Number"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onFocus={() => setFocusedField("phone")}
+                    onBlur={() => setFocusedField(null)}
+                    className="w-full px-0 py-3 border-b-2 border-gray-300 focus:border-[#2563eb] bg-transparent outline-none transition-colors text-gray-800 placeholder-gray-400"
+                  />
+                </div>
+
+                {/* Message Dropdown Style */}
+                <div>
+                  <select
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    onFocus={() => setFocusedField("message")}
+                    onBlur={() => setFocusedField(null)}
+                    className="w-full px-0 py-3 border-b-2 border-gray-300 focus:border-[#2563eb] bg-transparent outline-none transition-colors text-gray-800"
+                    required
+                  >
+                    <option value="">What can BlueberryFin help you with today?</option>
+                    <option value="IPO Advisory">IPO Advisory & Readiness</option>
+                    <option value="Fundraising">Fundraising Service</option>
+                    <option value="Private Equity">Private Equity</option>
+                    <option value="M&A">Merger & Acquisition</option>
+                    <option value="Debt Syndication">Debt Syndication</option>
+                    <option value="Startup Advisory">Startup Advisory</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                {/* Privacy Checkbox */}
+                <div className="flex items-start gap-2 text-xs text-gray-600">
+                  <input type="checkbox" required className="mt-1" />
+                  <label>
+                    By submitting, you agree with BlueberryFin's privacy policy and terms of use.
+                  </label>
+                </div>
+
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full px-8 py-4 bg-[#0f2c59] hover:bg-[#2563eb] text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      GET A QUOTE
+                      <PaperAirplaneIcon className="w-5 h-5" />
+                    </>
+                  )}
+                </button>
+              </form>
             </div>
           </motion.div>
         </div>

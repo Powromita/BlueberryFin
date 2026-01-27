@@ -13,11 +13,11 @@ interface ServicePageProps {
 
 export function ServicePage({ title, subtitle, description, benefits }: ServicePageProps) {
   return (
-    <div className="min-h-screen bg-white pt-20">
-      <div className="relative overflow-hidden bg-[#001f3f] text-white py-20 sm:py-32">
+    <div className="min-h-screen bg-[#f5f0eb] pt-20">
+      <div className="relative overflow-hidden bg-[#0f2c59] text-white py-20 sm:py-32">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-1/2 -right-1/2 w-[1000px] h-[1000px] rounded-full bg-gradient-to-b from-blue-600/20 to-transparent blur-3xl" />
-          <div className="absolute -bottom-1/2 -left-1/2 w-[1000px] h-[1000px] rounded-full bg-gradient-to-t from-[#0052cc]/20 to-transparent blur-3xl" />
+          <div className="absolute -bottom-1/2 -left-1/2 w-[1000px] h-[1000px] rounded-full bg-gradient-to-t from-[#2563eb]/20 to-transparent blur-3xl" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,7 +52,7 @@ export function ServicePage({ title, subtitle, description, benefits }: ServiceP
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold text-[#001f3f] mb-6">Overview</h2>
+            <h2 className="text-3xl font-bold text-[#0f2c59] mb-6">Overview</h2>
             <p className="text-lg text-gray-600 leading-relaxed">
               {description}
             </p>
@@ -65,7 +65,7 @@ export function ServicePage({ title, subtitle, description, benefits }: ServiceP
             transition={{ duration: 0.6, delay: 0.2 }}
             className="bg-gray-50 rounded-2xl p-8 border border-gray-100"
           >
-            <h3 className="text-2xl font-bold text-[#001f3f] mb-8">Key Benefits</h3>
+            <h3 className="text-2xl font-bold text-[#0f2c59] mb-8">Key Benefits</h3>
             <ul className="space-y-4">
               {benefits.map((benefit, index) => (
                 <motion.li
@@ -76,7 +76,7 @@ export function ServicePage({ title, subtitle, description, benefits }: ServiceP
                   transition={{ delay: 0.3 + index * 0.1 }}
                   className="flex items-start gap-3"
                 >
-                  <CheckCircleIcon className="w-6 h-6 text-[#0052cc] flex-shrink-0" />
+                  <CheckCircleIcon className="w-6 h-6 text-[#2563eb] flex-shrink-0" />
                   <span className="text-gray-700 font-medium">{benefit}</span>
                 </motion.li>
               ))}

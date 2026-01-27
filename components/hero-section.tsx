@@ -59,7 +59,7 @@ export function HeroSection() {
               }}
             />
             <motion.div
-              className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-tl from-blue-200/20 to-[#001f3f]/10 rounded-full blur-3xl"
+              className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-tl from-blue-200/20 to-[#0f2c59]/10 rounded-full blur-3xl"
               animate={{
                 scale: [1.1, 1, 1.1],
                 opacity: [0.2, 0.4, 0.2],
@@ -94,13 +94,13 @@ export function HeroSection() {
                 }}
               >
                 {/* Clean concentric circles */}
-                <div className="absolute inset-0 rounded-full border border-[#0052cc]/15"></div>
-                <div className="absolute inset-6 rounded-full border border-[#001f3f]/12"></div>
-                <div className="absolute inset-12 rounded-full border border-[#0052cc]/10"></div>
-                <div className="absolute inset-20 rounded-full border border-[#001f3f]/8"></div>
+                <div className="absolute inset-0 rounded-full border border-[#2563eb]/15"></div>
+                <div className="absolute inset-6 rounded-full border border-[#0f2c59]/12"></div>
+                <div className="absolute inset-12 rounded-full border border-[#2563eb]/10"></div>
+                <div className="absolute inset-20 rounded-full border border-[#0f2c59]/8"></div>
 
                 {/* Subtle gradient center */}
-                <div className="absolute inset-24 rounded-full bg-gradient-to-br from-[#001f3f]/5 to-[#0052cc]/10 blur-2xl"></div>
+                <div className="absolute inset-24 rounded-full bg-gradient-to-br from-[#0f2c59]/5 to-[#2563eb]/10 blur-2xl"></div>
               </motion.div>
             </motion.div>
 
@@ -127,7 +127,7 @@ export function HeroSection() {
                   {[...Array(16)].map((_, i) => (
                     <div
                       key={i}
-                      className="rounded border border-[#0052cc]/10 bg-[#001f3f]/5"
+                      className="rounded border border-[#2563eb]/10 bg-[#0f2c59]/5"
                       style={{
                         opacity: 0.3 + (i % 3) * 0.1,
                       }}
@@ -136,7 +136,7 @@ export function HeroSection() {
                 </div>
 
                 {/* Subtle glow */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-tl from-[#0052cc]/5 to-transparent blur-xl"></div>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-tl from-[#2563eb]/5 to-transparent blur-xl"></div>
               </motion.div>
             </motion.div>
 
@@ -174,7 +174,7 @@ export function HeroSection() {
               >
                 <Link href="#contact">
                   <motion.button
-                    className="px-8 py-4 bg-gradient-to-r from-[#001f3f] to-[#0052cc] text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="px-8 py-4 bg-gradient-to-r from-[#0f2c59] to-[#2563eb] text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
                     whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0, 82, 204, 0.3)" }}
                     whileTap={{ scale: 0.95 }}
                   >

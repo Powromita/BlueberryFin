@@ -1,97 +1,131 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline"
 
-const clients = [
-  "Reliance Industries",
-  "Tata Group",
-  "Aditya Birla Group",
-  "Infosys",
-  "Wipro",
-  "HDFC Bank",
-  "ICICI Bank",
-  "Mahindra & Mahindra",
-  "Larsen & Toubro",
-  "Asian Paints",
-  "Bajaj Auto",
-  "Tech Mahindra",
-  "Sun Pharma",
-  "HCL Technologies",
-  "Axis Bank",
+const testimonials = [
+  {
+    quote: "We place significant importance on strategic financial planning. With BlueberryFin's collaboration in introducing robust frameworks, we've accentuated our commitment to long-term growth and stability.",
+    name: "Ashish Kumar Singh",
+    title: "CHRO, Meesho",
+    company: "Meesho",
+  },
+  {
+    quote: "Thanks to BlueberryFin's consultative process, I know what other companies are doing, what benefits make sense to my team, and what I need to do to stand out in a competitive market.",
+    name: "Priya Sharma",
+    title: "Finance Director, Tata Group",
+    company: "Tata",
+  },
+  {
+    quote: "The difference is dramatic. We've seen financial processes that have been stuck for months – and now with BlueberryFin, everything is settled within a week. The execution is seamless and professional.",
+    name: "Amit Patel",
+    title: "VP Finance, Infosys",
+    company: "Infosys",
+  },
+  {
+    quote: "The execution was seamless, and the platform's intuitive design ensured a user-friendly experience for everyone. This has not only boosted employee satisfaction but has also contributed to a healthier and more productive workforce.",
+    name: "Sunita Reddy",
+    title: "Head of Corporate Finance, HDFC Bank",
+    company: "HDFC",
+  },
 ]
 
 export function ClientsSection() {
-  return (
-    <section className="py-12 pb-20 bg-gradient-to-br from-white via-blue-50/30 to-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center px-2 sm:px-0"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#001f3f] to-[#0052cc]">Clients</span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] mx-auto rounded-full mb-4" />
-          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-            Trusted by leading organizations across industries
-          </p>
-        </motion.div>
-      </div>
+  const [currentIndex, setCurrentIndex] = useState(0)
 
-      {/* Continuous scrolling clients */}
-      <div className="relative">
-        {/* Gradient overlays for smooth fade effect */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-        
-        {/* Scrolling container */}
-        <div className="flex overflow-hidden">
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+    }, 8000)
+    return () => clearInterval(timer)
+  }, [])
+
+  const goToNext = () => setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+  const goToPrevious = () => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+
+  return (
+    <section className="relative h-screen min-h-[500px] max-h-[700px] bg-[#0f2c59] overflow-hidden flex items-center">
+      {/* Large Company Name Background */}
+      <motion.div
+        key={`bg-${currentIndex}`}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.15 }}
+        transition={{ duration: 0.8 }}
+        className="absolute inset-0 flex items-center justify-center pointer-events-none"
+      >
+        <h3 className="text-[180px] md:text-[240px] lg:text-[320px] font-bold text-white/10 leading-none select-none">
+          {testimonials[currentIndex].company}
+        </h3>
+      </motion.div>
+
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full relative z-10">
+        {/* Header */}
+        <h2 className="text-2xl md:text-3xl font-light mb-8" style={{ fontFamily: 'GT Alpina Standard, Verdana, sans-serif' }}>
+          Testimonial
+        </h2>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* LEFT: Photo with Name Overlay */}
           <motion.div
-            className="flex gap-8"
-            animate={{
-              x: ["0%", "-50%"],
-            }}
-            transition={{
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 40,
-                ease: "linear",
-              },
-            }}
+            key={`photo-${currentIndex}`}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex justify-center lg:justify-end"
           >
-            {/* First set of clients */}
-            {clients.map((client, idx) => (
-              <motion.div
-                key={`client-1-${idx}`}
-                className="flex-shrink-0 px-8 py-6 bg-white rounded-xl border-2 border-gray-200 hover:border-[#0052cc] transition-all duration-300 shadow-lg hover:shadow-2xl min-w-[280px] mx-4"
-                whileHover={{ y: -5 }}
-              >
-                <div className="flex items-center justify-center h-16">
-                  <span className="text-xl font-bold text-gray-900 hover:text-[#0052cc] transition-colors text-center">
-                    {client}
-                  </span>
+            <div className="relative w-72 h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden shadow-2xl">
+              {/* Placeholder gradient - replace with actual image */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400/40 to-purple-600/40" />
+              
+              {/* Name overlay on photo */}
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6">
+                <div className="text-white font-semibold text-xl md:text-2xl mb-1">
+                  {testimonials[currentIndex].name}
                 </div>
-              </motion.div>
-            ))}
-            {/* Duplicate set for seamless loop */}
-            {clients.map((client, idx) => (
-              <motion.div
-                key={`client-2-${idx}`}
-                className="flex-shrink-0 px-8 py-6 bg-white rounded-xl border-2 border-gray-200 hover:border-[#0052cc] transition-all duration-300 shadow-lg hover:shadow-2xl min-w-[280px] mx-4"
-                whileHover={{ y: -5 }}
-              >
-                <div className="flex items-center justify-center h-16">
-                  <span className="text-xl font-bold text-gray-900 hover:text-[#0052cc] transition-colors text-center">
-                    {client}
-                  </span>
+                <div className="text-blue-200/90 text-sm md:text-base">
+                  {testimonials[currentIndex].title}
                 </div>
-              </motion.div>
-            ))}
+              </div>
+            </div>
           </motion.div>
+
+          {/* RIGHT: Quote */}
+          <motion.div
+            key={`quote-${currentIndex}`}
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex items-center"
+          >
+            <p className="text-white text-lg md:text-xl lg:text-2xl leading-relaxed font-light">
+              "{testimonials[currentIndex].quote}"
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Navigation at Bottom */}
+        <div className="flex items-center justify-center gap-8 mt-16">
+          <button
+            onClick={goToPrevious}
+            className="text-white/50 hover:text-white transition-colors p-2"
+            aria-label="Previous"
+          >
+            <ChevronLeftIcon className="w-8 h-8" />
+          </button>
+
+          <div className="text-white/70 text-xl font-light">
+            {currentIndex + 1}/{testimonials.length}
+          </div>
+
+          <button
+            onClick={goToNext}
+            className="text-white/50 hover:text-white transition-colors p-2"
+            aria-label="Next"
+          >
+            <ChevronRightIcon className="w-8 h-8" />
+          </button>
         </div>
       </div>
     </section>

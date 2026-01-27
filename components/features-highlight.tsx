@@ -15,25 +15,25 @@ const features = [
     icon: SparklesIcon,
     title: "Premium Analytics",
     description: "Real-time insights and comprehensive financial analytics to make informed decisions",
-    color: "from-[#001f3f] to-[#0052cc]",
+    color: "from-[#0f2c59] to-[#2563eb]",
   },
   {
     icon: CheckCircleIcon,
     title: "Verified Expertise",
     description: "Industry-leading professionals with proven track records in financial advisory",
-    color: "from-[#0052cc] to-[#60a5fa]",
+    color: "from-[#2563eb] to-[#60a5fa]",
   },
   {
     icon: LightBulbIcon,
     title: "Strategic Planning",
     description: "Customized strategies tailored to your unique business goals and challenges",
-    color: "from-[#001f3f] to-[#003366]",
+    color: "from-[#0f2c59] to-[#003366]",
   },
   {
     icon: UserGroupIcon,
     title: "Dedicated Support",
     description: "Personal relationship managers available 24/7 for your financial needs",
-    color: "from-[#0052cc] to-[#003366]",
+    color: "from-[#2563eb] to-[#003366]",
   },
 ]
 
@@ -41,11 +41,11 @@ export function FeaturesHighlight() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   return (
-    <section className="relative py-20 bg-white overflow-hidden">
+    <section className="relative py-20 bg-[#f5f0eb] overflow-hidden">
       {/* Decorative background */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-[#001f3f]/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#0052cc]/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-0 w-96 h-96 bg-[#0f2c59]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#2563eb]/5 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -57,7 +57,7 @@ export function FeaturesHighlight() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 md:mb-16 px-2 sm:px-0"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#001f3f] mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0f2c59] mb-4">
             Why Choose BlueberryFin?
           </h2>
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
@@ -96,7 +96,7 @@ export function FeaturesHighlight() {
 
                 {/* Content */}
                 <div className="relative z-10">
-                  <h3 className="text-lg font-bold text-[#001f3f] mb-3 group-hover:text-[#0052cc] transition-colors duration-300">
+                  <h3 className="text-lg font-bold text-[#0f2c59] mb-3 group-hover:text-[#2563eb] transition-colors duration-300">
                     {feature.title}
                   </h3>
                   <p className="text-gray-600 text-sm leading-relaxed">
@@ -106,7 +106,7 @@ export function FeaturesHighlight() {
 
                 {/* Subtle background highlight on hover */}
                 <motion.div
-                  className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#0052cc]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
+                  className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#2563eb]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
                   initial={{ scale: 0.8 }}
                   animate={{
                     scale: hoveredIndex === idx ? 1.1 : 0.8,
@@ -129,7 +129,7 @@ export function FeaturesHighlight() {
           <p className="text-gray-600 mb-6">Ready to transform your financial journey?</p>
           <Link href="#contact">
             <motion.button
-              className="px-8 py-4 bg-gradient-to-r from-[#001f3f] to-[#0052cc] text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+              className="px-8 py-4 bg-gradient-to-r from-[#0f2c59] to-[#2563eb] text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

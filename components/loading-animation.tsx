@@ -57,7 +57,7 @@ export function LoadingAnimation({ onComplete }: { onComplete: () => void }) {
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-[9999] bg-white flex items-center justify-center overflow-hidden"
+        className="fixed inset-0 z-[9999] bg-[#f5f0eb] flex items-center justify-center overflow-hidden"
         initial={{ opacity: 1 }}
         animate={isTransitioning ? {
           opacity: 0,
@@ -92,7 +92,7 @@ export function LoadingAnimation({ onComplete }: { onComplete: () => void }) {
               className="ml-6"
             >
               <motion.h1
-                className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#001f3f] to-[#0052cc]"
+                className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#0f2c59] to-[#2563eb]"
                 initial={{ opacity: 0 }}
                 animate={showText ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
@@ -100,7 +100,7 @@ export function LoadingAnimation({ onComplete }: { onComplete: () => void }) {
                 BLUEBERRYFIN
               </motion.h1>
               <motion.p
-                className="text-2xl md:text-3xl font-semibold text-[#0052cc] mt-2"
+                className="text-2xl md:text-3xl font-semibold text-[#2563eb] mt-2"
                 initial={{ opacity: 0 }}
                 animate={showText ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ delay: 0.4, duration: 0.8 }}

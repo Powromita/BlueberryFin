@@ -3,28 +3,47 @@
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { useState } from "react"
-import Image from "next/image"
 
-const backgroundImages = [
+const financialSolutions = [
   {
     title: "Investment Growth",
-    description: "Strategic wealth management",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop",
+    bullets: [
+      "Strategic wealth management tailored to your goals",
+      "Portfolio optimization for maximum returns",
+      "Risk mitigation through diversification",
+      "Data-driven investment insights and analytics"
+    ],
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=800&fit=crop",
   },
   {
     title: "Financial Planning",
-    description: "Personalized strategies for your goals",
-    image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&h=400&fit=crop",
+    bullets: [
+      "Personalized financial roadmap development",
+      "Retirement planning and wealth preservation",
+      "Tax optimization strategies",
+      "Estate planning and legacy management"
+    ],
+    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=800&fit=crop",
   },
   {
     title: "Market Analysis",
-    description: "Data-driven insights and decisions",
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop",
+    bullets: [
+      "Real-time market research and insights",
+      "Economic trend analysis and forecasting",
+      "Sector-specific investment opportunities",
+      "Risk assessment and market timing"
+    ],
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=800&fit=crop",
   },
   {
     title: "Portfolio Management",
-    description: "Maximize returns, minimize risks",
-    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=400&fit=crop",
+    bullets: [
+      "Active portfolio monitoring and rebalancing",
+      "Performance tracking and reporting",
+      "Asset allocation optimization",
+      "Long-term growth strategy execution"
+    ],
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=800&fit=crop",
   },
 ]
 
@@ -36,20 +55,34 @@ export function InteractiveImageBackground() {
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
+  // Calculate card width and position based on hover state
+  const getCardStyle = (index: number) => {
+    if (hoveredIndex === null) {
+      // No hover - all cards equal width
+      return "flex-1"
+    } else if (hoveredIndex === index) {
+      // This card is hovered - expand
+      return "flex-[2]"
+    } else {
+      // Other cards - minimize
+      return "flex-[0.5]"
+    }
+  }
+
   return (
     <section
       ref={ref}
-      className="py-24 bg-gradient-to-b from-white to-blue-50 overflow-hidden relative"
+      className="py-12 bg-[#f5f0eb] overflow-hidden relative"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          className="absolute top-0 left-0 w-96 h-96 bg-blue-200/10 rounded-full blur-3xl"
+          className="absolute top-0 left-0 w-96 h-96 bg-[#0f2c59]/5 rounded-full blur-3xl"
           animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 8, repeat: Infinity }}
         />
         <motion.div
-          className="absolute bottom-0 right-0 w-96 h-96 bg-blue-200/10 rounded-full blur-3xl"
+          className="absolute bottom-0 right-0 w-96 h-96 bg-[#2563eb]/5 rounded-full blur-3xl"
           animate={{ scale: [1.1, 1, 1.1], opacity: [0.3, 0.5, 0.3] }}
           transition={{ duration: 10, repeat: Infinity }}
         />
@@ -61,19 +94,19 @@ export function InteractiveImageBackground() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-8"
         >
-          <h2 className="text-5xl md:text-6xl font-bold text-[#001f3f] mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#0f2c59] mb-3">
             Comprehensive Financial Solutions
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Explore our range of services with visual insights into each offering
           </p>
         </motion.div>
 
-        {/* Interactive Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {backgroundImages.map((item, idx) => (
+        {/* Expandable Cards Row */}
+        <div className="flex gap-4 h-[500px]">
+          {financialSolutions.map((item, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 40 }}
@@ -84,15 +117,15 @@ export function InteractiveImageBackground() {
               }}
               onMouseEnter={() => setHoveredIndex(idx)}
               onMouseLeave={() => setHoveredIndex(null)}
-              className="group relative h-80 rounded-2xl overflow-hidden cursor-pointer"
+              className={`relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ease-out ${getCardStyle(idx)}`}
             >
               {/* Background Image */}
               <motion.div
                 className="absolute inset-0"
                 animate={{
-                  scale: hoveredIndex === idx ? 1.1 : 1,
+                  scale: hoveredIndex === idx ? 1.05 : 1,
                 }}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.5 }}
               >
                 <div
                   className="w-full h-full bg-cover bg-center"
@@ -104,63 +137,58 @@ export function InteractiveImageBackground() {
 
               {/* Dark overlay */}
               <motion.div
-                className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300"
+                className="absolute inset-0 bg-black/50 transition-colors duration-300"
+                animate={{
+                  opacity: hoveredIndex === idx ? 0.3 : 0.6,
+                }}
               />
 
               {/* Gradient overlay */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
-                animate={{
-                  opacity: hoveredIndex === idx ? 0.6 : 0.8,
-                }}
-              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0f2c59]/90 via-[#0f2c59]/50 to-transparent" />
 
               {/* Content */}
-              <div className="absolute inset-0 flex flex-col justify-between p-6 text-white z-20">
-                {/* Icon */}
-                <motion.div
-                  className="text-5xl"
-                  animate={{
-                    scale: hoveredIndex === idx ? 1.2 : 1,
-                    y: hoveredIndex === idx ? -10 : 0,
-                  }}
-                  transition={{ duration: 0.3 }}
+              <div className="absolute inset-0 flex flex-col justify-end p-6 text-white z-20">
+                {/* Title - Always visible */}
+                <motion.h3
+                  className="text-2xl md:text-3xl font-bold mb-2"
                 >
-                  {item.icon}
-                </motion.div>
+                  {item.title}
+                </motion.h3>
 
-                {/* Text */}
+                {/* Bullet Points - Only visible on hover */}
                 <motion.div
+                  initial={{ opacity: 0, height: 0 }}
                   animate={{
-                    y: hoveredIndex === idx ? 0 : 20,
-                    opacity: hoveredIndex === idx ? 1 : 0.8,
+                    opacity: hoveredIndex === idx ? 1 : 0,
+                    height: hoveredIndex === idx ? "auto" : 0,
                   }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.4 }}
+                  className="overflow-hidden"
                 >
-                  <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-200">{item.description}</p>
-                  <motion.div
-                    className="mt-4 flex items-center text-[#FFD700] font-semibold"
-                    animate={{
-                      x: hoveredIndex === idx ? 5 : 0,
-                    }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    Explore More →
-                  </motion.div>
+                  <div className="space-y-3 mb-4">
+                    {item.bullets.map((bullet, bulletIdx) => (
+                      <div key={bulletIdx} className="flex items-start gap-3">
+                        <div className="flex-shrink-0 w-2 h-2 rounded-full bg-white mt-1.5 ring-2 ring-white/30" />
+                        <p className="text-sm md:text-base text-white leading-relaxed">
+                          {bullet}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
                 </motion.div>
               </div>
 
-              {/* Shine effect */}
+              {/* Shine effect on hover */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100"
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
                 animate={{
-                  x: hoveredIndex === idx ? ["−100%", "200%"] : "−100%",
+                  x: hoveredIndex === idx ? ["-100%", "200%"] : "-100%",
                 }}
                 transition={{
-                  duration: 0.6,
+                  duration: 0.8,
                   repeat: hoveredIndex === idx ? Infinity : 0,
-                  repeatDelay: 1,
+                  repeatDelay: 1.5,
                 }}
               />
             </motion.div>

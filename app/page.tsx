@@ -7,7 +7,6 @@ import { InteractiveImageBackground } from "@/components/interactive-image-backg
 import { AboutSection } from "@/components/about-section"
 import { ServicesSection } from "@/components/services-section"
 import { ClientsSection } from "@/components/clients-section"
-import { ContactSection } from "@/components/contact-section"
 import { EndingSection } from "@/components/ending-section"
 import { Footer } from "@/components/footer"
 import { LoadingAnimation } from "@/components/loading-animation"
@@ -94,7 +93,6 @@ export default function Home() {
           <ServicesSection />
           <ClientsSection />
           <EndingSection />
-          <ContactSection />
           <Footer />
         </main>
       )}
