@@ -1,14 +1,13 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Outfit, Inter } from "next/font/google"
+import { Playfair_Display, Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "sonner"
 import "./globals.css"
 
-// Option 2: Modern Professional
-const outfit = Outfit({ 
+const playfair = Playfair_Display({ 
   subsets: ["latin"],
-  variable: "--font-outfit",
+  variable: "--font-playfair",
   display: "swap",
 })
 
@@ -55,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${inter.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{
           __html: `
@@ -66,24 +65,40 @@ export default function RootLayout({
             
             // Absolute scroll reset - must happen before anything renders
             function forceScrollToTop() {
-              document.documentElement.scrollTop = 0;
-              document.documentElement.scrollLeft = 0;
-              document.body.scrollTop = 0;
-              document.body.scrollLeft = 0;
+              if (document.documentElement) {
+                document.documentElement.scrollTop = 0;
+                document.documentElement.scrollLeft = 0;
+              }
+              if (document.body) {
+                document.body.scrollTop = 0;
+                document.body.scrollLeft = 0;
+              }
               window.scrollTo(0, 0);
             }
             
             // Lock overflow immediately
             function lockScroll() {
-              document.documentElement.style.overflow = 'hidden';
-              document.body.style.overflow = 'hidden';
-              document.documentElement.style.height = '100vh';
-              document.body.style.height = '100vh';
+              if (document.documentElement) {
+                document.documentElement.style.overflow = 'hidden';
+                document.documentElement.style.height = '100vh';
+              }
+              if (document.body) {
+                document.body.style.overflow = 'hidden';
+                document.body.style.height = '100vh';
+              }
             }
             
             // Execute immediately
-            lockScroll();
-            forceScrollToTop();
+            if (document.body) {
+              lockScroll();
+              forceScrollToTop();
+            } else {
+              // If body isn't ready, wait for it
+              document.addEventListener('DOMContentLoaded', () => {
+                lockScroll();
+                forceScrollToTop();
+              });
+            }
             
             // Execute on various lifecycle events
             if (document.readyState === 'loading') {
@@ -99,7 +114,7 @@ export default function RootLayout({
           `
         }} />
       </head>
-      <body className={`${outfit.variable} ${inter.variable} font-sans antialiased`} suppressHydrationWarning>
+      <body className={`${playfair.variable} ${inter.variable} font-sans antialiased`} suppressHydrationWarning>
         {children}
         <Toaster position="top-center" richColors />
         <Analytics />

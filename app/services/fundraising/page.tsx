@@ -1,67 +1,31 @@
-"use client"
+import { ServicePage } from "@/components/service-page"
 
-import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { ArrowLeftIcon } from "@heroicons/react/24/outline"
-
-export default function Fundraising() {
-  const handleBackToHome = () => {
-    sessionStorage.setItem("internalNavigation", "true")
-  }
-
+export default function FundraisingPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <Navbar />
-
-      <section className="pt-32 pb-20 max-w-4xl mx-auto px-4">
-        <Link 
-          href="/" 
-          onClick={handleBackToHome}
-          className="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all mb-8"
-        >
-          <ArrowLeftIcon className="w-5 h-5" />
-          Back to Home
-        </Link>
-
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <h1 className="text-5xl font-bold text-dark-blue mb-6">Fundraising Service</h1>
-
-          <div className="prose prose-lg max-w-none">
-            <p className="text-lg text-muted-foreground mb-6">
-              Secure the capital your business needs to grow and scale. Our fundraising specialists have extensive
-              networks and expertise across seed, Series A/B/C, and late-stage funding rounds.
-            </p>
-
-            <h2 className="text-2xl font-bold text-dark-blue mt-8 mb-4">Our Services</h2>
-            <ul className="space-y-3 text-muted-foreground">
-              <li className="flex gap-3">
-                <span className="text-primary font-bold">•</span>
-                Seed and Series funding rounds
-              </li>
-              <li className="flex gap-3">
-                <span className="text-primary font-bold">•</span>
-                Investor identification and outreach
-              </li>
-              <li className="flex gap-3">
-                <span className="text-primary font-bold">•</span>
-                Term sheet negotiation
-              </li>
-              <li className="flex gap-3">
-                <span className="text-primary font-bold">•</span>
-                Financial modeling and projections
-              </li>
-              <li className="flex gap-3">
-                <span className="text-primary font-bold">•</span>
-                Due diligence support and closing
-              </li>
-            </ul>
-          </div>
-        </motion.div>
-      </section>
-
-      <Footer />
-    </main>
+    <ServicePage
+      title="Fundraising"
+      subtitle="Securing the right capital partners to fuel your growth ambitions and strategic initiatives."
+      openingStatement="Capital raising is not just about funding; it is about finding partners who align with your vision. We leverage our extensive network of institutional investors, family offices, and venture capital firms to structure deals that drive long-term value."
+      whatWeDo={[
+        "Financial Modeling & Valuation",
+        "Pitch Deck & IM Preparation",
+        "Investor Targeting & Outreach",
+        "Term Sheet Negotiation",
+        "Due Diligence Management",
+        "Deal Structuring"
+      ]}
+      howWeEngage={[
+        "We assess your capital needs and determine the optimal mix of debt and equity.",
+        "We refine your business narrative to highlight competitive advantages and growth potential.",
+        "We manage the entire investor relations process, from initial contact to final closing.",
+        "We advocate for your interests during negotiations to secure favorable terms."
+      ]}
+      outcomes={[
+        "Access to diverse capital sources",
+        "Favorable valuation and terms",
+        "Strategic investor partnerships",
+        "Accelerated growth trajectory"
+      ]}
+    />
   )
 }

@@ -4,15 +4,27 @@ export default function IPOAdvisoryPage() {
   return (
     <ServicePage
       title="IPO Advisory & Readiness"
-      subtitle="Guiding Your Journey to the Public Markets"
-      description="Our IPO and Capital Markets advisory services are in-depth, meticulous, and result-oriented, with unparalleled excellence in timeliness and quality of execution capabilities throughout the life-cycle of a transaction. We guide companies through the complex IPO process, ensuring regulatory compliance, optimal market positioning, and successful listing. From pre-IPO readiness assessment to roadshows and book building, we stand by you at every step, creating a compelling investment story that resonates with the market."
-      benefits={[
-        "Comprehensive Readiness Assessment",
-        "Regulatory Compliance Management",
-        "Strategic Equity Positioning",
-        "Investor Relations Support",
-        "Valuation & Pricing Strategy",
-        "Post-IPO Transition Support"
+      subtitle="Navigating the complex transition from private enterprise to public entity with precision and strategic foresight."
+      openingStatement="Going public is a transformative milestone that demands rigorous preparation, regulatory discipline, and a compelling equity story. We act as your strategic architects, ensuring every phase of the IPO lifecycle is executed with excellence."
+      whatWeDo={[
+        "Pre-IPO Readiness Assessment",
+        "Capital Structure Optimization",
+        "Regulatory Compliance & Governance",
+        "Equity Story Development",
+        "Roadshow Preparation",
+        "Book Building Coordination"
+      ]}
+      howWeEngage={[
+        "We begin with a diagnostic deep-dive to identify gaps in financial reporting and governance.",
+        "Our team works alongside your leadership to craft an investment thesis that resonates with institutional investors.",
+        "We coordinate with legal, audit, and banking partners to ensure a seamless filing process.",
+        "We provide hands-on support during investor roadshows to maximize valuation."
+      ]}
+      outcomes={[
+        "Successful listing with optimal valuation",
+        "Robust governance framework",
+        "Enhanced market credibility",
+        "Sustainable post-IPO compliance"
       ]}
     />
   )

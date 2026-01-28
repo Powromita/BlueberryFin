@@ -23,7 +23,7 @@ export function HeroSection() {
       <>
         <motion.section
           id="home"
-          className="relative h-screen pt-20 overflow-hidden flex items-center"
+          className="relative h-screen pt-20 overflow-hidden flex items-center dark-section"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}

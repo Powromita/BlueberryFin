@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { useState, useEffect } from "react"
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline"
 
@@ -45,86 +45,47 @@ export function ClientsSection() {
   const goToPrevious = () => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
 
   return (
-    <section className="relative h-screen min-h-[500px] max-h-[700px] bg-[#0f2c59] overflow-hidden flex items-center">
-      {/* Large Company Name Background */}
-      <motion.div
-        key={`bg-${currentIndex}`}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.15 }}
-        transition={{ duration: 0.8 }}
-        className="absolute inset-0 flex items-center justify-center pointer-events-none"
-      >
-        <h3 className="text-[180px] md:text-[240px] lg:text-[320px] font-bold text-white/10 leading-none select-none">
-          {testimonials[currentIndex].company}
-        </h3>
-      </motion.div>
-
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full relative z-10">
-        {/* Header */}
-        <h2 className="text-2xl md:text-3xl font-light mb-8" style={{ fontFamily: 'GT Alpina Standard, Verdana, sans-serif' }}>
-          Testimonial
-        </h2>
-
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* LEFT: Photo with Name Overlay */}
-          <motion.div
-            key={`photo-${currentIndex}`}
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex justify-center lg:justify-end"
-          >
-            <div className="relative w-72 h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden shadow-2xl">
-              {/* Placeholder gradient - replace with actual image */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-400/40 to-purple-600/40" />
+    <section className="relative h-screen min-h-[600px] flex items-center justify-center bg-[#0f2c59] overflow-hidden text-white">
+      <div className="max-w-5xl mx-auto px-6 lg:px-8 relative z-10 w-full">
+        <div className="mb-12 border-t border-white/20 w-16" />
+        
+        <div className="relative min-h-[400px] flex flex-col justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-10"
+            >
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif leading-tight text-white/90">
+                "{testimonials[currentIndex].quote}"
+              </h3>
               
-              {/* Name overlay on photo */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6">
-                <div className="text-white font-semibold text-xl md:text-2xl mb-1">
-                  {testimonials[currentIndex].name}
-                </div>
-                <div className="text-blue-200/90 text-sm md:text-base">
-                  {testimonials[currentIndex].title}
+              <div className="flex items-center gap-6">
+                <div className="h-px w-12 bg-white/30" />
+                <div>
+                  <div className="text-lg font-medium text-white">{testimonials[currentIndex].name}</div>
+                  <div className="text-white/60 text-sm mt-1">{testimonials[currentIndex].title}</div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-
-          {/* RIGHT: Quote */}
-          <motion.div
-            key={`quote-${currentIndex}`}
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex items-center"
-          >
-            <p className="text-white text-lg md:text-xl lg:text-2xl leading-relaxed font-light">
-              "{testimonials[currentIndex].quote}"
-            </p>
-          </motion.div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        {/* Navigation at Bottom */}
-        <div className="flex items-center justify-center gap-8 mt-16">
-          <button
+        <div className="flex gap-4 mt-12">
+          <button 
             onClick={goToPrevious}
-            className="text-white/50 hover:text-white transition-colors p-2"
-            aria-label="Previous"
+            className="p-2 rounded-full border border-white/10 hover:bg-white/10 transition-colors text-white/60 hover:text-white"
           >
-            <ChevronLeftIcon className="w-8 h-8" />
+            <ChevronLeftIcon className="w-6 h-6" />
           </button>
-
-          <div className="text-white/70 text-xl font-light">
-            {currentIndex + 1}/{testimonials.length}
-          </div>
-
-          <button
+          <button 
             onClick={goToNext}
-            className="text-white/50 hover:text-white transition-colors p-2"
-            aria-label="Next"
+            className="p-2 rounded-full border border-white/10 hover:bg-white/10 transition-colors text-white/60 hover:text-white"
           >
-            <ChevronRightIcon className="w-8 h-8" />
+            <ChevronRightIcon className="w-6 h-6" />
           </button>
         </div>
       </div>
