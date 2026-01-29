@@ -7,10 +7,19 @@ import { Logo } from "./logo"
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false)
+  const [shouldAnimate, setShouldAnimate] = useState(true)
 
   useEffect(() => {
+    // Check if we've already shown the hero animation in this session
+    const hasVisited = sessionStorage.getItem("hasVisitedHero")
+    if (hasVisited) {
+      setShouldAnimate(false)
+    } else {
+      sessionStorage.setItem("hasVisitedHero", "true")
+    }
     setMounted(true)
   }, [])
+
 
   // Prevent hydration mismatch
   if (!mounted) {
@@ -23,8 +32,8 @@ export function HeroSection() {
       <>
         <motion.section
           id="home"
-          className="relative h-screen pt-20 overflow-hidden flex items-center"
-          initial={{ opacity: 0 }}
+          className="relative h-screen pt-20 overflow-hidden flex items-center dark-section"
+          initial={shouldAnimate ? { opacity: 0 } : { opacity: 1 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
@@ -172,6 +181,15 @@ export function HeroSection() {
                 transition={{ delay: 0.7, duration: 0.6 }}
                 className="mb-16"
               >
+                <Link href="/contact">
+                  <motion.button
+                    className="px-8 py-4 bg-gradient-to-r from-[#0f2c59] to-[#2563eb] text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                    whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0, 82, 204, 0.3)" }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Get Started Now
+                  </motion.button>
+                </Link>
               </motion.div>
 
               {/* Stats Section - Similar to reference */}

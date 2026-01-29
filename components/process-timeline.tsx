@@ -32,7 +32,7 @@ export function ProcessTimeline() {
   })
 
   return (
-    <section 
+    <section
       ref={ref}
       className="relative py-12 md:py-14 bg-[#f5f0eb] overflow-hidden"
     >
@@ -80,27 +80,27 @@ export function ProcessTimeline() {
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-blue-500/10 rounded-2xl flex items-center justify-center overflow-hidden">
                 {/* City buildings */}
                 <div className="absolute bottom-0 left-0 right-0 flex items-end justify-center gap-2 px-8">
-                  <motion.div 
+                  <motion.div
                     className="w-12 h-24 bg-gradient-to-t from-[#0f2c59] to-[#2563eb] rounded-t-lg opacity-80"
                     animate={{ height: [96, 104, 96] }}
                     transition={{ duration: 4, repeat: Infinity }}
                   />
-                  <motion.div 
+                  <motion.div
                     className="w-16 h-36 bg-gradient-to-t from-purple-600 to-purple-400 rounded-t-lg opacity-80"
                     animate={{ height: [144, 136, 144] }}
                     transition={{ duration: 5, repeat: Infinity }}
                   />
-                  <motion.div 
+                  <motion.div
                     className="w-12 h-28 bg-gradient-to-t from-[#2563eb] to-blue-400 rounded-t-lg opacity-80"
                     animate={{ height: [112, 120, 112] }}
                     transition={{ duration: 4.5, repeat: Infinity }}
                   />
-                  <motion.div 
+                  <motion.div
                     className="w-20 h-44 bg-gradient-to-t from-pink-600 to-pink-400 rounded-t-lg opacity-80"
                     animate={{ height: [176, 168, 176] }}
                     transition={{ duration: 6, repeat: Infinity }}
                   />
-                  <motion.div 
+                  <motion.div
                     className="w-12 h-32 bg-gradient-to-t from-[#0f2c59] to-[#2563eb] rounded-t-lg opacity-80"
                     animate={{ height: [128, 136, 128] }}
                     transition={{ duration: 5.5, repeat: Infinity }}
@@ -117,7 +117,7 @@ export function ProcessTimeline() {
                     <div className="w-2 h-2 rounded-full bg-green-500" />
                     <span className="text-xs font-semibold text-[#0f2c59]">Current Policy Score</span>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-[10px] text-gray-600">Basic Coverage</span>
@@ -168,12 +168,12 @@ export function ProcessTimeline() {
                 <div className={`inline-block ${step.badgeColor} text-[#0f2c59] text-xs font-bold px-3 py-1 rounded mb-2`}>
                   {step.badge}
                 </div>
-                
+
                 {/* Title */}
                 <h3 className="text-xl font-bold text-[#0f2c59] mb-1.5">
                   {step.title}
                 </h3>
-                
+
                 {/* Description */}
                 <p className="text-gray-600 text-sm leading-relaxed">
                   {step.description}

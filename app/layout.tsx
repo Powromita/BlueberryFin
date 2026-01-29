@@ -74,3 +74,54 @@ export default function RootLayout({
     </html>
   )
 }
+              }
+              window.scrollTo(0, 0);
+            }
+            
+            // Lock overflow immediately
+            function lockScroll() {
+              if (document.documentElement) {
+                document.documentElement.style.overflow = 'hidden';
+                document.documentElement.style.height = '100vh';
+              }
+              if (document.body) {
+                document.body.style.overflow = 'hidden';
+                document.body.style.height = '100vh';
+              }
+            }
+            
+            // Execute immediately
+            if (document.body) {
+              lockScroll();
+              forceScrollToTop();
+            } else {
+              // If body isn't ready, wait for it
+              document.addEventListener('DOMContentLoaded', () => {
+                lockScroll();
+                forceScrollToTop();
+              });
+            }
+            
+            // Execute on various lifecycle events
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', forceScrollToTop);
+            }
+            window.addEventListener('load', forceScrollToTop);
+            window.addEventListener('beforeunload', forceScrollToTop);
+            
+            // Execute multiple times to ensure it sticks
+            for (let i = 0; i < 10; i++) {
+              setTimeout(forceScrollToTop, i * 50);
+            }
+>>>>>>> 469cb6db7b9dbce565701360b0f15e63ffedcae5
+          `
+        }} />
+      </head>
+      <body className={`${playfair.variable} ${inter.variable} font-sans antialiased`} suppressHydrationWarning>
+        {children}
+        <Toaster position="top-center" richColors />
+        <Analytics />
+      </body>
+    </html>
+  )
+}

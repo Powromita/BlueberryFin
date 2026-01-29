@@ -2,21 +2,19 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { motion } from "framer-motion"
-import { ChevronDownIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
-import { Logo } from "./logo"
+import { motion, AnimatePresence } from "framer-motion"
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
 
 const services = [
   { name: "IPO Advisory & Readiness", href: "/services/ipo-advisory" },
-  { name: "Fundraising Service", href: "/services/fundraising" },
+  { name: "Fundraising", href: "/services/fundraising" },
   { name: "Private Equity", href: "/services/private-equity" },
-  { name: "Merger & Acquisition", href: "/services/mergers-acquisitions" },
+  { name: "Mergers & Acquisitions", href: "/services/mergers-acquisitions" },
   { name: "Debt Syndication", href: "/services/debt-syndication" },
   { name: "Startup Advisory", href: "/services/startup-advisory" },
 ]
 
 export function Navbar() {
-  const [servicesOpen, setServicesOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [isDarkSection, setIsDarkSection] = useState(false)
@@ -50,21 +48,20 @@ export function Navbar() {
       // Detect if navbar is over a dark section
       const navbar = document.querySelector('nav')
       if (!navbar) return
-      
+
       const navbarRect = navbar.getBoundingClientRect()
       const navbarCenter = navbarRect.top + navbarRect.height / 2
-      
       const elementAtCenter = document.elementFromPoint(window.innerWidth / 2, navbarCenter + navbarRect.height)
-      
+
       if (elementAtCenter) {
         const section = elementAtCenter.closest('section')
         if (section) {
           const bgColor = window.getComputedStyle(section).backgroundColor
-          // Check if background is dark (sapphire)
           const isDark = bgColor.includes('rgb(15, 44, 89)') || // #0f2c59
-                        bgColor.includes('rgb(30, 58, 138)') ||  // #1e3a8a
-                        section.classList.contains('bg-[#0f2c59]') ||
-                        section.classList.contains('bg-[#1e3a8a]')
+            bgColor.includes('rgb(30, 58, 138)') ||  // #1e3a8a
+            section.classList.contains('bg-[#0f2c59]') ||
+            section.classList.contains('bg-[#1e3a8a]') ||
+            section.classList.contains('dark-section')
           setIsDarkSection(isDark)
         }
       }
@@ -191,11 +188,14 @@ export function Navbar() {
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
-              <Link href="/" className={`${textColor} ${hoverColor} transition-colors font-medium text-[15px]`}>
-                Home
-              </Link>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            <Link
+              href="/"
+              className={`text-sm font-medium transition-colors duration-200 hover:opacity-70 ${textColor}`}
+            >
+              Home
+            </Link>
 
               {/* Services Dropdown - Hover triggered with delay */}
               <div
@@ -219,126 +219,85 @@ export function Navbar() {
                   <ChevronDownIcon className={`w-4 h-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
                 </button>
 
-                {servicesOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute left-0 mt-2 w-64 bg-[#f5f0eb] rounded-xl shadow-2xl border border-gray-200 overflow-hidden backdrop-blur-md z-50"
-                  >
-                    {services.map((service, idx) => (
-                      <motion.div
-                        key={service.href}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: idx * 0.05 }}
-                      >
-                        <Link
-                          href={service.href}
-                          onClick={markInternalNavigation}
-                          className="block px-4 py-3 text-sm text-gray-900 hover:bg-blue-50 hover:text-[#2563eb] transition-all duration-200 font-medium border-b border-gray-100 last:border-b-0"
-                        >
-                          {service.name}
-                        </Link>
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                )}
+              <div className="absolute top-full right-0 w-64 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                <div className="bg-white rounded-sm shadow-xl border border-gray-100 p-2 flex flex-col gap-1">
+                  {services.map((service) => (
+                    <Link
+                      key={service.href}
+                      href={service.href}
+                      className="px-4 py-2.5 text-sm text-gray-600 hover:text-[#0f2c59] hover:bg-gray-50 transition-colors text-left"
+                    >
+                      {service.name}
+                    </Link>
+                  ))}
+                </div>
               </div>
-
-              <Link 
-                href="/core-team"
-                onClick={markInternalNavigation}
-                className={`${textColor} ${hoverColor} transition-colors font-medium text-[15px]`}
-              >
-                Core Team
-              </Link>
             </div>
-          </div>
 
-          {/* Right: Desktop Buttons & Mobile Menu */}
-          <div className="flex items-center gap-4">
-            {/* Desktop Button */}
             <Link
-              href="/contact"
-              onClick={markInternalNavigation}
-              className="hidden sm:block px-6 py-2.5 bg-gradient-to-r from-[#0f2c59] to-[#2563eb] hover:from-[#1e3a8a] hover:to-[#3b82f6] rounded-lg text-white font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-xl"
+              href="/#contact"
+              className={`text-sm font-medium transition-colors duration-200 hover:opacity-70 ${textColor}`}
             >
-              Contact Us
+              Contact
             </Link>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100"
-            >
-              {mobileMenuOpen ? (
-                <XMarkIcon className="w-6 h-6" />
-              ) : (
-                <Bars3Icon className="w-6 h-6" />
-              )}
-            </button>
           </div>
-        </div>
 
-        {/* Mobile Menu */}
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className={`md:hidden p-2 -mr-2 z-50 relative ${textColor}`}
+          >
+            {mobileMenuOpen ? (
+              <XMarkIcon className="w-6 h-6 text-slate-900" />
+            ) : (
+              <Bars3Icon className="w-6 h-6" />
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden pb-6 border-t border-gray-200"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-white z-40 pt-24 px-6 md:hidden"
           >
-            <div className="space-y-4 py-4">
-              <Link href="/" className="block text-gray-700 hover:text-[#2563eb] transition-colors font-medium px-4" onClick={markInternalNavigation}>
+            <div className="flex flex-col gap-6">
+              <Link
+                href="/"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-2xl font-serif text-[#0f2c59]"
+              >
                 Home
               </Link>
-
-              <div className="px-4">
-                <button 
-                  onClick={() => setServicesOpen(!servicesOpen)}
-                  className="flex items-center gap-2 w-full text-gray-700 hover:text-[#2563eb] transition-colors font-medium"
-                >
-                  Services
-                  <ChevronDownIcon className={`w-4 h-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
-                </button>
-                
-                {servicesOpen && (
-                  <motion.div className="mt-2 space-y-2 pl-4">
-                    {services.map((service) => (
-                      <Link
-                        key={service.href}
-                        href={service.href}
-                        onClick={markInternalNavigation}
-                        className="block text-sm text-gray-600 hover:text-[#2563eb] transition-colors"
-                      >
-                        {service.name}
-                      </Link>
-                    ))}
-                  </motion.div>
-                )}
+              <div className="flex flex-col gap-4">
+                <div className="text-sm font-medium text-gray-400 uppercase tracking-wider">Services</div>
+                {services.map((service) => (
+                  <Link
+                    key={service.href}
+                    href={service.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-lg text-gray-600 hover:text-[#0f2c59]"
+                  >
+                    {service.name}
+                  </Link>
+                ))}
               </div>
-
-              <Link 
-                href="/core-team"
-                onClick={markInternalNavigation}
-                className="block text-gray-700 hover:text-[#2563eb] transition-colors font-medium px-4"
-              >
-                Core Team
-              </Link>
-
               <Link
-                href="/contact"
-                onClick={markInternalNavigation}
-                className="block mx-4 text-center px-6 py-2.5 bg-gradient-to-r from-[#0f2c59] to-[#2563eb] hover:from-[#1e3a8a] hover:to-[#3b82f6] rounded-lg text-white font-semibold text-sm transition-all duration-300"
+                href="/#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-2xl font-serif text-[#0f2c59]"
               >
-                Contact Us
+                Contact
               </Link>
             </div>
           </motion.div>
         )}
-      </div>
+      </AnimatePresence>
     </nav>
   )
 }

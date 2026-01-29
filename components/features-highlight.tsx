@@ -186,8 +186,8 @@ export function FeaturesHighlight() {
                   ))}
                 </div>
               </motion.div>
-            )
-          })}
+            ))}
+          </div>
         </div>
       </div>
 

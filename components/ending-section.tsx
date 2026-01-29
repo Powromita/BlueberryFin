@@ -13,7 +13,7 @@ export function EndingSection() {
   return (
     <section
       ref={ref}
-      className="relative h-[600px] md:h-[700px] overflow-hidden"
+      className="relative h-[400px] md:h-[500px] overflow-hidden"
     >
       {/* Video Background */}
       <div className="absolute inset-0">
@@ -28,10 +28,10 @@ export function EndingSection() {
           <source src="/videos/financial-background.mp4" type="video/mp4" />
           {/* Fallback gradient if video doesn't load */}
         </video>
-        
+
         {/* Fallback gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0f2c59] via-[#2563eb] to-[#0f2c59]" />
-        
+
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-black/50" />
       </div>
@@ -45,7 +45,7 @@ export function EndingSection() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             {/* Main Headline */}
-            <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white mb-8 leading-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light text-white mb-8 leading-tight">
               The New Standard{" "}
               <span className="italic font-serif">of</span>{" "}
               Financial Advisory

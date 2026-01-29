@@ -4,15 +4,27 @@ export default function PrivateEquityPage() {
   return (
     <ServicePage
       title="Private Equity"
-      subtitle="Strategic Partnerships for Growth"
-      description="We are passionate about attractively positioning our clients, deriving true value, and attracting the right Private Equity investors to ensure a long-term partnership. Our strategic PE advisory involves identifying the right investment partners, structuring deal terms for maximum value, and negotiating agreements that align with your long-term business goals. We bridge the gap between ambitious companies and transformative growth capital, ensuring your business is investment-ready."
-      benefits={[
-        "Investment Readiness Preparation",
-        "Targeted Investor Outreach",
-        "Deal Structuring & Negotiation",
-        "Due Diligence Management",
-        "Valuation Enhancement",
-        "Strategic Growth Alignment"
+      subtitle="Unlocking value through strategic investments and operational excellence."
+      openingStatement="In the high-stakes world of private equity, precision and speed are paramount. We assist PE firms and portfolio companies in identifying opportunities, executing transactions, and driving operational improvements to maximize returns."
+      whatWeDo={[
+        "Deal Sourcing & Screening",
+        "Commercial Due Diligence",
+        "Portfolio Management",
+        "Exit Strategy Planning",
+        "Value Creation Plans",
+        "Add-on Acquisition Support"
+      ]}
+      howWeEngage={[
+        "We act as an extension of your deal team, providing rigorous analysis and market insights.",
+        "We assist in post-acquisition integration to realize synergies quickly.",
+        "We monitor portfolio performance and recommend strategic pivots when necessary.",
+        "We prepare assets for exit to ensure maximum realization of value."
+      ]}
+      outcomes={[
+        "High-quality deal flow",
+        "Risk-mitigated investment decisions",
+        "Operational efficiency gains",
+        "Superior IRR and MOIC"
       ]}
     />
   )

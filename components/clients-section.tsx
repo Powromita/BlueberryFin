@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { useState, useEffect } from "react"
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline"
 
@@ -50,22 +50,22 @@ export function ClientsSection() {
 
   return (
     <section className="relative h-screen min-h-[500px] max-h-[700px] bg-[#0f2c59] overflow-hidden flex items-center">
-      {/* Large Company Name Background - Brighter for visibility */}
+      {/* Large Company Name Background */}
       <motion.div
         key={`bg-${currentIndex}`}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.3 }}
+        animate={{ opacity: 0.15 }}
         transition={{ duration: 0.8 }}
         className="absolute inset-0 flex items-center justify-center pointer-events-none"
       >
-        <h3 className="text-[180px] md:text-[240px] lg:text-[320px] font-bold text-white/30 leading-none select-none">
+        <h3 className="text-[180px] md:text-[240px] lg:text-[320px] font-bold text-white/10 leading-none select-none">
           {testimonials[currentIndex].company}
         </h3>
       </motion.div>
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full relative z-10">
         {/* Header */}
-        <h2 className="text-2xl md:text-3xl font-light mb-8 text-white" style={{ fontFamily: 'GT Alpina Standard, Verdana, sans-serif' }}> {/* Added text-white */}
+        <h2 className="text-2xl md:text-3xl font-light mb-8" style={{ fontFamily: 'GT Alpina Standard, Verdana, sans-serif' }}>
           Testimonial
         </h2>
 
@@ -80,12 +80,8 @@ export function ClientsSection() {
             className="flex justify-center lg:justify-end"
           >
             <div className="relative w-72 h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden shadow-2xl">
-              {/* Actual image */}
-              <img 
-                src={testimonials[currentIndex].image} 
-                alt={testimonials[currentIndex].name}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
+              {/* Placeholder gradient - replace with actual image */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400/40 to-purple-600/40" />
               
               {/* Name overlay on photo */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6">
@@ -113,26 +109,18 @@ export function ClientsSection() {
           </motion.div>
         </div>
 
-        {/* Navigation at Bottom */}
-        <div className="flex items-center justify-center gap-8 mt-16">
+        <div className="flex gap-4 mt-12">
           <button
             onClick={goToPrevious}
-            className="text-white/50 hover:text-white transition-colors p-2"
-            aria-label="Previous"
+            className="p-2 rounded-full border border-white/10 hover:bg-white/10 transition-colors text-white/60 hover:text-white"
           >
-            <ChevronLeftIcon className="w-8 h-8" />
+            <ChevronLeftIcon className="w-6 h-6" />
           </button>
-
-          <div className="text-white/70 text-xl font-light">
-            {currentIndex + 1}/{testimonials.length}
-          </div>
-
           <button
             onClick={goToNext}
-            className="text-white/50 hover:text-white transition-colors p-2"
-            aria-label="Next"
+            className="p-2 rounded-full border border-white/10 hover:bg-white/10 transition-colors text-white/60 hover:text-white"
           >
-            <ChevronRightIcon className="w-8 h-8" />
+            <ChevronRightIcon className="w-6 h-6" />
           </button>
         </div>
       </div>
