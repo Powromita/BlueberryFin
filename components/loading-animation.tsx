@@ -12,7 +12,7 @@ export function LoadingAnimation({ onComplete }: { onComplete: () => void }) {
 
   useEffect(() => {
     setMounted(true)
-
+    
     // Force scroll to top immediately and lock scroll
     window.scrollTo(0, 0)
     document.documentElement.scrollTop = 0
@@ -36,7 +36,7 @@ export function LoadingAnimation({ onComplete }: { onComplete: () => void }) {
       window.scrollTo(0, 0)
       document.documentElement.scrollTop = 0
       document.body.scrollTop = 0
-
+      
       setIsTransitioning(true)
       setTimeout(() => {
         onComplete()

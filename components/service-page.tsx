@@ -1,26 +1,18 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { CheckCircleIcon, ArrowLeftIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { Navbar } from "./navbar"
 
 interface ServicePageProps {
   title: string
   subtitle: string
-  openingStatement: string
-  whatWeDo: string[]
-  howWeEngage: string[]
-  outcomes: string[]
+  description: string
+  benefits: string[]
 }
 
-export function ServicePage({
-  title,
-  subtitle,
-  openingStatement,
-  whatWeDo,
-  howWeEngage,
-  outcomes
-}: ServicePageProps) {
+export function ServicePage({ title, subtitle, description, benefits }: ServicePageProps) {
   return (
     <>
       <Navbar />

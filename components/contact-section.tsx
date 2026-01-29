@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import { PaperAirplaneIcon, CheckCircleIcon } from "@heroicons/react/24/outline"
 import emailjs from '@emailjs/browser'
 import { toast } from "sonner"
+
 export function ContactSection() {
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -25,17 +26,17 @@ export function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
+    
     if (!formData.name.trim()) {
       toast.error("Please enter your name")
       return
     }
-
+    
     if (!formData.email.trim()) {
       toast.error("Please enter your email")
       return
     }
-
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(formData.email)) {
       toast.error("Please enter a valid email address")
@@ -69,7 +70,7 @@ export function ContactSection() {
       )
 
       toast.success("Message sent successfully! We'll get back to you soon.")
-
+      
       setFormData({
         name: "",
         email: "",
@@ -155,7 +156,7 @@ export function ContactSection() {
               <h3 className="text-2xl font-serif text-[#0f2c59] mb-2">
                 Build your plan <span className="italic">with BlueberryFin</span>
               </h3>
-
+              
               <form onSubmit={handleSubmit} className="space-y-5 mt-6">
                 {/* Name */}
                 <div>

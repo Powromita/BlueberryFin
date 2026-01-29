@@ -1,36 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { useInView } from "react-intersection-observer"
-import { motion, AnimatePresence } from "framer-motion"
-import { CogIcon, CheckCircleIcon, ChartBarIcon, LightBulbIcon } from "@heroicons/react/24/outline"
-
-const features = [
-  {
-    title: "Strategic Vision",
-    description: "We don't just look at numbers; we look at the future. Our strategic planning aligns your financial goals with long-term market trends.",
-    color: "bg-blue-500",
-    icon: LightBulbIcon
-  },
-  {
-    title: "Data-Driven Insights",
-    description: "Leveraging advanced analytics to uncover hidden opportunities and mitigate associated risks in your portfolio.",
-    color: "bg-purple-500",
-    icon: ChartBarIcon
-  },
-  {
-    title: "Execution Excellence",
-    description: "A strategy is only as good as its execution. Our team ensures seamless implementation of complex financial frameworks.",
-    color: "bg-cyan-500",
-    icon: CheckCircleIcon
-  },
-  {
-    title: "Continuous Optimization",
-    description: "The financial landscape changes rapidly. We continuously monitor and optimize your strategies to stay ahead.",
-    color: "bg-indigo-500",
-    icon: CogIcon
-  }
-]
+import { motion } from "framer-motion"
 
 export function AboutSection() {
   const { ref, inView } = useInView({
@@ -38,36 +9,11 @@ export function AboutSection() {
     triggerOnce: true,
   })
 
-  const [activeFeature, setActiveFeature] = useState(0)
-  const [progress, setProgress] = useState(0)
-
-  // Auto-advance logic
-  useEffect(() => {
-    if (!inView) return
-
-    const duration = 5000 // 5 seconds per slide
-    const intervalTime = 100 // Update progress every 100ms
-    const steps = duration / intervalTime
-    const increment = 100 / steps
-
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          setActiveFeature((current) => (current + 1) % features.length)
-          return 0
-        }
-        return prev + increment
-      })
-    }, intervalTime)
-
-    return () => clearInterval(timer)
-  }, [inView]) // Removed activeFeature dependency
-
-  // Reset progress when manually changing feature
-  const handleFeatureClick = (index: number) => {
-    setActiveFeature(index)
-    setProgress(0)
-  }
+  const stats = [
+    { number: "2", label: "Expert Verticals", sublabel: "Finance & Execution" },
+    { number: "6+", label: "Services", sublabel: "Comprehensive Solutions" },
+    { number: "100%", label: "Commitment", sublabel: "To Your Success" },
+  ]
 
   return (
     <section ref={ref} className="py-24 md:py-32 bg-[#0f2c59] relative overflow-hidden" id="about">
@@ -81,12 +27,14 @@ export function AboutSection() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-24">
+        {/* Main Content - Asymmetric Two Column */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+          {/* Left Column - 60% */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="lg:col-span-7"
           >
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-12 leading-tight">
               What We Do
@@ -124,7 +72,7 @@ export function AboutSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Side: Feature Showcase (Reference Implementation) */}
+          {/* Right Column - 40% - Stats */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
