@@ -12,7 +12,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" className="flex items-center gap-2 mb-4 group">
-              <span className="font-bold text-lg">Blueberry</span>
+              <span className="font-bold text-lg">BlueberryFin Capital</span>
             </Link>
             <p className="text-white/70 text-sm">Financial advisory for corporates and HNIs</p>
           </div>
@@ -22,14 +22,24 @@ export function Footer() {
             <h4 className="font-bold mb-4">Company</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/core-team" className="text-white/70 hover:text-white transition-colors">
-                  Core Team
-                </Link>
+                <a href="#about" className="text-white/70 hover:text-white transition-colors">
+                  About Us
+                </a>
               </li>
               <li>
                 <a href="#contact" className="text-white/70 hover:text-white transition-colors">
                   Contact
                 </a>
+              </li>
+              <li>
+                <Link href="/signin" className="text-white/70 hover:text-white transition-colors">
+                  Sign In
+                </Link>
+              </li>
+              <li>
+                <Link href="/signup" className="text-white/70 hover:text-white transition-colors">
+                  Sign Up
+                </Link>
               </li>
             </ul>
           </div>
@@ -49,8 +59,23 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/services/debt-syndication" className="text-white/70 hover:text-white transition-colors">
+                  Debt Syndication
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/mergers-acquisitions" className="text-white/70 hover:text-white transition-colors">
+                  M&A Advisory
+                </Link>
+              </li>
+              <li>
                 <Link href="/services/private-equity" className="text-white/70 hover:text-white transition-colors">
                   Private Equity
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/startup-advisory" className="text-white/70 hover:text-white transition-colors">
+                  Startup Advisory
                 </Link>
               </li>
             </ul>
@@ -61,14 +86,14 @@ export function Footer() {
             <h4 className="font-bold mb-4">Legal</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" className="text-white/70 hover:text-white transition-colors">
+                <Link href="/privacy-policy" className="text-white/70 hover:text-white transition-colors">
                   Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-white/70 hover:text-white transition-colors">
+                <Link href="/terms-of-service" className="text-white/70 hover:text-white transition-colors">
                   Terms of Service
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

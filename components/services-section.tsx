@@ -21,7 +21,7 @@ const serviceCategories = {
       description: "Navigate the complexities of going public with expert guidance through every step.",
       briefInfo: "Guide companies through IPO process, regulatory compliance, and market positioning",
       icon: ChartBarIcon,
-      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=800&h=600&fit=crop",
       href: "/services/ipo-advisory",
     },
     {
@@ -29,7 +29,7 @@ const serviceCategories = {
       description: "Secure the capital your business needs to grow and scale effectively.",
       briefInfo: "Connect with investors, structure deals, and maximize funding potential",
       icon: CurrencyDollarIcon,
-      image: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&h=600&fit=crop",
       href: "/services/fundraising",
     },
     {
@@ -37,7 +37,7 @@ const serviceCategories = {
       description: "Optimize capital structure through strategic debt syndication solutions.",
       briefInfo: "Efficient debt structuring and lender network optimization",
       icon: CreditCardIcon,
-      image: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop",
       href: "/services/debt-syndication",
     },
   ],
@@ -47,7 +47,7 @@ const serviceCategories = {
       description: "Expert guidance through complex M&A transactions and integrations.",
       briefInfo: "Complete M&A support from identification to post-acquisition integration",
       icon: UserGroupIcon,
-      image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=600&fit=crop",
       href: "/services/mergers-acquisitions",
     },
     {
@@ -55,7 +55,7 @@ const serviceCategories = {
       description: "Strategic PE investments and portfolio management for maximum returns.",
       briefInfo: "Strategic investments, portfolio management, and value creation",
       icon: BuildingOfficeIcon,
-      image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=600&fit=crop",
       href: "/services/private-equity",
     },
     {
@@ -63,7 +63,7 @@ const serviceCategories = {
       description: "Accelerate growth with tailored financial strategies for emerging companies.",
       briefInfo: "Strategic guidance for early-stage companies and high-growth startups",
       icon: RocketLaunchIcon,
-      image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop",
       href: "/services/startup-advisory",
     },
   ],

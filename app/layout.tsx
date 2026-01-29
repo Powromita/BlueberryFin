@@ -63,39 +63,6 @@ export default function RootLayout({
             if ('scrollRestoration' in window.history) {
               window.history.scrollRestoration = 'manual';
             }
-            
-            // Absolute scroll reset - must happen before anything renders
-            function forceScrollToTop() {
-              document.documentElement.scrollTop = 0;
-              document.documentElement.scrollLeft = 0;
-              document.body.scrollTop = 0;
-              document.body.scrollLeft = 0;
-              window.scrollTo(0, 0);
-            }
-            
-            // Lock overflow immediately
-            function lockScroll() {
-              document.documentElement.style.overflow = 'hidden';
-              document.body.style.overflow = 'hidden';
-              document.documentElement.style.height = '100vh';
-              document.body.style.height = '100vh';
-            }
-            
-            // Execute immediately
-            lockScroll();
-            forceScrollToTop();
-            
-            // Execute on various lifecycle events
-            if (document.readyState === 'loading') {
-              document.addEventListener('DOMContentLoaded', forceScrollToTop);
-            }
-            window.addEventListener('load', forceScrollToTop);
-            window.addEventListener('beforeunload', forceScrollToTop);
-            
-            // Execute multiple times to ensure it sticks
-            for (let i = 0; i < 10; i++) {
-              setTimeout(forceScrollToTop, i * 50);
-            }
           `
         }} />
       </head>

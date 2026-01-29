@@ -94,7 +94,7 @@ export function ContactSection() {
   ]
 
   return (
-    <section id="contact" ref={ref} className="py-24 md:py-32 bg-[#0f2c59] relative overflow-hidden">
+    <section id="contact" ref={ref} className="py-10 md:py-12 bg-[#0f2c59] relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#2563eb]/10 rounded-full blur-3xl" />
@@ -212,17 +212,23 @@ export function ContactSection() {
                   />
                 </div>
 
-                {/* Message Dropdown Style */}
-                <div>
+                {/* Service Selection - Professional Style */}
+                <div className="relative">
                   <select
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     onFocus={() => setFocusedField("message")}
                     onBlur={() => setFocusedField(null)}
-                    className="w-full px-0 py-3 border-b-2 border-gray-300 focus:border-[#2563eb] bg-transparent outline-none transition-colors text-gray-800"
+                    className="w-full px-0 py-3 border-b-2 border-gray-300 focus:border-[#2563eb] bg-transparent outline-none transition-colors text-gray-800 appearance-none cursor-pointer pr-8"
+                    style={{ 
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%232563eb'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'right 0.5rem center',
+                      backgroundSize: '1.5rem'
+                    }}
                     required
                   >
-                    <option value="">What can BlueberryFin help you with today?</option>
+                    <option value="" disabled>What can BlueberryFin help you with?</option>
                     <option value="IPO Advisory">IPO Advisory & Readiness</option>
                     <option value="Fundraising">Fundraising Service</option>
                     <option value="Private Equity">Private Equity</option>
