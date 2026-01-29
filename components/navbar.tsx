@@ -17,33 +17,40 @@ const services = [
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [isDarkSection, setIsDarkSection] = useState(false)
+  const [isDarkSection, setIsDarkSection] = useState(true)
 
   useEffect(() => {
     const handleScroll = () => {
+      // Force dark section (white text) when at top of home page
+      if (window.scrollY < 50 && window.location.pathname === "/") {
+        setIsDarkSection(true)
+        setScrolled(false)
+        return
+      }
+
       setScrolled(window.scrollY > 10)
-      
+
       const navbar = document.querySelector('nav')
       if (!navbar) return
-      
+
       const navbarRect = navbar.getBoundingClientRect()
       const navbarCenter = navbarRect.top + navbarRect.height / 2
       const elementAtCenter = document.elementFromPoint(window.innerWidth / 2, navbarCenter + navbarRect.height)
-      
+
       if (elementAtCenter) {
         const section = elementAtCenter.closest('section')
         if (section) {
           const bgColor = window.getComputedStyle(section).backgroundColor
           const isDark = bgColor.includes('rgb(15, 44, 89)') || // #0f2c59
-                        bgColor.includes('rgb(30, 58, 138)') ||  // #1e3a8a
-                        section.classList.contains('bg-[#0f2c59]') ||
-                        section.classList.contains('bg-[#1e3a8a]') ||
-                        section.classList.contains('dark-section')
+            bgColor.includes('rgb(30, 58, 138)') ||  // #1e3a8a
+            section.classList.contains('bg-[#0f2c59]') ||
+            section.classList.contains('bg-[#1e3a8a]') ||
+            section.classList.contains('dark-section')
           setIsDarkSection(isDark)
         }
       }
     }
-    
+
     handleScroll()
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
@@ -66,18 +73,18 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className={`text-sm font-medium transition-colors duration-200 hover:opacity-70 ${textColor}`}
             >
               Home
             </Link>
-            
+
             <div className="relative group">
               <button className={`text-sm font-medium flex items-center gap-1 transition-colors duration-200 hover:opacity-70 ${textColor}`}>
                 Services
               </button>
-              
+
               <div className="absolute top-full right-0 w-64 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
                 <div className="bg-white rounded-sm shadow-xl border border-gray-100 p-2 flex flex-col gap-1">
                   {services.map((service) => (
@@ -93,8 +100,8 @@ export function Navbar() {
               </div>
             </div>
 
-            <Link 
-              href="/#contact" 
+            <Link
+              href="/#contact"
               className={`text-sm font-medium transition-colors duration-200 hover:opacity-70 ${textColor}`}
             >
               Contact
@@ -126,8 +133,8 @@ export function Navbar() {
             className="fixed inset-0 bg-white z-40 pt-24 px-6 md:hidden"
           >
             <div className="flex flex-col gap-6">
-              <Link 
-                href="/" 
+              <Link
+                href="/"
                 onClick={() => setMobileMenuOpen(false)}
                 className="text-2xl font-serif text-[#0f2c59]"
               >
@@ -146,8 +153,8 @@ export function Navbar() {
                   </Link>
                 ))}
               </div>
-              <Link 
-                href="/#contact" 
+              <Link
+                href="/#contact"
                 onClick={() => setMobileMenuOpen(false)}
                 className="text-2xl font-serif text-[#0f2c59]"
               >

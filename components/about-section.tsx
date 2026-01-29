@@ -30,9 +30,14 @@ export function AboutSection() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="lg:col-span-7"
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#0f2c59] mb-12 leading-tight">
+            <motion.h2
+              initial={{ opacity: 0, letterSpacing: "-0.05em", y: 20 }}
+              animate={inView ? { opacity: 1, letterSpacing: "-0.02em", y: 0 } : { opacity: 0, letterSpacing: "-0.05em", y: 20 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#0f2c59] mb-12 leading-tight transition-colors duration-300 cursor-default"
+            >
               What We Do
-            </h2>
+            </motion.h2>
 
             <div className="space-y-8 text-lg md:text-xl text-gray-700 leading-relaxed">
               <p>
@@ -79,10 +84,11 @@ export function AboutSection() {
                   key={idx}
                   initial={{ opacity: 0, x: 20 }}
                   animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-                  transition={{ duration: 0.6, delay: 0.4 + idx * 0.1, ease: "easeOut" }}
-                  className="group"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="group cursor-default origin-left"
                 >
-                  <div className="text-7xl md:text-8xl font-extrabold text-[#2563eb] mb-2 leading-none group-hover:scale-105 transition-transform duration-300">
+                  <div className="text-7xl md:text-8xl font-extrabold text-[#2563eb] mb-2 leading-none inline-block">
                     {stat.number}
                   </div>
                   <div className="text-xl md:text-2xl font-bold text-[#0f2c59] mb-1">

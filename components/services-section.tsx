@@ -44,7 +44,9 @@ export function ServicesSection() {
         <div className="mb-16 border-t border-gray-200 pt-8 flex flex-col md:flex-row md:justify-between md:items-end gap-6">
           <div>
             <h2 className="text-sm font-medium text-gray-500 uppercase tracking-widest mb-2">Our Expertise</h2>
-            <p className="text-3xl md:text-4xl font-serif text-[#0f2c59]">
+            <p
+              className="text-3xl md:text-4xl font-serif text-[#0f2c59] hover:text-[#2563eb] transition-colors duration-300 cursor-default"
+            >
               Comprehensive Financial Advisory
             </p>
           </div>
@@ -65,7 +67,7 @@ export function ServicesSection() {
             >
               <Link href={service.href} className="block">
                 <div className="h-px w-full bg-gray-200 mb-6 group-hover:bg-[#0f2c59] transition-colors duration-300" />
-                <h3 className="text-xl font-medium text-[#0f2c59] mb-3 group-hover:translate-x-1 transition-transform duration-300">
+                <h3 className="text-xl font-medium text-[#0f2c59] mb-3 transition-colors duration-300">
                   {service.title}
                 </h3>
                 <p className="text-gray-600 leading-relaxed text-sm md:text-base">

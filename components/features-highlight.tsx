@@ -32,9 +32,15 @@ export function FeaturesHighlight() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl font-serif text-[#0f2c59] mb-6 leading-tight">
+            <motion.h2
+              initial={{ opacity: 0, letterSpacing: "-0.05em", y: 20 }}
+              whileInView={{ opacity: 1, letterSpacing: "-0.02em", y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-3xl md:text-4xl font-serif text-[#0f2c59] mb-6 leading-tight cursor-default"
+            >
               Why leading organizations trust BlueberryFin.
-            </h2>
+            </motion.h2>
             <p className="text-gray-600 text-lg leading-relaxed max-w-lg">
               In a crowded market of financial intermediaries, we stand apart through our commitment to integrity, analytical rigor, and unwavering client advocacy.
             </p>

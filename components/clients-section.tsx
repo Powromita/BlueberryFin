@@ -45,10 +45,10 @@ export function ClientsSection() {
   const goToPrevious = () => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
 
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center justify-center bg-[#0f2c59] overflow-hidden text-white">
+    <section className="relative min-h-[400px] flex items-center justify-center bg-[#0f2c59] overflow-hidden text-white py-12">
       <div className="max-w-5xl mx-auto px-6 lg:px-8 relative z-10 w-full">
         <div className="mb-12 border-t border-white/20 w-16" />
-        
+
         <div className="relative min-h-[400px] flex flex-col justify-center">
           <AnimatePresence mode="wait">
             <motion.div
@@ -59,10 +59,10 @@ export function ClientsSection() {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-10"
             >
-              <h3 className="text-3xl md:text-4xl lg:text-5xl font-serif leading-tight text-white/90">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-serif leading-tight text-white/90">
                 "{testimonials[currentIndex].quote}"
               </h3>
-              
+
               <div className="flex items-center gap-6">
                 <div className="h-px w-12 bg-white/30" />
                 <div>
@@ -75,13 +75,13 @@ export function ClientsSection() {
         </div>
 
         <div className="flex gap-4 mt-12">
-          <button 
+          <button
             onClick={goToPrevious}
             className="p-2 rounded-full border border-white/10 hover:bg-white/10 transition-colors text-white/60 hover:text-white"
           >
             <ChevronLeftIcon className="w-6 h-6" />
           </button>
-          <button 
+          <button
             onClick={goToNext}
             className="p-2 rounded-full border border-white/10 hover:bg-white/10 transition-colors text-white/60 hover:text-white"
           >
