@@ -64,7 +64,8 @@ export function Navbar() {
           const isDark = bgColor.includes('rgb(15, 44, 89)') || // #0f2c59
                         bgColor.includes('rgb(30, 58, 138)') ||  // #1e3a8a
                         section.classList.contains('bg-[#0f2c59]') ||
-                        section.classList.contains('bg-[#1e3a8a]')
+                        section.classList.contains('bg-[#1e3a8a]') ||
+                        section.classList.contains('dark-section')
           setIsDarkSection(isDark)
         }
       }
