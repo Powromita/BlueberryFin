@@ -6,6 +6,10 @@ import { motion } from "framer-motion"
 import { PaperAirplaneIcon, CheckCircleIcon } from "@heroicons/react/24/outline"
 import emailjs from '@emailjs/browser'
 import { toast } from "sonner"
+import PhoneInput, { getCountryCallingCode } from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
+import { isValidPhoneNumber, parsePhoneNumber } from 'libphonenumber-js'
+import type { E164Number } from 'libphonenumber-js'
 
 export function ContactSection() {
   const { ref, inView } = useInView({
@@ -17,12 +21,49 @@ export function ContactSection() {
     name: "",
     email: "",
     company: "",
-    phone: "",
+    phone: "" as E164Number | "",
     message: "",
   })
 
   const [focusedField, setFocusedField] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handlePhoneChange = (value: E164Number | undefined) => {
+    if (!value) {
+      setFormData({ ...formData, phone: "" })
+      return
+    }
+
+    // Validate and limit the phone number
+    try {
+      const phoneNumber = parsePhoneNumber(value)
+      if (phoneNumber) {
+        // Check if the number is valid for the country
+        if (isValidPhoneNumber(value)) {
+          setFormData({ ...formData, phone: value })
+        } else {
+          // If not valid yet, still allow typing but limit to reasonable length
+          // Most phone numbers are max 15 digits (E.164 standard)
+          const digitsOnly = value.replace(/\D/g, '')
+          if (digitsOnly.length <= 15) {
+            setFormData({ ...formData, phone: value })
+          }
+        }
+      } else {
+        // Allow partial input
+        const digitsOnly = value.replace(/\D/g, '')
+        if (digitsOnly.length <= 15) {
+          setFormData({ ...formData, phone: value })
+        }
+      }
+    } catch (error) {
+      // If parsing fails, limit to 15 digits
+      const digitsOnly = value.replace(/\D/g, '')
+      if (digitsOnly.length <= 15) {
+        setFormData({ ...formData, phone: value })
+      }
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -43,6 +84,19 @@ export function ContactSection() {
       return
     }
 
+    // Validate phone number using libphonenumber-js if provided
+    if (formData.phone) {
+      try {
+        if (!isValidPhoneNumber(formData.phone)) {
+          toast.error("Please enter a valid phone number")
+          return
+        }
+      } catch (error) {
+        toast.error("Invalid phone number format")
+        return
+      }
+    }
+
     setIsSubmitting(true)
 
     try {
@@ -61,8 +115,8 @@ export function ContactSection() {
           to_email: "sm091849@gmail.com",
           from_name: formData.name,
           from_email: formData.email,
-          company: formData.company,
-          phone: formData.phone,
+          company: formData.company || "Not provided",
+          phone: formData.phone || "Not provided",
           message: formData.message,
           reply_to: formData.email,
         },
@@ -102,51 +156,50 @@ export function ContactSection() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* LEFT SIDE - Headline & Benefits */}
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          {/* Left Column - Benefits */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.8 }}
-            className="text-white"
+            className="space-y-8"
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl leading-tight mb-6" style={{ fontFamily: 'GT Alpina Standard, Verdana, sans-serif' }}>
-              Get A Quote For Financial Advisory.
-            </h2>
-            <p className="text-xl text-blue-100 mb-12 leading-relaxed">
-              Custom recommendations. Expert guidance. Better coverage for your business.
-            </p>
+            <div>
+              <h2 className="text-3xl md:text-4xl font-serif text-white mb-4">
+                Get in <span className="italic">Touch</span>
+              </h2>
+              <p className="text-blue-100 text-lg">
+                Let's discuss how we can help transform your financial future.
+              </p>
+            </div>
 
-            {/* Benefits List */}
-            <div className="space-y-4 mb-12">
+            <div className="space-y-4">
               {benefits.map((benefit, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, x: -20 }}
                   animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
+                  transition={{ delay: idx * 0.1, duration: 0.5 }}
                   className="flex items-start gap-3"
                 >
-                  <CheckCircleIcon className="w-6 h-6 text-[#2563eb] flex-shrink-0 mt-0.5" />
-                  <p className="text-blue-100 leading-relaxed">{benefit}</p>
+                  <CheckCircleIcon className="w-6 h-6 text-[#60a5fa] flex-shrink-0 mt-0.5" />
+                  <p className="text-blue-100">{benefit}</p>
                 </motion.div>
               ))}
             </div>
 
             {/* Company Logos Placeholder */}
-            <div>
-              <p className="text-blue-200 text-sm mb-4">Join 100+ companies building a culture of financial excellence</p>
-              <div className="flex flex-wrap gap-6 items-center opacity-60">
-                {/* Placeholder for company logos */}
-                <div className="text-white/40 text-xs font-semibold">RELIANCE</div>
-                <div className="text-white/40 text-xs font-semibold">TATA</div>
-                <div className="text-white/40 text-xs font-semibold">INFOSYS</div>
-                <div className="text-white/40 text-xs font-semibold">HDFC</div>
+            <div className="pt-8 border-t border-white/10">
+              <p className="text-sm text-blue-200 mb-4">Trusted by leading companies</p>
+              <div className="flex gap-6 items-center opacity-50">
+                <div className="w-20 h-8 bg-white/20 rounded"></div>
+                <div className="w-20 h-8 bg-white/20 rounded"></div>
+                <div className="w-20 h-8 bg-white/20 rounded"></div>
               </div>
             </div>
           </motion.div>
 
-          {/* RIGHT SIDE - Form Card */}
+          {/* Right Column - Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
@@ -162,7 +215,7 @@ export function ContactSection() {
                 <div>
                   <input
                     type="text"
-                    placeholder="Your Name"
+                    placeholder="Your Name *"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     onFocus={() => setFocusedField("name")}
@@ -176,7 +229,7 @@ export function ContactSection() {
                 <div>
                   <input
                     type="email"
-                    placeholder="Email"
+                    placeholder="Email *"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     onFocus={() => setFocusedField("email")}
@@ -199,44 +252,33 @@ export function ContactSection() {
                   />
                 </div>
 
-                {/* Phone */}
-                <div>
-                  <input
-                    type="tel"
-                    placeholder="Phone Number"
+                {/* Phone with International Dropdown */}
+                <div className="phone-input-wrapper">
+                  <PhoneInput
+                    international
+                    defaultCountry="IN"
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={handlePhoneChange}
                     onFocus={() => setFocusedField("phone")}
                     onBlur={() => setFocusedField(null)}
-                    className="w-full px-0 py-3 border-b-2 border-gray-300 focus:border-[#2563eb] bg-transparent outline-none transition-colors text-gray-800 placeholder-gray-400"
+                    className="w-full"
+                    placeholder="Phone Number"
+                    limitMaxLength={true}
                   />
                 </div>
 
-                {/* Service Selection - Professional Style */}
-                <div className="relative">
-                  <select
+                {/* Message - Combined with service question */}
+                <div>
+                  <textarea
+                    placeholder="What can BlueberryFin help you with?*"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     onFocus={() => setFocusedField("message")}
                     onBlur={() => setFocusedField(null)}
-                    className="w-full px-0 py-3 border-b-2 border-gray-300 focus:border-[#2563eb] bg-transparent outline-none transition-colors text-gray-800 appearance-none cursor-pointer pr-8"
-                    style={{ 
-                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%232563eb'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`,
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'right 0.5rem center',
-                      backgroundSize: '1.5rem'
-                    }}
+                    rows={5}
+                    className="w-full px-0 py-3 border-b-2 border-gray-300 focus:border-[#2563eb] bg-transparent outline-none transition-colors text-gray-800 placeholder-gray-400 resize-none"
                     required
-                  >
-                    <option value="" disabled>What can BlueberryFin help you with?</option>
-                    <option value="IPO Advisory">IPO Advisory & Readiness</option>
-                    <option value="Fundraising">Fundraising Service</option>
-                    <option value="Private Equity">Private Equity</option>
-                    <option value="M&A">Merger & Acquisition</option>
-                    <option value="Debt Syndication">Debt Syndication</option>
-                    <option value="Startup Advisory">Startup Advisory</option>
-                    <option value="Other">Other</option>
-                  </select>
+                  />
                 </div>
 
                 {/* Privacy Checkbox */}
@@ -270,6 +312,56 @@ export function ContactSection() {
           </motion.div>
         </div>
       </div>
+
+      <style jsx global>{`
+        .phone-input-wrapper .PhoneInput {
+          border-bottom: 2px solid #d1d5db;
+          padding-bottom: 12px;
+          transition: border-color 0.2s;
+        }
+        
+        .phone-input-wrapper .PhoneInput:focus-within {
+          border-bottom-color: #2563eb;
+        }
+        
+        .phone-input-wrapper .PhoneInputInput {
+          background: transparent;
+          border: none;
+          outline: none;
+          color: #1f2937;
+          font-size: 1rem;
+          padding: 0;
+          margin-left: 8px;
+        }
+        
+        .phone-input-wrapper .PhoneInputInput::placeholder {
+          color: #9ca3af;
+        }
+        
+        .phone-input-wrapper .PhoneInputCountry {
+          margin-right: 8px;
+        }
+        
+        .phone-input-wrapper .PhoneInputCountrySelect {
+          background: transparent;
+          border: none;
+          outline: none;
+          color: #1f2937;
+          cursor: pointer;
+        }
+        
+        .phone-input-wrapper .PhoneInputCountryIcon {
+          width: 24px;
+          height: 18px;
+          box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+        }
+        
+        .phone-input-wrapper .PhoneInputCountrySelectArrow {
+          color: #6b7280;
+          opacity: 0.7;
+          margin-left: 4px;
+        }
+      `}</style>
     </section>
   )
 }

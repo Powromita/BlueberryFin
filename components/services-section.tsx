@@ -84,7 +84,7 @@ export function ServicesSection() {
     <section
       id="services"
       ref={ref}
-      className="py-12 bg-gradient-to-b from-[#f5f0eb] via-blue-50/30 to-[#f5f0eb] relative overflow-hidden"
+      className="py-12 bg-[#f5f0eb] relative overflow-hidden"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -207,12 +207,12 @@ export function ServicesSection() {
                   key={idx}
                   initial={{ opacity: 0, x: 30 }}
                   animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  transition={{ duration: 0.6, delay: 0.5 + idx * 0.15 }}
                   onClick={() => setSelectedService(idx)}
                   className={`p-6 rounded-xl cursor-pointer transition-all duration-300 ${
                     isSelected
-                      ? "bg-[#f5f0eb] border-2 border-[#0052cc] shadow-xl"
-                      : "bg-[#f5f0eb] border-2 border-gray-200 hover:border-[#0052cc] hover:shadow-lg"
+                      ? "bg-white border-2 border-[#0052cc] shadow-xl"
+                      : "bg-white border-2 border-gray-200 hover:border-[#0052cc] hover:shadow-lg"
                   }`}
                 >
                   <div className="flex items-start gap-4">
