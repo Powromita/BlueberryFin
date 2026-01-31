@@ -3,10 +3,16 @@
 import { useState } from "react"
 import { useInView } from "react-intersection-observer"
 import { motion } from "framer-motion"
-import { PaperAirplaneIcon, CheckCircleIcon } from "@heroicons/react/24/outline"
+import { 
+  PaperAirplaneIcon, 
+  CheckCircleIcon, 
+  EnvelopeIcon, 
+  PhoneIcon, 
+  ChatBubbleLeftRightIcon 
+} from "@heroicons/react/24/outline"
 import emailjs from '@emailjs/browser'
 import { toast } from "sonner"
-import PhoneInput, { getCountryCallingCode } from 'react-phone-number-input'
+import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
 import { isValidPhoneNumber, parsePhoneNumber } from 'libphonenumber-js'
 import type { E164Number } from 'libphonenumber-js'
@@ -34,30 +40,24 @@ export function ContactSection() {
       return
     }
 
-    // Validate and limit the phone number
     try {
       const phoneNumber = parsePhoneNumber(value)
       if (phoneNumber) {
-        // Check if the number is valid for the country
         if (isValidPhoneNumber(value)) {
           setFormData({ ...formData, phone: value })
         } else {
-          // If not valid yet, still allow typing but limit to reasonable length
-          // Most phone numbers are max 15 digits (E.164 standard)
           const digitsOnly = value.replace(/\D/g, '')
           if (digitsOnly.length <= 15) {
             setFormData({ ...formData, phone: value })
           }
         }
       } else {
-        // Allow partial input
         const digitsOnly = value.replace(/\D/g, '')
         if (digitsOnly.length <= 15) {
           setFormData({ ...formData, phone: value })
         }
       }
     } catch (error) {
-      // If parsing fails, limit to 15 digits
       const digitsOnly = value.replace(/\D/g, '')
       if (digitsOnly.length <= 15) {
         setFormData({ ...formData, phone: value })
@@ -84,7 +84,6 @@ export function ContactSection() {
       return
     }
 
-    // Validate phone number using libphonenumber-js if provided
     if (formData.phone) {
       try {
         if (!isValidPhoneNumber(formData.phone)) {
@@ -145,6 +144,34 @@ export function ContactSection() {
     "High quality financial solutions like IPO advisory, fundraising & more",
     "Day 1 support for your team and their families. Parents covered.",
     "Setup and go live in days, not months.",
+    "End-to-end deal execution with dedicated support.",
+  ]
+
+  const contactOptions = [
+    {
+      icon: EnvelopeIcon,
+      title: "Email Us",
+      value: "sm091849@gmail.com",
+      href: "mailto:sm091849@gmail.com",
+      color: "hover:bg-red-50 hover:text-red-600",
+      borderColor: "hover:border-red-200"
+    },
+    {
+      icon: PhoneIcon,
+      title: "Call Us",
+      value: "+91 9870333395",
+      href: "tel:+919870333395",
+      color: "hover:bg-green-50 hover:text-green-600",
+      borderColor: "hover:border-green-200"
+    },
+    {
+      icon: ChatBubbleLeftRightIcon,
+      title: "WhatsApp",
+      value: "Chat with us",
+      href: "https://wa.me/919870333395",
+      color: "hover:bg-emerald-50 hover:text-emerald-600",
+      borderColor: "hover:border-emerald-200"
+    }
   ]
 
   return (
@@ -155,9 +182,9 @@ export function ContactSection() {
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#2563eb]/10 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-16">
         <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Left Column - Benefits */}
+          {/* Left Column - Benefits & Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
@@ -188,13 +215,28 @@ export function ContactSection() {
               ))}
             </div>
 
-            {/* Company Logos Placeholder */}
+            {/* Direct Contact Cards */}
             <div className="pt-8 border-t border-white/10">
-              <p className="text-sm text-blue-200 mb-4">Trusted by leading companies</p>
-              <div className="flex gap-6 items-center opacity-50">
-                <div className="w-20 h-8 bg-white/20 rounded"></div>
-                <div className="w-20 h-8 bg-white/20 rounded"></div>
-                <div className="w-20 h-8 bg-white/20 rounded"></div>
+              <p className="text-sm text-blue-200 mb-6 font-medium uppercase tracking-wider">Direct Contact</p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                {contactOptions.map((option, idx) => {
+                  const Icon = option.icon
+                  return (
+                    <a
+                      key={idx}
+                      href={option.href}
+                      target={option.title === "WhatsApp" ? "_blank" : undefined}
+                      rel={option.title === "WhatsApp" ? "noopener noreferrer" : undefined}
+                      className={`flex flex-col items-center justify-center p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm transition-all duration-300 w-full sm:flex-1 group ${option.color} ${option.borderColor} hover:bg-white hover:scale-105 hover:shadow-xl`}
+                    >
+                      <div className="p-3 rounded-full bg-white/10 group-hover:bg-gray-100 mb-3 transition-colors">
+                        <Icon className="w-6 h-6 text-blue-200 group-hover:text-inherit transition-colors" />
+                      </div>
+                      <span className="text-sm font-semibold text-white group-hover:text-gray-900 transition-colors text-center mb-1">{option.title}</span>
+                      <span className="text-xs text-blue-200 group-hover:text-gray-600 transition-colors text-center break-words max-w-full">{option.value}</span>
+                    </a>
+                  )
+                })}
               </div>
             </div>
           </motion.div>
@@ -267,7 +309,7 @@ export function ContactSection() {
                   />
                 </div>
 
-                {/* Message - Combined with service question */}
+                {/* Message */}
                 <div>
                   <textarea
                     placeholder="What can BlueberryFin help you with?*"
@@ -310,6 +352,21 @@ export function ContactSection() {
               </form>
             </div>
           </motion.div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-12">
+        <div className="w-full h-[400px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative group">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.218342263435!2d72.83244837508316!3d18.921989182250107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7d1c73a0d5cad%3A0xc70a25a7209c733c!2sGateway%20Of%20India%20Mumbai!5e0!3m2!1sen!2sin!4v1706691234567!5m2!1sen!2sin" 
+            width="100%" 
+            height="100%" 
+            style={{ border: 0 }} 
+            allowFullScreen 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+            className="w-full h-full"
+          ></iframe>
         </div>
       </div>
 
