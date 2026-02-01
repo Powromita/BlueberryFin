@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion"
 import { useRef, useMemo } from "react"
 import {
   SparklesIcon,
@@ -70,6 +70,9 @@ export function FeaturesHighlight() {
     ["#2563eb", "#0f2c59", "#2563eb"]
   )
 
+  const backgroundImage = useMotionTemplate`linear-gradient(to bottom right, ${gradientColor1}, ${gradientColor2})`
+  const bgOpacity = useTransform(scrollYProgress, [0, 1], [0.05, 0.2])
+
   return (
     <section ref={containerRef} className="relative bg-[#f5f0eb]">
       {/* Sticky Title - Always Visible with Progress */}
@@ -98,124 +101,40 @@ export function FeaturesHighlight() {
         <motion.div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: scrollYProgress
+            backgroundImage,
+            opacity: bgOpacity
           }}
-        >
-          <div className="absolute inset-0" style={{
-            backgroundImage: scrollYProgress
-          }} />
-        </motion.div>
+        />
 
         {/* Constellation Network */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30">
-          <defs>
-            <linearGradient id="constellationGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#0f2c59" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#2563eb" stopOpacity="0.2" />
-            </linearGradient>
-          </defs>
-          
-          {/* Connecting lines between nodes */}
-          {constellationNodes.map((node1, i) => {
-            const node2 = constellationNodes[(i + 1) % constellationNodes.length]
-            const nextNode = constellationNodes[(i + 2) % constellationNodes.length]
-            
-            return (
-              <g key={`lines-${i}`}>
-                <motion.line
-                  x1={`${node1.x}%`}
-                  y1={`${node1.y}%`}
-                  x2={`${node2.x}%`}
-                  y2={`${node2.y}%`}
-                  stroke="url(#constellationGradient)"
-                  strokeWidth="0.5"
-                  animate={{
-                    opacity: [0.2, 0.5, 0.2],
-                  }}
-                  transition={{
-                    duration: 4 + i * 0.3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-                <motion.line
-                  x1={`${node1.x}%`}
-                  y1={`${node1.y}%`}
-                  x2={`${nextNode.x}%`}
-                  y2={`${nextNode.y}%`}
-                  stroke="url(#constellationGradient)"
-                  strokeWidth="0.3"
-                  animate={{
-                    opacity: [0.1, 0.3, 0.1],
-                  }}
-                  transition={{
-                    duration: 5 + i * 0.4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1,
-                  }}
-                />
-              </g>
-            )
-          })}
-          
-          {/* Constellation nodes/dots */}
-          {constellationNodes.map((node) => (
-            <motion.circle
-              key={`node-${node.id}`}
-              cx={`${node.x}%`}
-              cy={`${node.y}%`}
-              r={node.size}
-              fill="#2563eb"
-              animate={{
-                r: [node.size, node.size * 1.5, node.size],
-                opacity: [0.4, 0.8, 0.4],
-              }}
-              transition={{
-                duration: 3 + node.id * 0.2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
-        </svg>
 
-        {/* Enhanced background decorations */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-[#0f2c59]/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#2563eb]/5 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-5">
-            <div className="absolute inset-0" style={{
-              backgroundImage: 'radial-gradient(circle at 2px 2px, #0f2c59 1px, transparent 0)',
-              backgroundSize: '40px 40px'
-            }} />
-          </div>
-        </div>
+
+
 
         {/* Feature display area */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           {features.map((feature, idx) => {
             const IconComponent = feature.icon
-            
+
             // Calculate opacity and scale based on scroll position
             const start = idx / features.length
             const end = (idx + 1) / features.length
-            
+
             // Modified opacity: first feature starts at 1, last feature ends at 1
             const opacity = useTransform(
               scrollYProgress,
-              idx === 0 
+              idx === 0
                 ? [0, 0.05, end - 0.05, end]
                 : idx === features.length - 1
-                ? [start, start + 0.05, end - 0.05, 1]
-                : [start, start + 0.05, end - 0.05, end],
+                  ? [start, start + 0.05, end - 0.05, 1]
+                  : [start, start + 0.05, end - 0.05, end],
               idx === 0
                 ? [1, 1, 1, 0]
                 : idx === features.length - 1
-                ? [0, 1, 1, 1]
-                : [0, 1, 1, 0]
+                  ? [0, 1, 1, 1]
+                  : [0, 1, 1, 0]
             )
-            
+
             const scale = useTransform(
               scrollYProgress,
               [start, start + 0.05, end - 0.05, end],
@@ -236,26 +155,29 @@ export function FeaturesHighlight() {
               >
                 {/* Horizontal Layout: Icon Left, Text Right - More Centered */}
                 <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10 max-w-4xl w-full">
-                  
+
                   {/* LEFT: Icon with number background */}
                   <div className="relative flex-shrink-0">
                     {/* Large background number */}
-                    <div className="absolute -top-6 -left-6 text-[#0f2c59]/10 text-[140px] md:text-[160px] font-bold select-none -z-10">
+                    <div className="absolute -top-4 -left-4 md:-top-6 md:-left-6 text-[#0f2c59]/10 text-[80px] sm:text-[100px] md:text-[160px] font-bold select-none -z-10">
                       {feature.number}
                     </div>
-                    
+
                     {/* Icon - Smaller */}
                     <motion.div
-                      className={`w-24 h-24 md:w-28 md:h-28 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white shadow-2xl relative z-10`}
+                      className={`w-24 h-24 md:w-28 md:h-28 rounded-2xl bg-[#0f2c59] flex items-center justify-center text-white shadow-2xl relative z-10`}
                     >
                       <IconComponent className="w-12 h-12 md:w-14 md:h-14" />
                     </motion.div>
                   </div>
 
                   {/* RIGHT: Text Content - Smaller and more centered */}
-                  <div className="flex-1 text-center md:text-left max-w-lg">
+                  <div className="flex-1 text-center md:text-left max-w-lg bg-white/60 backdrop-blur-md p-8 rounded-3xl border border-white/50 shadow-xl relative overflow-hidden group hover:shadow-2xl transition-all duration-300">
+                    {/* Decorative gradient blob */}
+                    <div className="absolute -top-20 -right-20 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl group-hover:bg-blue-500/20 transition-all duration-500" />
+
                     {/* Feature number badge */}
-                    <div className="inline-block px-3 py-1 bg-[#0f2c59]/10 rounded-full text-[#0f2c59] text-xs font-bold mb-3">
+                    <div className="inline-block px-3 py-1 bg-[#0f2c59] rounded-full text-white text-xs font-bold mb-4 tracking-wider uppercase">
                       Feature {feature.number}
                     </div>
                     
@@ -270,13 +192,12 @@ export function FeaturesHighlight() {
                     </p>
 
                     {/* Progress indicator - Desktop only */}
-                    <div className="hidden md:flex gap-2 mt-6">
+                    <div className="hidden md:flex gap-2">
                       {features.map((_, i) => (
                         <div
                           key={i}
-                          className={`h-1 rounded-full transition-all duration-300 ${
-                            i === idx ? "w-10 bg-[#0f2c59]" : "w-6 bg-gray-300"
-                          }`}
+                          className={`h-1.5 rounded-full transition-all duration-300 ${i === idx ? "w-12 bg-[#0f2c59]" : "w-6 bg-gray-300/60"
+                            }`}
                         />
                       ))}
                     </div>
@@ -288,9 +209,8 @@ export function FeaturesHighlight() {
                   {features.map((_, i) => (
                     <div
                       key={i}
-                      className={`h-1 rounded-full transition-all duration-300 ${
-                        i === idx ? "w-10 bg-[#0f2c59]" : "w-6 bg-gray-300"
-                      }`}
+                      className={`h-1 rounded-full transition-all duration-300 ${i === idx ? "w-10 bg-[#0f2c59]" : "w-6 bg-gray-300"
+                        }`}
                     />
                   ))}
                 </div>
