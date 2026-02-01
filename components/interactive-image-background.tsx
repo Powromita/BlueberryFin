@@ -148,20 +148,16 @@ export function InteractiveImageBackground() {
 
               {/* Content */}
               <div className="absolute inset-0 flex flex-col justify-between p-6 text-white z-20 overflow-hidden">
-                {/* Title - Always visible at top */}
+                {/* Title - Always visible and horizontal */}
                 <motion.h3
-                  className="font-bold mb-4 break-words"
+                  className="font-bold mb-4 break-words leading-tight"
                   animate={{
-                    fontSize: hoveredIndex === null || hoveredIndex === idx ? '1.875rem' : '1.75rem',
-                    rotate: hoveredIndex === null || hoveredIndex === idx ? 0 : -90,
-                    originX: 0,
-                    originY: 0,
+                    fontSize: hoveredIndex === null ? '1.875rem' : hoveredIndex === idx ? '1.875rem' : '1.5rem',
                   }}
                   transition={{ duration: 0.4 }}
                   style={{ 
                     textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6)',
                     WebkitTextStroke: '0.5px rgba(255,255,255,0.3)',
-                    whiteSpace: hoveredIndex === null || hoveredIndex === idx ? 'normal' : 'nowrap',
                   }}
                 >
                   {item.title}
