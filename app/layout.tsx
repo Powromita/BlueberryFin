@@ -1,13 +1,14 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Playfair_Display, Inter } from "next/font/google"
+import { Outfit, Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "sonner"
 import "./globals.css"
 
-const playfair = Playfair_Display({ 
+// Option 2: Modern Professional
+const outfit = Outfit({ 
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-outfit",
   display: "swap",
 })
 
@@ -54,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{
           __html: `
@@ -62,59 +63,10 @@ export default function RootLayout({
             if ('scrollRestoration' in window.history) {
               window.history.scrollRestoration = 'manual';
             }
-            
-            // Absolute scroll reset - must happen before anything renders
-            function forceScrollToTop() {
-              if (document.documentElement) {
-                document.documentElement.scrollTop = 0;
-                document.documentElement.scrollLeft = 0;
-              }
-              if (document.body) {
-                document.body.scrollTop = 0;
-                document.body.scrollLeft = 0;
-              }
-              window.scrollTo(0, 0);
-            }
-            
-            // Lock overflow immediately
-            function lockScroll() {
-              if (document.documentElement) {
-                document.documentElement.style.overflow = 'hidden';
-                document.documentElement.style.height = '100vh';
-              }
-              if (document.body) {
-                document.body.style.overflow = 'hidden';
-                document.body.style.height = '100vh';
-              }
-            }
-            
-            // Execute immediately
-            if (document.body) {
-              lockScroll();
-              forceScrollToTop();
-            } else {
-              // If body isn't ready, wait for it
-              document.addEventListener('DOMContentLoaded', () => {
-                lockScroll();
-                forceScrollToTop();
-              });
-            }
-            
-            // Execute on various lifecycle events
-            if (document.readyState === 'loading') {
-              document.addEventListener('DOMContentLoaded', forceScrollToTop);
-            }
-            window.addEventListener('load', forceScrollToTop);
-            window.addEventListener('beforeunload', forceScrollToTop);
-            
-            // Execute multiple times to ensure it sticks
-            for (let i = 0; i < 10; i++) {
-              setTimeout(forceScrollToTop, i * 50);
-            }
           `
         }} />
       </head>
-      <body className={`${playfair.variable} ${inter.variable} font-sans antialiased`} suppressHydrationWarning>
+      <body className={`${outfit.variable} ${inter.variable} font-sans antialiased`} suppressHydrationWarning>
         {children}
         <Toaster position="top-center" richColors />
         <Analytics />

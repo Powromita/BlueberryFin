@@ -65,28 +65,7 @@ export function ProcessTimeline() {
             <p className="text-gray-600 text-base leading-relaxed mb-8">
               No misselling. No pressure. No jargon. Just genuine expertise and care to help you create the perfect financial strategy for your business.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/contact"
-                onClick={() => sessionStorage.setItem("internalNavigation", "true")}
-                className="px-6 py-3 bg-[#0f2c59] hover:bg-[#2563eb] text-white font-semibold rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
-              >
-                TALK TO SALES
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-              <Link
-                href="/services/ipo-advisory"
-                onClick={() => sessionStorage.setItem("internalNavigation", "true")}
-                className="px-6 py-3 border-2 border-[#0f2c59] text-[#0f2c59] hover:bg-[#0f2c59] hover:text-white font-semibold rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
-              >
-                VIEW ADMIN JOURNEY
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
+          
           </motion.div>
 
           {/* CENTER - Illustration (4 columns) */}

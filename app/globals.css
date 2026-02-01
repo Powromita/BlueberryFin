@@ -4,10 +4,15 @@
 /* Option 2: Modern Professional Fonts */
 body {
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6, .font-heading, .font-serif {
-  font-family: var(--font-playfair), system-ui, -apple-system, serif;
+html {
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif;
 }
 
 .font-sans {
@@ -91,8 +96,7 @@ h1, h2, h3, h4, h5, h6, .font-heading, .font-serif {
 }
 
 @theme inline {
-  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
-  --font-serif: var(--font-playfair), serif;
+  --font-sans: "Geist", "Geist Fallback";
   --font-mono: "Geist Mono", "Geist Mono Fallback";
   --color-background: var(--background);
   --color-foreground: var(--foreground);

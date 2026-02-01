@@ -3,9 +3,19 @@
 import { useState } from "react"
 import { useInView } from "react-intersection-observer"
 import { motion } from "framer-motion"
-import { PaperAirplaneIcon, CheckCircleIcon } from "@heroicons/react/24/outline"
+import { 
+  PaperAirplaneIcon, 
+  CheckCircleIcon, 
+  EnvelopeIcon, 
+  PhoneIcon, 
+  ChatBubbleLeftRightIcon 
+} from "@heroicons/react/24/outline"
 import emailjs from '@emailjs/browser'
 import { toast } from "sonner"
+import PhoneInput from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
+import { isValidPhoneNumber, parsePhoneNumber } from 'libphonenumber-js'
+import type { E164Number } from 'libphonenumber-js'
 
 export function ContactSection() {
   const { ref, inView } = useInView({
@@ -17,12 +27,43 @@ export function ContactSection() {
     name: "",
     email: "",
     company: "",
-    phone: "",
+    phone: "" as E164Number | "",
     message: "",
   })
 
   const [focusedField, setFocusedField] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handlePhoneChange = (value: E164Number | undefined) => {
+    if (!value) {
+      setFormData({ ...formData, phone: "" })
+      return
+    }
+
+    try {
+      const phoneNumber = parsePhoneNumber(value)
+      if (phoneNumber) {
+        if (isValidPhoneNumber(value)) {
+          setFormData({ ...formData, phone: value })
+        } else {
+          const digitsOnly = value.replace(/\D/g, '')
+          if (digitsOnly.length <= 15) {
+            setFormData({ ...formData, phone: value })
+          }
+        }
+      } else {
+        const digitsOnly = value.replace(/\D/g, '')
+        if (digitsOnly.length <= 15) {
+          setFormData({ ...formData, phone: value })
+        }
+      }
+    } catch (error) {
+      const digitsOnly = value.replace(/\D/g, '')
+      if (digitsOnly.length <= 15) {
+        setFormData({ ...formData, phone: value })
+      }
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -43,6 +84,18 @@ export function ContactSection() {
       return
     }
 
+    if (formData.phone) {
+      try {
+        if (!isValidPhoneNumber(formData.phone)) {
+          toast.error("Please enter a valid phone number")
+          return
+        }
+      } catch (error) {
+        toast.error("Invalid phone number format")
+        return
+      }
+    }
+
     setIsSubmitting(true)
 
     try {
@@ -61,8 +114,8 @@ export function ContactSection() {
           to_email: "sm091849@gmail.com",
           from_name: formData.name,
           from_email: formData.email,
-          company: formData.company,
-          phone: formData.phone,
+          company: formData.company || "Not provided",
+          phone: formData.phone || "Not provided",
           message: formData.message,
           reply_to: formData.email,
         },
@@ -91,62 +144,104 @@ export function ContactSection() {
     "High quality financial solutions like IPO advisory, fundraising & more",
     "Day 1 support for your team and their families. Parents covered.",
     "Setup and go live in days, not months.",
+    "End-to-end deal execution with dedicated support.",
+  ]
+
+  const contactOptions = [
+    {
+      icon: EnvelopeIcon,
+      title: "Email Us",
+      value: "sm091849@gmail.com",
+      href: "mailto:sm091849@gmail.com",
+      color: "hover:bg-red-50 hover:text-red-600",
+      borderColor: "hover:border-red-200"
+    },
+    {
+      icon: PhoneIcon,
+      title: "Call Us",
+      value: "+91 9870333395",
+      href: "tel:+919870333395",
+      color: "hover:bg-green-50 hover:text-green-600",
+      borderColor: "hover:border-green-200"
+    },
+    {
+      icon: ChatBubbleLeftRightIcon,
+      title: "WhatsApp",
+      value: "Chat with us",
+      href: "https://wa.me/919870333395",
+      color: "hover:bg-emerald-50 hover:text-emerald-600",
+      borderColor: "hover:border-emerald-200"
+    }
   ]
 
   return (
-    <section id="contact" ref={ref} className="py-24 md:py-32 bg-[#0f2c59] relative overflow-hidden">
+    <section id="contact" ref={ref} className="py-10 md:py-12 bg-[#0f2c59] relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#2563eb]/10 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#2563eb]/10 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* LEFT SIDE - Headline & Benefits */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-16">
+        <div className="grid md:grid-cols-2 gap-12 items-start">
+          {/* Left Column - Benefits & Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
             transition={{ duration: 0.8 }}
-            className="text-white"
+            className="space-y-8"
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl leading-tight mb-6" style={{ fontFamily: 'GT Alpina Standard, Verdana, sans-serif' }}>
-              Get A Quote For Financial Advisory.
-            </h2>
-            <p className="text-xl text-blue-100 mb-12 leading-relaxed">
-              Custom recommendations. Expert guidance. Better coverage for your business.
-            </p>
+            <div>
+              <h2 className="text-3xl md:text-4xl font-serif text-white mb-4">
+                Get in <span className="italic">Touch</span>
+              </h2>
+              <p className="text-blue-100 text-lg">
+                Let's discuss how we can help transform your financial future.
+              </p>
+            </div>
 
-            {/* Benefits List */}
-            <div className="space-y-4 mb-12">
+            <div className="space-y-4">
               {benefits.map((benefit, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, x: -20 }}
                   animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
+                  transition={{ delay: idx * 0.1, duration: 0.5 }}
                   className="flex items-start gap-3"
                 >
-                  <CheckCircleIcon className="w-6 h-6 text-[#2563eb] flex-shrink-0 mt-0.5" />
-                  <p className="text-blue-100 leading-relaxed">{benefit}</p>
+                  <CheckCircleIcon className="w-6 h-6 text-[#60a5fa] flex-shrink-0 mt-0.5" />
+                  <p className="text-blue-100">{benefit}</p>
                 </motion.div>
               ))}
             </div>
 
-            {/* Company Logos Placeholder */}
-            <div>
-              <p className="text-blue-200 text-sm mb-4">Join 100+ companies building a culture of financial excellence</p>
-              <div className="flex flex-wrap gap-6 items-center opacity-60">
-                {/* Placeholder for company logos */}
-                <div className="text-white/40 text-xs font-semibold">RELIANCE</div>
-                <div className="text-white/40 text-xs font-semibold">TATA</div>
-                <div className="text-white/40 text-xs font-semibold">INFOSYS</div>
-                <div className="text-white/40 text-xs font-semibold">HDFC</div>
+            {/* Direct Contact Cards */}
+            <div className="pt-8 border-t border-white/10">
+              <p className="text-sm text-blue-200 mb-6 font-medium uppercase tracking-wider">Direct Contact</p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                {contactOptions.map((option, idx) => {
+                  const Icon = option.icon
+                  return (
+                    <a
+                      key={idx}
+                      href={option.href}
+                      target={option.title === "WhatsApp" ? "_blank" : undefined}
+                      rel={option.title === "WhatsApp" ? "noopener noreferrer" : undefined}
+                      className={`flex flex-col items-center justify-center p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm transition-all duration-300 w-full sm:flex-1 group ${option.color} ${option.borderColor} hover:bg-white hover:scale-105 hover:shadow-xl`}
+                    >
+                      <div className="p-3 rounded-full bg-white/10 group-hover:bg-gray-100 mb-3 transition-colors">
+                        <Icon className="w-6 h-6 text-blue-200 group-hover:text-inherit transition-colors" />
+                      </div>
+                      <span className="text-sm font-semibold text-white group-hover:text-gray-900 transition-colors text-center mb-1">{option.title}</span>
+                      <span className="text-xs text-blue-200 group-hover:text-gray-600 transition-colors text-center break-words max-w-full">{option.value}</span>
+                    </a>
+                  )
+                })}
               </div>
             </div>
           </motion.div>
 
-          {/* RIGHT SIDE - Form Card */}
+          {/* Right Column - Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
@@ -162,7 +257,7 @@ export function ContactSection() {
                 <div>
                   <input
                     type="text"
-                    placeholder="Your Name"
+                    placeholder="Your Name *"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     onFocus={() => setFocusedField("name")}
@@ -176,7 +271,7 @@ export function ContactSection() {
                 <div>
                   <input
                     type="email"
-                    placeholder="Email"
+                    placeholder="Email *"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     onFocus={() => setFocusedField("email")}
@@ -199,38 +294,33 @@ export function ContactSection() {
                   />
                 </div>
 
-                {/* Phone */}
-                <div>
-                  <input
-                    type="tel"
-                    placeholder="Phone Number"
+                {/* Phone with International Dropdown */}
+                <div className="phone-input-wrapper">
+                  <PhoneInput
+                    international
+                    defaultCountry="IN"
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    onChange={handlePhoneChange}
                     onFocus={() => setFocusedField("phone")}
                     onBlur={() => setFocusedField(null)}
-                    className="w-full px-0 py-3 border-b-2 border-gray-300 focus:border-[#2563eb] bg-transparent outline-none transition-colors text-gray-800 placeholder-gray-400"
+                    className="w-full"
+                    placeholder="Phone Number"
+                    limitMaxLength={true}
                   />
                 </div>
 
-                {/* Message Dropdown Style */}
+                {/* Message */}
                 <div>
-                  <select
+                  <textarea
+                    placeholder="What can BlueberryFin help you with?*"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     onFocus={() => setFocusedField("message")}
                     onBlur={() => setFocusedField(null)}
-                    className="w-full px-0 py-3 border-b-2 border-gray-300 focus:border-[#2563eb] bg-transparent outline-none transition-colors text-gray-800"
+                    rows={5}
+                    className="w-full px-0 py-3 border-b-2 border-gray-300 focus:border-[#2563eb] bg-transparent outline-none transition-colors text-gray-800 placeholder-gray-400 resize-none"
                     required
-                  >
-                    <option value="">What can BlueberryFin help you with today?</option>
-                    <option value="IPO Advisory">IPO Advisory & Readiness</option>
-                    <option value="Fundraising">Fundraising Service</option>
-                    <option value="Private Equity">Private Equity</option>
-                    <option value="M&A">Merger & Acquisition</option>
-                    <option value="Debt Syndication">Debt Syndication</option>
-                    <option value="Startup Advisory">Startup Advisory</option>
-                    <option value="Other">Other</option>
-                  </select>
+                  />
                 </div>
 
                 {/* Privacy Checkbox */}
@@ -264,6 +354,71 @@ export function ContactSection() {
           </motion.div>
         </div>
       </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-12">
+        <div className="w-full h-[400px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative group">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.218342263435!2d72.83244837508316!3d18.921989182250107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7d1c73a0d5cad%3A0xc70a25a7209c733c!2sGateway%20Of%20India%20Mumbai!5e0!3m2!1sen!2sin!4v1706691234567!5m2!1sen!2sin" 
+            width="100%" 
+            height="100%" 
+            style={{ border: 0 }} 
+            allowFullScreen 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+            className="w-full h-full"
+          ></iframe>
+        </div>
+      </div>
+
+      <style jsx global>{`
+        .phone-input-wrapper .PhoneInput {
+          border-bottom: 2px solid #d1d5db;
+          padding-bottom: 12px;
+          transition: border-color 0.2s;
+        }
+        
+        .phone-input-wrapper .PhoneInput:focus-within {
+          border-bottom-color: #2563eb;
+        }
+        
+        .phone-input-wrapper .PhoneInputInput {
+          background: transparent;
+          border: none;
+          outline: none;
+          color: #1f2937;
+          font-size: 1rem;
+          padding: 0;
+          margin-left: 8px;
+        }
+        
+        .phone-input-wrapper .PhoneInputInput::placeholder {
+          color: #9ca3af;
+        }
+        
+        .phone-input-wrapper .PhoneInputCountry {
+          margin-right: 8px;
+        }
+        
+        .phone-input-wrapper .PhoneInputCountrySelect {
+          background: transparent;
+          border: none;
+          outline: none;
+          color: #1f2937;
+          cursor: pointer;
+        }
+        
+        .phone-input-wrapper .PhoneInputCountryIcon {
+          width: 24px;
+          height: 18px;
+          box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+        }
+        
+        .phone-input-wrapper .PhoneInputCountrySelectArrow {
+          color: #6b7280;
+          opacity: 0.7;
+          margin-left: 4px;
+        }
+      `}</style>
     </section>
   )
 }

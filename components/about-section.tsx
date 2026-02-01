@@ -16,9 +16,15 @@ export function AboutSection() {
   ]
 
   return (
-    <section ref={ref} className="py-24 md:py-32 bg-[#f5f0eb] relative overflow-hidden" id="about">
+    <section ref={ref} className="py-24 md:py-32 bg-[#0f2c59] relative overflow-hidden" id="about">
       {/* Subtle background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-50/20 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-900/20 to-transparent pointer-events-none" />
+      
+      {/* Animated background elements */}
+      <div className="absolute inset-0 pointer-events-none opacity-10">
+        <div className="absolute top-20 right-20 w-96 h-96 bg-blue-400 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-purple-400 rounded-full blur-3xl" />
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main Content - Asymmetric Two Column */}
@@ -30,13 +36,13 @@ export function AboutSection() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="lg:col-span-7"
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#0f2c59] mb-12 leading-tight">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-12 leading-tight">
               What We Do
             </h2>
 
-            <div className="space-y-8 text-lg md:text-xl text-gray-700 leading-relaxed">
+            <div className="space-y-8 text-lg md:text-xl text-blue-100 leading-relaxed">
               <p>
-                <span className="font-bold text-[#0f2c59]">Blueberry Financial Advisory</span> is not just a firm — we are your strategic partners in growth.
+                <span className="font-bold text-white">BlueberryFin Capital</span> is not just a firm — we are your strategic partners in growth.
               </p>
               <p>
                 In an era of volatile markets, we bring stability, clarity, and foresight to your financial decisions.
@@ -59,8 +65,8 @@ export function AboutSection() {
                 "Execution Excellence & Optimization"
               ].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-4 group">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#2563eb] group-hover:scale-150 transition-transform duration-300" />
-                  <span className="text-base md:text-lg font-medium text-gray-800">{item}</span>
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#60a5fa] group-hover:scale-150 transition-transform duration-300" />
+                  <span className="text-base md:text-lg font-medium text-blue-200">{item}</span>
                 </div>
               ))}
             </motion.div>
@@ -71,7 +77,7 @@ export function AboutSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-            className="lg:col-span-5 lg:pl-12 lg:border-l border-gray-200"
+            className="lg:col-span-5 lg:pl-12 lg:border-l border-white/20"
           >
             <div className="space-y-12">
               {stats.map((stat, idx) => (
@@ -82,24 +88,17 @@ export function AboutSection() {
                   transition={{ duration: 0.6, delay: 0.4 + idx * 0.1, ease: "easeOut" }}
                   className="group"
                 >
-                  <div className="text-7xl md:text-8xl font-extrabold text-[#2563eb] mb-2 leading-none group-hover:scale-105 transition-transform duration-300">
+                  <div className="text-7xl md:text-8xl font-extrabold text-[#60a5fa] mb-2 leading-none group-hover:scale-105 transition-transform duration-300">
                     {stat.number}
                   </div>
-                  <div className="text-xl md:text-2xl font-bold text-[#0f2c59] mb-1">
+                  <div className="text-xl md:text-2xl font-bold text-white mb-1">
                     {stat.label}
                   </div>
-                  <div className="text-base text-gray-600">
+                  <div className="text-base text-blue-200">
                     {stat.sublabel}
                   </div>
                 </motion.div>
               ))}
-            </div>
-
-            {/* Subtle accent */}
-            <div className="mt-16 pt-8 border-t border-gray-200">
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Trusted by leading organizations across industries to navigate complex financial landscapes with confidence.
-              </p>
             </div>
           </motion.div>
         </div>

@@ -13,7 +13,7 @@ const financialSolutions = [
       "Risk mitigation through diversification",
       "Data-driven investment insights and analytics"
     ],
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&h=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&h=800&fit=crop",
   },
   {
     title: "Financial Planning",
@@ -23,7 +23,7 @@ const financialSolutions = [
       "Tax optimization strategies",
       "Estate planning and legacy management"
     ],
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=800&fit=crop",
   },
   {
     title: "Market Analysis",
@@ -43,7 +43,7 @@ const financialSolutions = [
       "Asset allocation optimization",
       "Long-term growth strategy execution"
     ],
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=800&fit=crop",
+    image: "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=600&h=800&fit=crop",
   },
 ]
 
@@ -148,9 +148,13 @@ export function InteractiveImageBackground() {
 
               {/* Content */}
               <div className="absolute inset-0 flex flex-col justify-end p-6 text-white z-20">
-                {/* Title - Always visible */}
+                {/* Title - Always visible with better visibility */}
                 <motion.h3
-                  className="text-2xl md:text-3xl font-bold mb-2"
+                  className="text-3xl md:text-4xl font-bold mb-2"
+                  style={{ 
+                    textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6)',
+                    WebkitTextStroke: '0.5px rgba(255,255,255,0.3)'
+                  }}
                 >
                   {item.title}
                 </motion.h3>
