@@ -23,6 +23,12 @@ const steps = [
     badge: "STEP 3",
     badgeColor: "bg-green-400",
   },
+  {
+    title: "Ongoing Support",
+    description: "Continuous monitoring and refinement to maximize your financial strategy's success.",
+    badge: "STEP 4",
+    badgeColor: "bg-purple-400",
+  },
 ]
 
 export function ProcessTimeline() {
@@ -34,7 +40,7 @@ export function ProcessTimeline() {
   return (
     <section 
       ref={ref}
-      className="relative py-12 md:py-14 bg-[#f5f0eb] overflow-hidden"
+      className="relative py-12 md:py-14 bg-[#001f3f] overflow-hidden dark-section"
     >
       {/* Background decorations */}
       <div className="absolute inset-0 pointer-events-none">
@@ -59,10 +65,10 @@ export function ProcessTimeline() {
             transition={{ duration: 0.8 }}
             className="lg:col-span-4"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#0f2c59] leading-tight mb-6">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-tight mb-6">
               We've reimagined financial advisory and business partnerships.
             </h2>
-            <p className="text-gray-600 text-base leading-relaxed mb-8">
+            <p className="text-gray-300 text-base leading-relaxed mb-8">
               No misselling. No pressure. No jargon. Just genuine expertise and care to help you create the perfect financial strategy for your business.
             </p>
           
@@ -75,7 +81,7 @@ export function ProcessTimeline() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:col-span-4 hidden lg:block"
           >
-            <div className="relative w-full h-[320px]">
+            <div className="relative w-full h-[500px]">
               {/* Illustrated city skyline with financial dashboard */}
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-blue-500/10 rounded-2xl flex items-center justify-center overflow-hidden">
                 {/* City buildings */}
@@ -109,18 +115,18 @@ export function ProcessTimeline() {
 
                 {/* Floating dashboard card */}
                 <motion.div
-                  className="absolute top-1/4 left-1/2 transform -translate-x-1/2 bg-[#f5f0eb] rounded-xl shadow-2xl p-4 w-60 border-2 border-gray-100"
+                  className="absolute top-1/4 left-1/2 transform -translate-x-1/2 bg-[#0a1f3f] rounded-xl shadow-2xl p-4 w-60 border-2 border-[#0052cc]"
                   animate={{ y: [0, -8, 0] }}
                   transition={{ duration: 4, repeat: Infinity }}
                 >
                   <div className="flex items-center gap-2 mb-3">
-                    <div className="w-2 h-2 rounded-full bg-green-500" />
-                    <span className="text-xs font-semibold text-[#0f2c59]">Current Policy Score</span>
+                    <div className="w-2 h-2 rounded-full bg-green-400" />
+                    <span className="text-xs font-semibold text-white">Current Policy Score</span>
                   </div>
                   
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-[10px] text-gray-600">Basic Coverage</span>
+                      <span className="text-[10px] text-gray-300">Basic Coverage</span>
                       <div className="flex gap-0.5">
                         {[1, 2, 3].map((i) => (
                           <div key={i} className="w-2.5 h-2.5 rounded-sm bg-red-400" />
@@ -128,7 +134,7 @@ export function ProcessTimeline() {
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-[10px] text-gray-600">Family Benefits</span>
+                      <span className="text-[10px] text-gray-300">Family Benefits</span>
                       <div className="flex gap-0.5">
                         {[1].map((i) => (
                           <div key={i} className="w-2.5 h-2.5 rounded-sm bg-red-400" />
@@ -136,7 +142,7 @@ export function ProcessTimeline() {
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-[10px] text-gray-600">Inclusive Benefits</span>
+                      <span className="text-[10px] text-gray-300">Inclusive Benefits</span>
                       <div className="flex gap-0.5">
                         {[1, 2, 3].map((i) => (
                           <div key={i} className="w-2.5 h-2.5 rounded-sm bg-red-400" />
@@ -145,8 +151,8 @@ export function ProcessTimeline() {
                     </div>
                   </div>
 
-                  <div className="mt-3 pt-3 border-t border-gray-200">
-                    <p className="text-[9px] text-gray-500 leading-relaxed">
+                  <div className="mt-3 pt-3 border-t border-gray-600">
+                    <p className="text-[9px] text-gray-400 leading-relaxed">
                       Improve your policy by addressing these gaps
                     </p>
                   </div>
@@ -156,7 +162,7 @@ export function ProcessTimeline() {
           </motion.div>
 
           {/* RIGHT SIDE - Process Steps (4 columns) - Simple text, no cards */}
-          <div className="lg:col-span-4 space-y-4">
+          <div className="lg:col-span-4 space-y-2">
             {steps.map((step, idx) => (
               <motion.div
                 key={idx}
@@ -165,17 +171,17 @@ export function ProcessTimeline() {
                 transition={{ duration: 0.6, delay: idx * 0.15 }}
               >
                 {/* Badge */}
-                <div className={`inline-block ${step.badgeColor} text-[#0f2c59] text-xs font-bold px-3 py-1 rounded mb-2`}>
+                <div className={`inline-block ${step.badgeColor} text-white text-xs font-bold px-3 py-1 rounded mb-2`}>
                   {step.badge}
                 </div>
                 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-[#0f2c59] mb-1.5">
+                <h3 className="text-xl font-bold text-white mb-1.5">
                   {step.title}
                 </h3>
                 
                 {/* Description */}
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-gray-300 text-sm leading-relaxed">
                   {step.description}
                 </p>
               </motion.div>

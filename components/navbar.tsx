@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { motion } from "framer-motion"
 import { ChevronDownIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
 import { Logo } from "./logo"
@@ -16,6 +17,9 @@ const services = [
 ]
 
 export function Navbar() {
+  const pathname = usePathname()
+  const isServicePage = pathname.includes("/services/")
+  
   const [servicesOpen, setServicesOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -114,15 +118,21 @@ export function Navbar() {
   }, [mouseNearTop, isHoveringNav, hideTimeout])
 
   const markInternalNavigation = () => {
-    sessionStorage.setItem("internalNavigation", "true")
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("internalNavigation", "true")
+    }
     setMobileMenuOpen(false)
   }
 
-  // Dynamic color classes - REVERSED LOGIC
-  // When section text is dark blue (isDarkSection = false) -> navbar is blue
-  // When section text is white (isDarkSection = true) -> navbar is white
-  const textColor = isDarkSection ? "text-white" : "text-gray-700"
-  const hoverColor = isDarkSection ? "hover:text-white/80" : "hover:text-[#2563eb]"
+  // Dynamic color classes
+  // On service pages: start with blue, then switch based on isDarkSection
+  // On home page: start with white (hero), then switch based on isDarkSection
+  const textColor = scrolled 
+    ? (isDarkSection ? "text-white" : "text-[#2563eb]") 
+    : (isServicePage ? "text-[#2563eb]" : "text-white")
+  const hoverColor = scrolled 
+    ? (isDarkSection ? "hover:text-white/80" : "hover:text-[#0f2c59]") 
+    : (isServicePage ? "hover:text-[#0f2c59]" : "hover:text-white/80")
   // Fully transparent with minimal blur
   const bgColor = "bg-transparent backdrop-blur-sm"
   const borderColor = isDarkSection ? "border-white/10" : "border-gray-200"
@@ -192,12 +202,13 @@ export function Navbar() {
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
-              <Link href="/" className={`${textColor} ${hoverColor} transition-colors font-medium text-[15px]`}>
-                Home
-              </Link>
+            {/* Desktop Navigation - Moved to right */}
+          </div>
 
+          {/* Right: Desktop Navigation, Button & Mobile Menu */}
+          <div className="flex items-center gap-4 md:gap-6">
+            {/* Desktop Navigation - Services & Core Team */}
+            <div className="hidden md:flex items-center gap-6">
               {/* Services Dropdown - Hover triggered with delay */}
               <div
                 className="relative group"
@@ -226,7 +237,7 @@ export function Navbar() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute left-0 mt-2 w-64 bg-[#f5f0eb] rounded-xl shadow-2xl border border-gray-200 overflow-hidden backdrop-blur-md z-50"
+                    className="absolute right-0 mt-2 w-64 bg-[#f5f0eb] rounded-xl shadow-2xl border border-gray-200 overflow-hidden backdrop-blur-md z-50"
                   >
                     {services.map((service, idx) => (
                       <motion.div
@@ -256,10 +267,7 @@ export function Navbar() {
                 Core Team
               </Link>
             </div>
-          </div>
 
-          {/* Right: Desktop Buttons & Mobile Menu */}
-          <div className="flex items-center gap-4">
             {/* Desktop Button */}
             <Link
               href="/contact"
@@ -292,9 +300,7 @@ export function Navbar() {
             className="md:hidden pb-6 border-t border-gray-200"
           >
             <div className="space-y-4 py-4">
-              <Link href="/" className="block text-gray-700 hover:text-[#2563eb] transition-colors font-medium px-4" onClick={markInternalNavigation}>
-                Home
-              </Link>
+
 
               <div className="px-4">
                 <button 

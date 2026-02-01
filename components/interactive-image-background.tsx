@@ -61,11 +61,11 @@ export function InteractiveImageBackground() {
       // No hover - all cards equal width
       return "flex-1"
     } else if (hoveredIndex === index) {
-      // This card is hovered - expand
-      return "flex-[2]"
+      // This card is hovered - shrink even more
+      return "flex-[0.7]"
     } else {
-      // Other cards - minimize
-      return "flex-[0.5]"
+      // Other cards - minimize significantly
+      return "flex-[0.3]"
     }
   }
 
@@ -147,13 +147,21 @@ export function InteractiveImageBackground() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0f2c59]/90 via-[#0f2c59]/50 to-transparent" />
 
               {/* Content */}
-              <div className="absolute inset-0 flex flex-col justify-end p-6 text-white z-20">
-                {/* Title - Always visible with better visibility */}
+              <div className="absolute inset-0 flex flex-col justify-between p-6 text-white z-20 overflow-hidden">
+                {/* Title - Always visible at top */}
                 <motion.h3
-                  className="text-3xl md:text-4xl font-bold mb-2"
+                  className="font-bold mb-4 break-words"
+                  animate={{
+                    fontSize: hoveredIndex === null || hoveredIndex === idx ? '1.875rem' : '1.75rem',
+                    rotate: hoveredIndex === null || hoveredIndex === idx ? 0 : -90,
+                    originX: 0,
+                    originY: 0,
+                  }}
+                  transition={{ duration: 0.4 }}
                   style={{ 
                     textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6)',
-                    WebkitTextStroke: '0.5px rgba(255,255,255,0.3)'
+                    WebkitTextStroke: '0.5px rgba(255,255,255,0.3)',
+                    whiteSpace: hoveredIndex === null || hoveredIndex === idx ? 'normal' : 'nowrap',
                   }}
                 >
                   {item.title}
@@ -161,25 +169,22 @@ export function InteractiveImageBackground() {
 
                 {/* Bullet Points - Only visible on hover */}
                 <motion.div
-                  initial={{ opacity: 0, height: 0 }}
+                  initial={{ opacity: 0, x: -30 }}
                   animate={{
                     opacity: hoveredIndex === idx ? 1 : 0,
-                    height: hoveredIndex === idx ? "auto" : 0,
+                    x: hoveredIndex === idx ? 0 : -30,
                   }}
                   transition={{ duration: 0.4 }}
-                  className="overflow-hidden"
+                  className="space-y-3"
                 >
-                  <div className="space-y-3 mb-4">
-                    {item.bullets.map((bullet, bulletIdx) => (
-                      <div key={bulletIdx} className="flex items-start gap-3">
-                        <div className="flex-shrink-0 w-2 h-2 rounded-full bg-white mt-1.5 ring-2 ring-white/30" />
-                        <p className="text-sm md:text-base text-white leading-relaxed">
-                          {bullet}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-
+                  {item.bullets.map((bullet, bulletIdx) => (
+                    <div key={bulletIdx} className="flex items-start gap-3">
+                      <div className="flex-shrink-0 w-2 h-2 rounded-full bg-white mt-1.5 ring-2 ring-white/30" />
+                      <p className="text-sm md:text-base text-white leading-relaxed">
+                        {bullet}
+                      </p>
+                    </div>
+                  ))}
                 </motion.div>
               </div>
 

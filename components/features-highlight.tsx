@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useScroll, useTransform } from "framer-motion"
-import { useRef } from "react"
+import { useRef, useMemo } from "react"
 import {
   SparklesIcon,
   CheckCircleIcon,
@@ -47,6 +47,29 @@ export function FeaturesHighlight() {
     offset: ["start start", "end end"],
   })
 
+  // Generate constellation nodes
+  const constellationNodes = useMemo(() => {
+    return Array.from({ length: 12 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 3 + 1.5,
+    }))
+  }, [])
+
+  // Animated background gradient based on scroll
+  const gradientColor1 = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    ["#0f2c59", "#0052cc", "#003366"]
+  )
+
+  const gradientColor2 = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    ["#2563eb", "#0f2c59", "#2563eb"]
+  )
+
   return (
     <section ref={containerRef} className="relative bg-[#f5f0eb]">
       {/* Sticky Title - Always Visible with Progress */}
@@ -71,6 +94,92 @@ export function FeaturesHighlight() {
 
       {/* Sticky container that holds the feature display */}
       <div className="sticky top-32 h-[70vh] flex items-center justify-center overflow-hidden">
+        {/* Animated Gradient Background */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: scrollYProgress
+          }}
+        >
+          <div className="absolute inset-0" style={{
+            backgroundImage: scrollYProgress
+          }} />
+        </motion.div>
+
+        {/* Constellation Network */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30">
+          <defs>
+            <linearGradient id="constellationGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#0f2c59" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#2563eb" stopOpacity="0.2" />
+            </linearGradient>
+          </defs>
+          
+          {/* Connecting lines between nodes */}
+          {constellationNodes.map((node1, i) => {
+            const node2 = constellationNodes[(i + 1) % constellationNodes.length]
+            const nextNode = constellationNodes[(i + 2) % constellationNodes.length]
+            
+            return (
+              <g key={`lines-${i}`}>
+                <motion.line
+                  x1={`${node1.x}%`}
+                  y1={`${node1.y}%`}
+                  x2={`${node2.x}%`}
+                  y2={`${node2.y}%`}
+                  stroke="url(#constellationGradient)"
+                  strokeWidth="0.5"
+                  animate={{
+                    opacity: [0.2, 0.5, 0.2],
+                  }}
+                  transition={{
+                    duration: 4 + i * 0.3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+                <motion.line
+                  x1={`${node1.x}%`}
+                  y1={`${node1.y}%`}
+                  x2={`${nextNode.x}%`}
+                  y2={`${nextNode.y}%`}
+                  stroke="url(#constellationGradient)"
+                  strokeWidth="0.3"
+                  animate={{
+                    opacity: [0.1, 0.3, 0.1],
+                  }}
+                  transition={{
+                    duration: 5 + i * 0.4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1,
+                  }}
+                />
+              </g>
+            )
+          })}
+          
+          {/* Constellation nodes/dots */}
+          {constellationNodes.map((node) => (
+            <motion.circle
+              key={`node-${node.id}`}
+              cx={`${node.x}%`}
+              cy={`${node.y}%`}
+              r={node.size}
+              fill="#2563eb"
+              animate={{
+                r: [node.size, node.size * 1.5, node.size],
+                opacity: [0.4, 0.8, 0.4],
+              }}
+              transition={{
+                duration: 3 + node.id * 0.2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+        </svg>
+
         {/* Enhanced background decorations */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-0 w-96 h-96 bg-[#0f2c59]/5 rounded-full blur-3xl" />
