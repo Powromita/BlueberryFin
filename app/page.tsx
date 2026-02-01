@@ -20,14 +20,15 @@ export default function Home() {
 
   useEffect(() => {
     setMounted(true)
-
-    // Check if user has visited the site in this session
-    const hasVisited = sessionStorage.getItem("hasVisited") === "true"
-
-    if (hasVisited) {
-      // User has been here before in this session - skip animation
+    
+    // Check if user navigated here from another page in the app
+    const isInternalNavigation = sessionStorage.getItem("internalNavigation") === "true"
+    
+    if (isInternalNavigation) {
+      // Coming from another page - skip animation
+      sessionStorage.removeItem("internalNavigation")
       setShowWebsite(true)
-
+      
       // Ensure scroll is unlocked immediately
       setTimeout(() => {
         document.documentElement.style.overflow = "visible"
@@ -37,10 +38,8 @@ export default function Home() {
         document.documentElement.style.scrollBehavior = "smooth"
       }, 50)
     } else {
-      // First visit - show animation
+      // Fresh load or refresh - show animation
       setShouldShowAnimation(true)
-      sessionStorage.setItem("hasVisited", "true")
-
       // Lock scroll during loading
       document.documentElement.style.overflow = "hidden"
       document.body.style.overflow = "hidden"
@@ -54,10 +53,10 @@ export default function Home() {
     window.scrollTo(0, 0)
     document.documentElement.scrollTop = 0
     document.body.scrollTop = 0
-
+    
     setTimeout(() => {
       setShowWebsite(true)
-
+      
       // Unlock scroll after content is visible
       setTimeout(() => {
         document.documentElement.style.overflow = "visible"
@@ -65,7 +64,7 @@ export default function Home() {
         document.documentElement.style.height = "auto"
         document.body.style.height = "auto"
         document.documentElement.style.scrollBehavior = "smooth"
-
+        
         // Final scroll lock
         window.scrollTo(0, 0)
       }, 100)
@@ -82,7 +81,7 @@ export default function Home() {
       {shouldShowAnimation && !showWebsite && (
         <LoadingAnimation onComplete={handleLoadingComplete} />
       )}
-
+      
       {showWebsite && (
         <main className="min-h-screen">
           <Navbar />

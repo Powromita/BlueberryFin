@@ -49,7 +49,7 @@ export function ClientsSection() {
   const goToPrevious = () => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
 
   return (
-    <section className="relative min-h-screen md:min-h-[500px] md:h-screen bg-[#0f2c59] overflow-hidden flex items-center py-20 md:py-0">
+    <section className="relative h-screen min-h-[500px] max-h-[700px] bg-[#0f2c59] overflow-hidden flex items-center">
       {/* Large Company Name Background - Brighter for visibility */}
       <motion.div
         key={`bg-${currentIndex}`}
@@ -81,12 +81,12 @@ export function ClientsSection() {
           >
             <div className="relative w-64 h-72 sm:w-72 sm:h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden shadow-2xl mx-auto lg:mx-0">
               {/* Actual image */}
-              <img
-                src={testimonials[currentIndex].image}
+              <img 
+                src={testimonials[currentIndex].image} 
                 alt={testimonials[currentIndex].name}
                 className="absolute inset-0 w-full h-full object-cover"
               />
-
+              
               {/* Name overlay on photo */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-4 sm:p-6">
                 <div className="text-white font-semibold text-lg sm:text-xl md:text-2xl mb-1">
