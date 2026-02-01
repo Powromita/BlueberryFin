@@ -215,10 +215,10 @@ export function ContactSection() {
               ))}
             </div>
 
-            {/* Direct Contact Cards */}
-            <div className="pt-6 sm:pt-8 border-t border-white/10">
-              <p className="text-xs sm:text-sm text-blue-200 mb-4 sm:mb-6 font-medium uppercase tracking-wider">Direct Contact</p>
-              <div className="grid grid-cols-1 xs:grid-cols-3 gap-3 sm:gap-4">
+            {/* Direct Contact Cards - Horizontal Row */}
+            <div className="pt-6 sm:pt-8 border-t border-white/10 w-full">
+              <p className="text-xs sm:text-sm text-blue-200 mb-4 font-medium uppercase tracking-wider">Direct Contact</p>
+              <div className="grid grid-cols-3 gap-2 sm:gap-4">
                 {contactOptions.map((option, idx) => {
                   const Icon = option.icon
                   return (
@@ -227,18 +227,20 @@ export function ContactSection() {
                       href={option.href}
                       target={option.title === "WhatsApp" ? "_blank" : undefined}
                       rel={option.title === "WhatsApp" ? "noopener noreferrer" : undefined}
-                      className={`flex flex-col items-center justify-center p-4 sm:p-6 bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl backdrop-blur-sm transition-all duration-300 group ${option.color} ${option.borderColor} hover:bg-white hover:scale-105 hover:shadow-xl min-h-[120px] sm:min-h-0`}
+                      className={`flex flex-col items-center justify-center p-3 sm:p-4 bg-white/5 border border-white/10 rounded-xl backdrop-blur-sm transition-all duration-300 group ${option.color} ${option.borderColor} hover:bg-white hover:scale-105 hover:shadow-xl h-full`}
                     >
-                      <div className="p-2 sm:p-3 rounded-full bg-white/10 group-hover:bg-gray-100 mb-2 sm:mb-3 transition-colors">
-                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-200 group-hover:text-inherit transition-colors" />
+                      <div className="p-2 rounded-full bg-white/10 group-hover:bg-gray-100 mb-2 transition-colors">
+                        <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-200 group-hover:text-inherit transition-colors" />
                       </div>
-                      <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-gray-900 transition-colors text-center mb-1">{option.title}</span>
-                      <span className="text-[10px] sm:text-xs text-blue-200 group-hover:text-gray-600 transition-colors text-center break-words max-w-full px-2">{option.value}</span>
+                      <span className="text-[10px] sm:text-xs font-semibold text-white group-hover:text-gray-900 transition-colors text-center whitespace-nowrap mb-0.5">{option.title}</span>
+                      <span className="text-[9px] sm:text-[10px] text-blue-200 group-hover:text-gray-600 transition-colors text-center font-medium max-w-full truncate px-1">{option.value}</span>
                     </a>
                   )
                 })}
               </div>
             </div>
+
+
           </motion.div>
 
           {/* Right Column - Form */}
@@ -354,6 +356,8 @@ export function ContactSection() {
           </motion.div>
         </div>
       </div>
+
+
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-8 sm:pb-12">
         <div className="w-full h-[300px] sm:h-[400px] rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative group">
