@@ -56,16 +56,17 @@ export function InteractiveImageBackground() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   // Calculate card width and position based on hover state
+  // Calculate card width/height and position based on hover state
   const getCardStyle = (index: number) => {
     if (hoveredIndex === null) {
-      // No hover - all cards equal width
+      // No hover - all cards equal
       return "flex-1"
     } else if (hoveredIndex === index) {
-      // This card is hovered - shrink even more
-      return "flex-[0.7]"
+      // This card is hovered - grow
+      return "flex-[1.5] md:flex-[0.7]"
     } else {
-      // Other cards - minimize significantly
-      return "flex-[0.3]"
+      // Other cards - shrink
+      return "flex-[0.5] md:flex-[0.3]"
     }
   }
 
@@ -105,7 +106,7 @@ export function InteractiveImageBackground() {
         </motion.div>
 
         {/* Expandable Cards Row */}
-        <div className="flex gap-4 h-[500px]">
+        <div className="flex flex-col md:flex-row gap-4 h-[800px] md:h-[500px]">
           {financialSolutions.map((item, idx) => (
             <motion.div
               key={idx}
@@ -152,16 +153,15 @@ export function InteractiveImageBackground() {
                 <motion.h3
                   className="font-bold mb-4 break-words"
                   animate={{
-                    fontSize: hoveredIndex === null || hoveredIndex === idx ? '1.875rem' : '1.75rem',
-                    rotate: hoveredIndex === null || hoveredIndex === idx ? 0 : -90,
-                    originX: 0,
-                    originY: 0,
+                    fontSize: hoveredIndex === null || hoveredIndex === idx ? '1.875rem' : '1.5rem',
+                    opacity: hoveredIndex === null || hoveredIndex === idx ? 1 : 0,
+                    y: hoveredIndex === null || hoveredIndex === idx ? 0 : 20,
                   }}
                   transition={{ duration: 0.4 }}
-                  style={{ 
+                  style={{
                     textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6)',
                     WebkitTextStroke: '0.5px rgba(255,255,255,0.3)',
-                    whiteSpace: hoveredIndex === null || hoveredIndex === idx ? 'normal' : 'nowrap',
+                    whiteSpace: 'normal',
                   }}
                 >
                   {item.title}

@@ -24,22 +24,22 @@ const serviceCategories = {
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
       href: "/services/ipo-advisory",
     },
-      {
-        title: "Fundraising Service",
-        description: "Secure the capital your business needs to grow and scale effectively.",
-        briefInfo: "Connect with investors, structure deals, and maximize funding potential",
-        icon: CurrencyDollarIcon,
-        image: "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=800&h=600&fit=crop",
-        href: "/services/fundraising",
-      },
-      {
-        title: "Debt Syndication",
-        description: "Optimize capital structure through strategic debt syndication solutions.",
-        briefInfo: "Efficient debt structuring and lender network optimization",
-        icon: CreditCardIcon,
-          image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop",
-        href: "/services/debt-syndication",
-      },
+    {
+      title: "Fundraising Service",
+      description: "Secure the capital your business needs to grow and scale effectively.",
+      briefInfo: "Connect with investors, structure deals, and maximize funding potential",
+      icon: CurrencyDollarIcon,
+      image: "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=800&h=600&fit=crop",
+      href: "/services/fundraising",
+    },
+    {
+      title: "Debt Syndication",
+      description: "Optimize capital structure through strategic debt syndication solutions.",
+      briefInfo: "Efficient debt structuring and lender network optimization",
+      icon: CreditCardIcon,
+      image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop",
+      href: "/services/debt-syndication",
+    },
   ],
   "Strategic Transactions": [
     {
@@ -47,7 +47,7 @@ const serviceCategories = {
       description: "Expert guidance through complex M&A transactions and integrations.",
       briefInfo: "Complete M&A support from identification to post-acquisition integration",
       icon: UserGroupIcon,
-          image: "/mergers-acquisitions-prepartion-tips.jpg",
+      image: "/mergers-acquisitions-prepartion-tips.jpg",
       href: "/services/mergers-acquisitions",
     },
     {
@@ -119,18 +119,17 @@ export function ServicesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="flex justify-center gap-4 mb-12"
+          className="flex flex-wrap justify-center gap-4 mb-12"
         >
           <button
             onClick={() => {
               setActiveCategory("Corporate Finance")
               setSelectedService(0)
             }}
-            className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
-              activeCategory === "Corporate Finance"
+            className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${activeCategory === "Corporate Finance"
                 ? "bg-[#0f2c59] text-white shadow-lg"
                 : "bg-[#f5f0eb] text-[#001f3f] border-2 border-gray-200 hover:border-[#0052cc]"
-            }`}
+              }`}
           >
             Corporate Finance
           </button>
@@ -139,11 +138,10 @@ export function ServicesSection() {
               setActiveCategory("Strategic Transactions")
               setSelectedService(0)
             }}
-            className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
-              activeCategory === "Strategic Transactions"
+            className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${activeCategory === "Strategic Transactions"
                 ? "bg-[#0f2c59] text-white shadow-lg"
                 : "bg-[#f5f0eb] text-[#001f3f] border-2 border-gray-200 hover:border-[#0052cc]"
-            }`}
+              }`}
           >
             Strategic Transactions
           </button>
@@ -173,7 +171,7 @@ export function ServicesSection() {
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-              
+
               {/* Service info overlay */}
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                 <h3 className="text-2xl font-bold mb-2">
@@ -209,26 +207,23 @@ export function ServicesSection() {
                   animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
                   transition={{ duration: 0.6, delay: 0.5 + idx * 0.15 }}
                   onClick={() => setSelectedService(idx)}
-                  className={`p-6 rounded-xl cursor-pointer transition-all duration-300 flex flex-col flex-1 ${
-                    isSelected
+                  className={`p-6 rounded-xl cursor-pointer transition-all duration-300 flex flex-col flex-1 ${isSelected
                       ? "bg-white border-2 border-[#0052cc] shadow-xl"
                       : "bg-white border-2 border-gray-200 hover:border-[#0052cc] hover:shadow-lg"
-                  }`}
+                    }`}
                 >
                   <div className="flex items-start gap-4">
                     <div
-                      className={`flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300 ${
-                        isSelected
+                      className={`flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300 ${isSelected
                           ? "bg-[#0052cc] text-white"
                           : "bg-blue-50 text-[#0052cc]"
-                      }`}
+                        }`}
                     >
                       <IconComponent className="w-6 h-6" />
                     </div>
                     <div className="flex-1">
-                      <h3 className={`text-lg font-bold mb-2 transition-colors ${
-                        isSelected ? "text-[#0052cc]" : "text-[#001f3f]"
-                      }`}>
+                      <h3 className={`text-lg font-bold mb-2 transition-colors ${isSelected ? "text-[#0052cc]" : "text-[#001f3f]"
+                        }`}>
                         {service.title}
                       </h3>
                       <p className="text-gray-600 text-sm leading-relaxed">

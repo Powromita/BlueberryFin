@@ -1,9 +1,19 @@
+import Link from "next/link"
+import { ArrowLeftIcon } from "@heroicons/react/24/outline"
+
 export default function PrivacyPolicyPage() {
   return (
     <main className="min-h-screen bg-[#f5f0eb] pt-32 pb-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 text-[#0f2c59] mb-8 hover:text-[#2563eb] transition-colors font-medium"
+        >
+          <ArrowLeftIcon className="w-5 h-5" />
+          Back to Home
+        </Link>
         <h1 className="text-4xl md:text-5xl font-bold text-[#0f2c59] mb-8">Privacy Policy</h1>
-        
+
         <div className="prose prose-lg max-w-none">
           <p className="text-gray-600 mb-6">
             <strong>Last Updated:</strong> January 2026

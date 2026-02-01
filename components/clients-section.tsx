@@ -49,7 +49,7 @@ export function ClientsSection() {
   const goToPrevious = () => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
 
   return (
-    <section className="relative h-screen min-h-[500px] max-h-[700px] bg-[#0f2c59] overflow-hidden flex items-center">
+    <section className="relative min-h-screen md:min-h-[500px] md:h-screen bg-[#0f2c59] overflow-hidden flex items-center py-20 md:py-0">
       {/* Large Company Name Background - Brighter for visibility */}
       <motion.div
         key={`bg-${currentIndex}`}
@@ -58,7 +58,7 @@ export function ClientsSection() {
         transition={{ duration: 0.8 }}
         className="absolute inset-0 flex items-center justify-center pointer-events-none"
       >
-        <h3 className="text-[180px] md:text-[240px] lg:text-[320px] font-bold text-white/30 leading-none select-none">
+        <h3 className="text-[60px] sm:text-[100px] md:text-[200px] lg:text-[320px] font-bold text-white/10 leading-none select-none text-center">
           {testimonials[currentIndex].company}
         </h3>
       </motion.div>
@@ -81,12 +81,12 @@ export function ClientsSection() {
           >
             <div className="relative w-72 h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden shadow-2xl">
               {/* Actual image */}
-              <img 
-                src={testimonials[currentIndex].image} 
+              <img
+                src={testimonials[currentIndex].image}
                 alt={testimonials[currentIndex].name}
                 className="absolute inset-0 w-full h-full object-cover"
               />
-              
+
               {/* Name overlay on photo */}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6">
                 <div className="text-white font-semibold text-xl md:text-2xl mb-1">
