@@ -1,6 +1,6 @@
 import { ServicePage } from "@/components/service-page"
-
-export default function StartupAdvisoryPage() {
+export default function StartupAdvisoryPage() 
+{
   return (
     <ServicePage
       title="Startup Advisory"
