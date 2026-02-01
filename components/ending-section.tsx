@@ -45,7 +45,7 @@ export function EndingSection() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             {/* Main Headline */}
-            <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white mb-8 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light text-white mb-6 sm:mb-8 leading-tight px-4 sm:px-0">
               The New Standard{" "}
               <span className="italic font-serif">of</span>{" "}
               Financial Advisory
@@ -64,7 +64,7 @@ export function EndingSection() {
               <Link
                 href="/contact"
                 onClick={() => sessionStorage.setItem("internalNavigation", "true")}
-                className="inline-block px-12 py-5 bg-[#2563eb] hover:bg-[#3b82f6] text-white font-semibold text-lg rounded-lg transition-all duration-300 shadow-2xl hover:shadow-[#2563eb]/50 hover:scale-105"
+                className="inline-block px-8 sm:px-12 py-4 sm:py-5 bg-[#2563eb] hover:bg-[#3b82f6] text-white font-semibold text-base sm:text-lg rounded-lg transition-all duration-300 shadow-2xl hover:shadow-[#2563eb]/50 hover:scale-105"
               >
                 START NOW
               </Link>

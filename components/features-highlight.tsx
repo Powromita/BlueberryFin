@@ -73,13 +73,13 @@ export function FeaturesHighlight() {
   return (
     <section ref={containerRef} className="relative bg-[#f5f0eb]">
       {/* Sticky Title - Always Visible with Progress */}
-      <div className="sticky top-0 z-20 bg-[#f5f0eb]/95 backdrop-blur-sm py-8 border-b border-[#0f2c59]/10">
+      <div className="sticky top-0 z-20 bg-[#f5f0eb]/95 backdrop-blur-sm py-6 sm:py-8 border-b border-[#0f2c59]/10">
         <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0f2c59] mb-2">
+          <div className="text-center mb-3 sm:mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f2c59] mb-2">
               Why Choose BlueberryFin?
             </h2>
-            <p className="text-sm md:text-base text-gray-600">
+            <p className="text-xs sm:text-sm md:text-base text-gray-600">
               Experience world-class financial advisory with cutting-edge technology
             </p>
           </div>
@@ -260,12 +260,12 @@ export function FeaturesHighlight() {
                     </div>
                     
                     {/* Title - Smaller */}
-                    <h3 className="text-2xl md:text-3xl font-bold text-[#0f2c59] mb-3">
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#0f2c59] mb-2 sm:mb-3">
                       {feature.title}
                     </h3>
 
                     {/* Description - Smaller */}
-                    <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+                    <p className="text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed">
                       {feature.description}
                     </p>
 

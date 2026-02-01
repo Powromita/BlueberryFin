@@ -36,11 +36,11 @@ export function AboutSection() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="lg:col-span-7"
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-12 leading-tight">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 sm:mb-10 md:mb-12 leading-tight">
               What We Do
             </h2>
 
-            <div className="space-y-8 text-lg md:text-xl text-blue-100 leading-relaxed">
+            <div className="space-y-6 sm:space-y-8 text-base sm:text-lg md:text-xl text-blue-100 leading-relaxed">
               <p>
                 <span className="font-bold text-white">BlueberryFin Capital</span> is not just a firm — we are your strategic partners in growth.
               </p>
@@ -88,7 +88,7 @@ export function AboutSection() {
                   transition={{ duration: 0.6, delay: 0.4 + idx * 0.1, ease: "easeOut" }}
                   className="group"
                 >
-                  <div className="text-7xl md:text-8xl font-extrabold text-[#60a5fa] mb-2 leading-none group-hover:scale-105 transition-transform duration-300">
+                  <div className="text-6xl sm:text-7xl md:text-8xl font-extrabold text-[#60a5fa] mb-2 leading-none group-hover:scale-105 transition-transform duration-300">
                     {stat.number}
                   </div>
                   <div className="text-xl md:text-2xl font-bold text-white mb-1">

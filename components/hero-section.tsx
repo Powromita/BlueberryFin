@@ -148,7 +148,7 @@ export function HeroSection() {
               className="text-center"
             >
               {/* Main Heading */}
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 md:mb-8 leading-tight drop-shadow-lg px-4 sm:px-0">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 md:mb-8 leading-tight drop-shadow-lg px-4 sm:px-0">
                 Enhance your
                 <br />
                 Finance with BlueberryFin
@@ -156,12 +156,12 @@ export function HeroSection() {
 
               {/* Subtext */}
               <motion.p
-                className="text-lg sm:text-xl md:text-2xl text-gray-200 font-medium max-w-2xl mx-auto leading-relaxed mb-8 md:mb-10 drop-shadow-md px-4 sm:px-0"
+                className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 font-medium max-w-2xl mx-auto leading-relaxed mb-6 sm:mb-8 md:mb-10 drop-shadow-md px-4 sm:px-6 md:px-0"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
               >
-                Driving results through data-informed and <br className="hidden md:block" />
+                Driving results through data-informed and <br className="hidden sm:block" />
                 client-focused financial strategies for corporates and HNIs
               </motion.p>
 
@@ -174,24 +174,24 @@ export function HeroSection() {
               >
               </motion.div>
 
-              {/* Stats Section - Similar to reference */}
+              {/* Stats Section - Responsive Grid */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.9, duration: 0.8 }}
-                className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto px-2 sm:px-0"
+                className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto px-4 sm:px-0"
               >
                 <div className="text-center">
                   <motion.h3
-                    className="text-3xl md:text-4xl font-bold text-white mb-2"
+                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 sm:mb-2"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 1.1, type: "spring", stiffness: 200 }}
                   >
                     75K+
                   </motion.h3>
-                  <p className="text-sm text-gray-300 flex items-center justify-center gap-1">
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <p className="text-xs sm:text-sm text-gray-300 flex items-center justify-center gap-1">
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                     Users
@@ -199,15 +199,15 @@ export function HeroSection() {
                 </div>
                 <div className="text-center">
                   <motion.h3
-                    className="text-3xl md:text-4xl font-bold text-white mb-2"
+                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 sm:mb-2"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 1.2, type: "spring", stiffness: 200 }}
                   >
                     ₹1000Cr+
                   </motion.h3>
-                  <p className="text-sm text-gray-300 flex items-center justify-center gap-1">
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <p className="text-xs sm:text-sm text-gray-300 flex items-center justify-center gap-1">
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     Managed
@@ -215,15 +215,15 @@ export function HeroSection() {
                 </div>
                 <div className="text-center">
                   <motion.h3
-                    className="text-3xl md:text-4xl font-bold text-white mb-2"
+                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 sm:mb-2"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 1.3, type: "spring", stiffness: 200 }}
                   >
                     500+
                   </motion.h3>
-                  <p className="text-sm text-gray-300 flex items-center justify-center gap-1">
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <p className="text-xs sm:text-sm text-gray-300 flex items-center justify-center gap-1">
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     Deals
@@ -231,15 +231,15 @@ export function HeroSection() {
                 </div>
                 <div className="text-center">
                   <motion.h3
-                    className="text-3xl md:text-4xl font-bold text-white mb-2"
+                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 sm:mb-2"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 1.4, type: "spring", stiffness: 200 }}
                   >
                     92%
                   </motion.h3>
-                  <p className="text-sm text-gray-300 flex items-center justify-center gap-1">
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <p className="text-xs sm:text-sm text-gray-300 flex items-center justify-center gap-1">
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                     </svg>
                     Satisfaction

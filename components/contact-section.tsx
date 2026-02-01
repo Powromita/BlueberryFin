@@ -192,10 +192,10 @@ export function ContactSection() {
             className="space-y-8"
           >
             <div>
-              <h2 className="text-3xl md:text-4xl font-serif text-white mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-white mb-3 sm:mb-4">
                 Get in <span className="italic">Touch</span>
               </h2>
-              <p className="text-blue-100 text-lg">
+              <p className="text-blue-100 text-base sm:text-lg">
                 Let's discuss how we can help transform your financial future.
               </p>
             </div>
@@ -216,9 +216,9 @@ export function ContactSection() {
             </div>
 
             {/* Direct Contact Cards */}
-            <div className="pt-8 border-t border-white/10">
-              <p className="text-sm text-blue-200 mb-6 font-medium uppercase tracking-wider">Direct Contact</p>
-              <div className="flex flex-col sm:flex-row gap-4">
+            <div className="pt-6 sm:pt-8 border-t border-white/10">
+              <p className="text-xs sm:text-sm text-blue-200 mb-4 sm:mb-6 font-medium uppercase tracking-wider">Direct Contact</p>
+              <div className="grid grid-cols-1 xs:grid-cols-3 gap-3 sm:gap-4">
                 {contactOptions.map((option, idx) => {
                   const Icon = option.icon
                   return (
@@ -227,13 +227,13 @@ export function ContactSection() {
                       href={option.href}
                       target={option.title === "WhatsApp" ? "_blank" : undefined}
                       rel={option.title === "WhatsApp" ? "noopener noreferrer" : undefined}
-                      className={`flex flex-col items-center justify-center p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm transition-all duration-300 w-full sm:flex-1 group ${option.color} ${option.borderColor} hover:bg-white hover:scale-105 hover:shadow-xl`}
+                      className={`flex flex-col items-center justify-center p-4 sm:p-6 bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl backdrop-blur-sm transition-all duration-300 group ${option.color} ${option.borderColor} hover:bg-white hover:scale-105 hover:shadow-xl min-h-[120px] sm:min-h-0`}
                     >
-                      <div className="p-3 rounded-full bg-white/10 group-hover:bg-gray-100 mb-3 transition-colors">
-                        <Icon className="w-6 h-6 text-blue-200 group-hover:text-inherit transition-colors" />
+                      <div className="p-2 sm:p-3 rounded-full bg-white/10 group-hover:bg-gray-100 mb-2 sm:mb-3 transition-colors">
+                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-blue-200 group-hover:text-inherit transition-colors" />
                       </div>
-                      <span className="text-sm font-semibold text-white group-hover:text-gray-900 transition-colors text-center mb-1">{option.title}</span>
-                      <span className="text-xs text-blue-200 group-hover:text-gray-600 transition-colors text-center break-words max-w-full">{option.value}</span>
+                      <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-gray-900 transition-colors text-center mb-1">{option.title}</span>
+                      <span className="text-[10px] sm:text-xs text-blue-200 group-hover:text-gray-600 transition-colors text-center break-words max-w-full px-2">{option.value}</span>
                     </a>
                   )
                 })}
@@ -247,12 +247,12 @@ export function ContactSection() {
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="bg-[#f5f0eb] rounded-2xl p-8 md:p-10 shadow-2xl">
-              <h3 className="text-2xl font-serif text-[#0f2c59] mb-2">
+            <div className="bg-[#f5f0eb] rounded-2xl p-6 sm:p-8 md:p-10 shadow-2xl">
+              <h3 className="text-xl sm:text-2xl font-serif text-[#0f2c59] mb-2">
                 Build your plan <span className="italic">with BlueberryFin</span>
               </h3>
               
-              <form onSubmit={handleSubmit} className="space-y-5 mt-6">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 mt-4 sm:mt-6">
                 {/* Name */}
                 <div>
                   <input
@@ -355,8 +355,8 @@ export function ContactSection() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-12">
-        <div className="w-full h-[400px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative group">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-8 sm:pb-12">
+        <div className="w-full h-[300px] sm:h-[400px] rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative group">
           <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.218342263435!2d72.83244837508316!3d18.921989182250107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7d1c73a0d5cad%3A0xc70a25a7209c733c!2sGateway%20Of%20India%20Mumbai!5e0!3m2!1sen!2sin!4v1706691234567!5m2!1sen!2sin" 
             width="100%" 

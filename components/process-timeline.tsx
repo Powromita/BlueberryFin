@@ -65,10 +65,10 @@ export function ProcessTimeline() {
             transition={{ duration: 0.8 }}
             className="lg:col-span-4"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-tight mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif text-white leading-tight mb-4 sm:mb-6">
               We've reimagined financial advisory and business partnerships.
             </h2>
-            <p className="text-gray-300 text-base leading-relaxed mb-8">
+            <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
               No misselling. No pressure. No jargon. Just genuine expertise and care to help you create the perfect financial strategy for your business.
             </p>
           
@@ -176,12 +176,12 @@ export function ProcessTimeline() {
                 </div>
                 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-white mb-1.5">
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5">
                   {step.title}
                 </h3>
                 
                 {/* Description */}
-                <p className="text-gray-300 text-sm leading-relaxed">
+                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
                   {step.description}
                 </p>
               </motion.div>

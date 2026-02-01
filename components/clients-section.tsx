@@ -58,19 +58,19 @@ export function ClientsSection() {
         transition={{ duration: 0.8 }}
         className="absolute inset-0 flex items-center justify-center pointer-events-none"
       >
-        <h3 className="text-[180px] md:text-[240px] lg:text-[320px] font-bold text-white/30 leading-none select-none">
+        <h3 className="text-[120px] sm:text-[180px] md:text-[240px] lg:text-[320px] font-bold text-white/30 leading-none select-none">
           {testimonials[currentIndex].company}
         </h3>
       </motion.div>
 
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full relative z-10">
         {/* Header */}
-        <h2 className="text-2xl md:text-3xl font-light mb-8 text-white" style={{ fontFamily: 'GT Alpina Standard, Verdana, sans-serif' }}> {/* Added text-white */}
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-light mb-6 sm:mb-8 text-white" style={{ fontFamily: 'GT Alpina Standard, Verdana, sans-serif' }}>
           Testimonial
         </h2>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
           {/* LEFT: Photo with Name Overlay */}
           <motion.div
             key={`photo-${currentIndex}`}
@@ -79,7 +79,7 @@ export function ClientsSection() {
             transition={{ duration: 0.6 }}
             className="flex justify-center lg:justify-end"
           >
-            <div className="relative w-72 h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative w-64 h-72 sm:w-72 sm:h-80 md:w-80 md:h-96 rounded-2xl overflow-hidden shadow-2xl mx-auto lg:mx-0">
               {/* Actual image */}
               <img 
                 src={testimonials[currentIndex].image} 
@@ -88,11 +88,11 @@ export function ClientsSection() {
               />
               
               {/* Name overlay on photo */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6">
-                <div className="text-white font-semibold text-xl md:text-2xl mb-1">
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-4 sm:p-6">
+                <div className="text-white font-semibold text-lg sm:text-xl md:text-2xl mb-1">
                   {testimonials[currentIndex].name}
                 </div>
-                <div className="text-blue-200/90 text-sm md:text-base">
+                <div className="text-blue-200/90 text-xs sm:text-sm md:text-base">
                   {testimonials[currentIndex].title}
                 </div>
               </div>
@@ -107,7 +107,7 @@ export function ClientsSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex items-center"
           >
-            <p className="text-white text-lg md:text-xl lg:text-2xl leading-relaxed font-light">
+            <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed font-light px-4 sm:px-0">
               "{testimonials[currentIndex].quote}"
             </p>
           </motion.div>
@@ -123,7 +123,7 @@ export function ClientsSection() {
             <ChevronLeftIcon className="w-8 h-8" />
           </button>
 
-          <div className="text-white/70 text-xl font-light">
+          <div className="text-white/70 text-lg sm:text-xl font-light">
             {currentIndex + 1}/{testimonials.length}
           </div>
 

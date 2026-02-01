@@ -119,14 +119,14 @@ export function ServicesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="flex justify-center gap-4 mb-12"
+          className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 px-4 sm:px-0"
         >
           <button
             onClick={() => {
               setActiveCategory("Corporate Finance")
               setSelectedService(0)
             }}
-            className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
+            className={`px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base min-h-[44px] ${
               activeCategory === "Corporate Finance"
                 ? "bg-[#0f2c59] text-white shadow-lg"
                 : "bg-[#f5f0eb] text-[#001f3f] border-2 border-gray-200 hover:border-[#0052cc]"
@@ -139,7 +139,7 @@ export function ServicesSection() {
               setActiveCategory("Strategic Transactions")
               setSelectedService(0)
             }}
-            className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
+            className={`px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base min-h-[44px] ${
               activeCategory === "Strategic Transactions"
                 ? "bg-[#0f2c59] text-white shadow-lg"
                 : "bg-[#f5f0eb] text-[#001f3f] border-2 border-gray-200 hover:border-[#0052cc]"

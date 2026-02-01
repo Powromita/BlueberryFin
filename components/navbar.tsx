@@ -162,11 +162,22 @@ export function Navbar() {
       className={`fixed w-full z-50 transition-all duration-500 ${bgColor} ${isVisible ? 'top-0' : '-top-24'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          {/* Left: Logo, Home, Services */}
-          <div className="flex items-center gap-4 sm:gap-8">
-            <Link href="/" className="flex items-center gap-2 sm:gap-4 group flex-shrink-0">
-              <div className="flex flex-col hidden sm:flex">
+        <div className="flex justify-between items-center h-16 sm:h-20">
+          {/* Left: Logo */}
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
+              {/* Mobile Logo - Abbreviated */}
+              <div className="flex flex-col sm:hidden">
+                <span className={`font-bold text-base tracking-tight leading-none ${textColor}`}>
+                  BLUEBERRY
+                </span>
+                <span className={`font-medium text-xs tracking-wide leading-none mt-0.5 ${textColor} opacity-90`}>
+                  CAPITAL
+                </span>
+              </div>
+              
+              {/* Desktop Logo - Full */}
+              <div className="hidden sm:flex flex-col">
                 <motion.span 
                   className={`font-bold text-lg md:text-xl tracking-tight leading-none ${isDarkSection ? 'text-white' : 'bg-clip-text text-transparent bg-gradient-to-r from-[#0f2c59] via-[#2563eb] to-[#0f2c59]'}`}
                   animate={isDarkSection ? {} : {
@@ -272,7 +283,7 @@ export function Navbar() {
             <Link
               href="/contact"
               onClick={markInternalNavigation}
-              className="hidden sm:block px-6 py-2.5 bg-gradient-to-r from-[#0f2c59] to-[#2563eb] hover:from-[#1e3a8a] hover:to-[#3b82f6] rounded-lg text-white font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="hidden sm:block px-4 md:px-6 py-2 md:py-2.5 bg-gradient-to-r from-[#0f2c59] to-[#2563eb] hover:from-[#1e3a8a] hover:to-[#3b82f6] rounded-lg text-white font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Contact Us
             </Link>
@@ -280,7 +291,8 @@ export function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100"
+              className={`md:hidden p-2 rounded-lg transition-colors ${textColor} ${isDarkSection ? 'hover:bg-white/10' : 'hover:bg-gray-100'}`}
+              aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
                 <XMarkIcon className="w-6 h-6" />
@@ -297,28 +309,30 @@ export function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden pb-6 border-t border-gray-200"
+            className={`md:hidden pb-6 border-t ${borderColor}`}
           >
-            <div className="space-y-4 py-4">
-
-
+            <div className="space-y-1 py-4">
               <div className="px-4">
                 <button 
                   onClick={() => setServicesOpen(!servicesOpen)}
-                  className="flex items-center gap-2 w-full text-gray-700 hover:text-[#2563eb] transition-colors font-medium"
+                  className={`flex items-center justify-between gap-2 w-full ${textColor} ${hoverColor} transition-colors font-medium py-3 min-h-[44px]`}
                 >
-                  Services
-                  <ChevronDownIcon className={`w-4 h-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
+                  <span>Services</span>
+                  <ChevronDownIcon className={`w-5 h-5 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
                 </button>
                 
                 {servicesOpen && (
-                  <motion.div className="mt-2 space-y-2 pl-4">
+                  <motion.div 
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    className="mt-1 space-y-1 pl-4"
+                  >
                     {services.map((service) => (
                       <Link
                         key={service.href}
                         href={service.href}
                         onClick={markInternalNavigation}
-                        className="block text-sm text-gray-600 hover:text-[#2563eb] transition-colors"
+                        className={`block text-sm ${textColor} opacity-80 hover:opacity-100 transition-opacity py-2 min-h-[44px] flex items-center`}
                       >
                         {service.name}
                       </Link>
@@ -330,7 +344,7 @@ export function Navbar() {
               <Link 
                 href="/core-team"
                 onClick={markInternalNavigation}
-                className="block text-gray-700 hover:text-[#2563eb] transition-colors font-medium px-4"
+                className={`block ${textColor} ${hoverColor} transition-colors font-medium px-4 py-3 min-h-[44px] flex items-center`}
               >
                 Core Team
               </Link>
@@ -338,7 +352,7 @@ export function Navbar() {
               <Link
                 href="/contact"
                 onClick={markInternalNavigation}
-                className="block mx-4 text-center px-6 py-2.5 bg-gradient-to-r from-[#0f2c59] to-[#2563eb] hover:from-[#1e3a8a] hover:to-[#3b82f6] rounded-lg text-white font-semibold text-sm transition-all duration-300"
+                className="block mx-4 mt-4 text-center px-6 py-3 bg-gradient-to-r from-[#0f2c59] to-[#2563eb] hover:from-[#1e3a8a] hover:to-[#3b82f6] rounded-lg text-white font-semibold text-sm transition-all duration-300 min-h-[44px] flex items-center justify-center"
               >
                 Contact Us
               </Link>
