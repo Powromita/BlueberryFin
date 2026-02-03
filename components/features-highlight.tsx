@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion, useScroll, useTransform, useSpring, useMotionTemplate } from "framer-motion"
 import { useRef, useMemo } from "react"
 import {
   SparklesIcon,
@@ -47,6 +47,13 @@ export function FeaturesHighlight() {
     offset: ["start start", "end end"],
   })
 
+  // Add smoothing to the scroll progress
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  })
+
   // Generate constellation nodes
   const constellationNodes = useMemo(() => {
     return Array.from({ length: 12 }, (_, i) => ({
@@ -54,21 +61,26 @@ export function FeaturesHighlight() {
       x: Math.random() * 100,
       y: Math.random() * 100,
       size: Math.random() * 3 + 1.5,
+      // Random velocities
+      vx: (Math.random() - 0.5) * 0.2,
+      vy: (Math.random() - 0.5) * 0.2
     }))
   }, [])
 
-  // Animated background gradient based on scroll
+  // Animated background gradient based on scroll - Use smoothProgress
   const gradientColor1 = useTransform(
-    scrollYProgress,
+    smoothProgress,
     [0, 0.5, 1],
     ["#0f2c59", "#0052cc", "#003366"]
   )
 
   const gradientColor2 = useTransform(
-    scrollYProgress,
+    smoothProgress,
     [0, 0.5, 1],
     ["#2563eb", "#0f2c59", "#2563eb"]
   )
+
+  // const backgroundImage = useMotionTemplate`linear-gradient(135deg, ${gradientColor1} 0%, ${gradientColor2} 100%)`
 
   return (
     <section ref={containerRef} className="relative bg-[#f5f0eb]">
@@ -86,7 +98,7 @@ export function FeaturesHighlight() {
           <div className="w-full h-1 bg-gray-200 rounded-full overflow-hidden">
             <motion.div
               className="h-full bg-gradient-to-r from-[#0f2c59] to-[#2563eb]"
-              style={{ scaleX: scrollYProgress, transformOrigin: 'left' }}
+              style={{ scaleX: smoothProgress, transformOrigin: 'left' }}
             />
           </div>
         </div>
@@ -97,12 +109,12 @@ export function FeaturesHighlight() {
         {/* Animated Gradient Background */}
         <motion.div
           className="absolute inset-0 pointer-events-none"
-          style={{
-            background: scrollYProgress
-          }}
+          // style={{
+          //   background: backgroundImage
+          // }}
         >
           <div className="absolute inset-0" style={{
-            backgroundImage: scrollYProgress
+            backgroundImage: `radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 50%)`
           }} />
         </motion.div>
 
@@ -197,13 +209,13 @@ export function FeaturesHighlight() {
           {features.map((feature, idx) => {
             const IconComponent = feature.icon
             
-            // Calculate opacity and scale based on scroll position
+            // Calculate opacity and scale based on scroll position - Use smoothProgress
             const start = idx / features.length
             const end = (idx + 1) / features.length
             
             // Modified opacity: first feature starts at 1, last feature ends at 1
             const opacity = useTransform(
-              scrollYProgress,
+              smoothProgress,
               idx === 0 
                 ? [0, 0.05, end - 0.05, end]
                 : idx === features.length - 1
@@ -217,13 +229,13 @@ export function FeaturesHighlight() {
             )
             
             const scale = useTransform(
-              scrollYProgress,
+              smoothProgress,
               [start, start + 0.05, end - 0.05, end],
               [0.9, 1, 1, 0.9]
             )
 
             const x = useTransform(
-              scrollYProgress,
+              smoothProgress,
               [start, start + 0.05, end - 0.05, end],
               [100, 0, 0, -100]
             )
