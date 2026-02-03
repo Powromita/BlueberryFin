@@ -9,10 +9,12 @@ interface ServicePageProps {
   title: string
   subtitle: string
   description: string
-  benefits: string[]
+  whatWeDo?: string
+  howWeEngage?: string
+  outcomes?: string[]
 }
 
-export function ServicePage({ title, subtitle, description, benefits }: ServicePageProps) {
+export function ServicePage({ title, subtitle, description, whatWeDo, howWeEngage, outcomes }: ServicePageProps) {
   return (
     <>
       <Navbar />
@@ -48,43 +50,85 @@ export function ServicePage({ title, subtitle, description, benefits }: ServiceP
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 gap-16">
+            {/* Opening Statement */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="prose prose-lg max-w-none text-gray-600 leading-relaxed"
             >
-              <h2 className="text-3xl font-bold text-[#0f2c59] mb-6">Overview</h2>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                {description}
-              </p>
+              <div dangerouslySetInnerHTML={{ __html: description }} />
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-gray-50 rounded-2xl p-8 border border-gray-100"
-            >
-              <h3 className="text-2xl font-bold text-[#0f2c59] mb-8">Key Benefits</h3>
-              <ul className="space-y-4">
-                {benefits.map((benefit, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: 10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + index * 0.1 }}
-                    className="flex items-start gap-3"
-                  >
-                    <CheckCircleIcon className="w-6 h-6 text-[#2563eb] flex-shrink-0" />
-                    <span className="text-gray-700 font-medium">{benefit}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
+            {/* What We Do - Editorial Layout */}
+            {whatWeDo && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 border-t border-gray-200 pt-16"
+              >
+                <div className="lg:col-span-4">
+                  <h2 className="text-3xl font-serif text-[#0f2c59]">What We Do</h2>
+                </div>
+                <div className="lg:col-span-8 prose prose-lg max-w-none text-gray-600">
+                  <div dangerouslySetInnerHTML={{ __html: whatWeDo }} />
+                </div>
+              </motion.div>
+            )}
+
+            {/* How We Engage - Editorial Layout */}
+            {howWeEngage && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 border-t border-gray-200 pt-16"
+              >
+                <div className="lg:col-span-4">
+                  <h2 className="text-3xl font-serif text-[#0f2c59]">How We Engage</h2>
+                </div>
+                <div className="lg:col-span-8 prose prose-lg max-w-none text-gray-600">
+                  <div dangerouslySetInnerHTML={{ __html: howWeEngage }} />
+                </div>
+              </motion.div>
+            )}
+
+            {/* Outcomes/Benefits - Editorial List */}
+            {outcomes && outcomes.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 border-t border-gray-200 pt-16"
+              >
+                <div className="lg:col-span-4">
+                  <h2 className="text-3xl font-serif text-[#0f2c59]">Outcomes</h2>
+                </div>
+                <div className="lg:col-span-8">
+                  <ul className="grid grid-cols-1 gap-6">
+                    {outcomes.map((outcome, index) => (
+                      <motion.li
+                        key={index}
+                        initial={{ opacity: 0, x: 10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 * index }}
+                        className="flex items-start gap-4"
+                      >
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#2563eb] mt-2.5 flex-shrink-0" />
+                        <span className="text-lg text-gray-700 leading-relaxed">{outcome}</span>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            )}
           </div>
         </div>
       </div>

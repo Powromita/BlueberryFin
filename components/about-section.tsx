@@ -37,39 +37,43 @@ export function AboutSection() {
             className="lg:col-span-7"
           >
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-12 leading-tight">
-              What We Do
+              Who We Are
             </h2>
 
             <div className="space-y-8 text-lg md:text-xl text-blue-100 leading-relaxed">
               <p>
-                <span className="font-bold text-white">BlueberryFin Capital</span> is not just a firm — we are your strategic partners in growth.
+                <span className="font-bold text-white">Axcelus Finserv</span> is a Capital Advisory firm, providing unbiased, tactical, strategic financial advice and investment banking services to our clients through our in-depth knowledge and expertise across industries.
               </p>
               <p>
-                In an era of volatile markets, we bring stability, clarity, and foresight to your financial decisions.
-              </p>
-              <p>
-                Catering exclusively to corporates and high-net-worth individuals, we combine traditional wisdom with modern financial engineering to deliver bespoke solutions that stand the test of time.
+                We work with our clients through all phases of the business cycle through expert capabilities in Financing, M&A and Capital Markets.
               </p>
             </div>
 
-            {/* Key Points - Simple List */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="mt-16 space-y-4"
-            >
-              {[
-                "Strategic Vision for Long-Term Growth",
-                "Data-Driven Insights & Analytics",
-                "Execution Excellence & Optimization"
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-center gap-4 group">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#60a5fa] group-hover:scale-150 transition-transform duration-300" />
-                  <span className="text-base md:text-lg font-medium text-blue-200">{item}</span>
-                </div>
-              ))}
-            </motion.div>
+            <div className="mt-12">
+              <h3 className="text-2xl font-bold text-white mb-6">Our Business Philosophy</h3>
+              {/* Key Points - Simple List */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                className="space-y-4"
+              >
+                {[
+                  { title: "Excellence", desc: "We strive to achieve our goals through excellence." },
+                  { title: "Integrity", desc: "We exhibit honesty and integrity at all times." },
+                  { title: "Ingenuity", desc: "We are committed to new innovation." },
+                  { title: "Leadership", desc: "We lead by example." }
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start gap-4 group">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#60a5fa] mt-2.5 group-hover:scale-150 transition-transform duration-300 flex-shrink-0" />
+                    <div>
+                      <span className="text-base md:text-lg font-bold text-white block">{item.title}</span>
+                      <span className="text-base text-blue-200">{item.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
           </motion.div>
 
           {/* Right Column - 40% - Stats */}
@@ -80,7 +84,18 @@ export function AboutSection() {
             className="lg:col-span-5 lg:pl-12 lg:border-l border-white/20"
           >
             <div className="space-y-12">
-              {stats.map((stat, idx) => (
+              <div className="mb-8">
+                <h3 className="text-2xl font-bold text-white mb-4">Our Vision</h3>
+                <p className="text-lg text-blue-100 italic">
+                  "To be the preferred capital advisory company through Leadership and Excellence"
+                </p>
+              </div>
+              
+              {[
+                 { number: "20+", label: "Years Experience", sublabel: "In Financial Management" },
+                 { number: "12k+", label: "Crores Raised", sublabel: "(USD $1.8bn+)" },
+                 { number: "360°", label: "Perspective", sublabel: "Corporate & Banking" },
+              ].map((stat, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, x: 20 }}
