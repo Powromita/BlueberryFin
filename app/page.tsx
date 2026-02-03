@@ -89,7 +89,7 @@ export default function Home() {
           <InteractiveImageBackground />
           <AboutSection />
           <FeaturesHighlight />
-          <ProcessTimeline />
+          {/* <ProcessTimeline /> */}
           <ServicesSection />
           <ClientsSection />
           <EndingSection />
