@@ -21,25 +21,25 @@ const serviceCategories = {
       description: "Navigate the complexities of going public with expert guidance through every step.",
       briefInfo: "Guide companies through IPO process, regulatory compliance, and market positioning",
       icon: ChartBarIcon,
-      image: "https://images.unsplash.com/photo-1664575602554-2087b04935a5?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
       href: "/services/ipo-advisory",
     },
-    {
-      title: "Fundraising Service",
-      description: "Secure the capital your business needs to grow and scale effectively.",
-      briefInfo: "Connect with investors, structure deals, and maximize funding potential",
-      icon: CurrencyDollarIcon,
-      image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&h=600&fit=crop",
-      href: "/services/fundraising",
-    },
-    {
-      title: "Debt Syndication",
-      description: "Optimize capital structure through strategic debt syndication solutions.",
-      briefInfo: "Efficient debt structuring and lender network optimization",
-      icon: CreditCardIcon,
-      image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop",
-      href: "/services/debt-syndication",
-    },
+      {
+        title: "Fundraising Service",
+        description: "Secure the capital your business needs to grow and scale effectively.",
+        briefInfo: "Connect with investors, structure deals, and maximize funding potential",
+        icon: CurrencyDollarIcon,
+        image: "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=800&h=600&fit=crop",
+        href: "/services/fundraising",
+      },
+      {
+        title: "Debt Syndication",
+        description: "Optimize capital structure through strategic debt syndication solutions.",
+        briefInfo: "Efficient debt structuring and lender network optimization",
+        icon: CreditCardIcon,
+          image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop",
+        href: "/services/debt-syndication",
+      },
   ],
   "Strategic Transactions": [
     {
@@ -47,7 +47,7 @@ const serviceCategories = {
       description: "Expert guidance through complex M&A transactions and integrations.",
       briefInfo: "Complete M&A support from identification to post-acquisition integration",
       icon: UserGroupIcon,
-      image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=600&fit=crop",
+          image: "/mergers-acquisitions-prepartion-tips.jpg",
       href: "/services/mergers-acquisitions",
     },
     {
@@ -55,7 +55,7 @@ const serviceCategories = {
       description: "Strategic PE investments and portfolio management for maximum returns.",
       briefInfo: "Strategic investments, portfolio management, and value creation",
       icon: BuildingOfficeIcon,
-      image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
       href: "/services/private-equity",
     },
     {
@@ -63,7 +63,7 @@ const serviceCategories = {
       description: "Accelerate growth with tailored financial strategies for emerging companies.",
       briefInfo: "Strategic guidance for early-stage companies and high-growth startups",
       icon: RocketLaunchIcon,
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop",
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
       href: "/services/startup-advisory",
     },
   ],
@@ -119,14 +119,14 @@ export function ServicesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="flex justify-center gap-4 mb-12"
+          className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 px-4 sm:px-0"
         >
           <button
             onClick={() => {
               setActiveCategory("Corporate Finance")
               setSelectedService(0)
             }}
-            className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
+            className={`px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base min-h-[44px] ${
               activeCategory === "Corporate Finance"
                 ? "bg-[#0f2c59] text-white shadow-lg"
                 : "bg-[#f5f0eb] text-[#001f3f] border-2 border-gray-200 hover:border-[#0052cc]"
@@ -139,7 +139,7 @@ export function ServicesSection() {
               setActiveCategory("Strategic Transactions")
               setSelectedService(0)
             }}
-            className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
+            className={`px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base min-h-[44px] ${
               activeCategory === "Strategic Transactions"
                 ? "bg-[#0f2c59] text-white shadow-lg"
                 : "bg-[#f5f0eb] text-[#001f3f] border-2 border-gray-200 hover:border-[#0052cc]"
@@ -155,7 +155,7 @@ export function ServicesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch"
         >
           {/* LEFT: Image Display */}
           <div className="order-2 lg:order-1">
@@ -197,7 +197,7 @@ export function ServicesSection() {
           </div>
 
           {/* RIGHT: Service Cards */}
-          <div className="order-1 lg:order-2 space-y-4">
+          <div className="order-1 lg:order-2 space-y-4 flex flex-col">
             {currentServices.map((service, idx) => {
               const IconComponent = service.icon
               const isSelected = selectedService === idx
@@ -209,7 +209,7 @@ export function ServicesSection() {
                   animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
                   transition={{ duration: 0.6, delay: 0.5 + idx * 0.15 }}
                   onClick={() => setSelectedService(idx)}
-                  className={`p-6 rounded-xl cursor-pointer transition-all duration-300 ${
+                  className={`p-6 rounded-xl cursor-pointer transition-all duration-300 flex flex-col flex-1 ${
                     isSelected
                       ? "bg-white border-2 border-[#0052cc] shadow-xl"
                       : "bg-white border-2 border-gray-200 hover:border-[#0052cc] hover:shadow-lg"

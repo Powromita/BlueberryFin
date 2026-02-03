@@ -291,4 +291,19 @@ h1, h2, h3, h4, h5, h6, .font-heading {
   .btn-secondary {
     @apply px-8 py-4 bg-[#f5f0eb] text-[#001f3f] font-semibold rounded-lg border-2 border-[#001f3f] transition-all duration-300 hover:bg-[#001f3f] hover:text-white;
   }
+
+  /* Mobile-Optimized Touch Targets */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* Responsive Container Padding */
+  .container-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Mobile-First Spacing */
+  .section-gap {
+    @apply space-y-6 sm:space-y-8 md:space-y-10;
+  }
 }

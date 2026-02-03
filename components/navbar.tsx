@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { motion } from "framer-motion"
 import { ChevronDownIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
 import { Logo } from "./logo"
@@ -16,6 +17,9 @@ const services = [
 ]
 
 export function Navbar() {
+  const pathname = usePathname()
+  const isServicePage = pathname.includes("/services/")
+  
   const [servicesOpen, setServicesOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -114,15 +118,21 @@ export function Navbar() {
   }, [mouseNearTop, isHoveringNav, hideTimeout])
 
   const markInternalNavigation = () => {
-    sessionStorage.setItem("internalNavigation", "true")
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("internalNavigation", "true")
+    }
     setMobileMenuOpen(false)
   }
 
-  // Dynamic color classes - REVERSED LOGIC
-  // When section text is dark blue (isDarkSection = false) -> navbar is blue
-  // When section text is white (isDarkSection = true) -> navbar is white
-  const textColor = isDarkSection ? "text-white" : "text-gray-700"
-  const hoverColor = isDarkSection ? "hover:text-white/80" : "hover:text-[#2563eb]"
+  // Dynamic color classes
+  // On service pages: start with blue, then switch based on isDarkSection
+  // On home page: start with white (hero), then switch based on isDarkSection
+  const textColor = scrolled 
+    ? (isDarkSection ? "text-white" : "text-[#2563eb]") 
+    : (isServicePage ? "text-[#2563eb]" : "text-white")
+  const hoverColor = scrolled 
+    ? (isDarkSection ? "hover:text-white/80" : "hover:text-[#0f2c59]") 
+    : (isServicePage ? "hover:text-[#0f2c59]" : "hover:text-white/80")
   // Fully transparent with minimal blur
   const bgColor = "bg-transparent backdrop-blur-sm"
   const borderColor = isDarkSection ? "border-white/10" : "border-gray-200"
@@ -152,11 +162,22 @@ export function Navbar() {
       className={`fixed w-full z-50 transition-all duration-500 ${bgColor} ${isVisible ? 'top-0' : '-top-24'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          {/* Left: Logo, Home, Services */}
-          <div className="flex items-center gap-4 sm:gap-8">
-            <Link href="/" className="flex items-center gap-2 sm:gap-4 group flex-shrink-0">
-              <div className="flex flex-col hidden sm:flex">
+        <div className="flex justify-between items-center h-16 sm:h-20">
+          {/* Left: Logo */}
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center gap-2 group flex-shrink-0">
+              {/* Mobile Logo - Abbreviated */}
+              <div className="flex flex-col sm:hidden">
+                <span className={`font-bold text-base tracking-tight leading-none ${textColor}`}>
+                  BLUEBERRY
+                </span>
+                <span className={`font-medium text-xs tracking-wide leading-none mt-0.5 ${textColor} opacity-90`}>
+                  CAPITAL
+                </span>
+              </div>
+              
+              {/* Desktop Logo - Full */}
+              <div className="hidden sm:flex flex-col">
                 <motion.span 
                   className={`font-bold text-lg md:text-xl tracking-tight leading-none ${isDarkSection ? 'text-white' : 'bg-clip-text text-transparent bg-gradient-to-r from-[#0f2c59] via-[#2563eb] to-[#0f2c59]'}`}
                   animate={isDarkSection ? {} : {
@@ -192,12 +213,13 @@ export function Navbar() {
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
-              <Link href="/" className={`${textColor} ${hoverColor} transition-colors font-medium text-[15px]`}>
-                Home
-              </Link>
+            {/* Desktop Navigation - Moved to right */}
+          </div>
 
+          {/* Right: Desktop Navigation, Button & Mobile Menu */}
+          <div className="flex items-center gap-4 md:gap-6">
+            {/* Desktop Navigation - Services & Core Team */}
+            <div className="hidden md:flex items-center gap-6">
               {/* Services Dropdown - Hover triggered with delay */}
               <div
                 className="relative group"
@@ -226,7 +248,7 @@ export function Navbar() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute left-0 mt-2 w-64 bg-[#f5f0eb] rounded-xl shadow-2xl border border-gray-200 overflow-hidden backdrop-blur-md z-50"
+                    className="absolute right-0 mt-2 w-64 bg-[#f5f0eb] rounded-xl shadow-2xl border border-gray-200 overflow-hidden backdrop-blur-md z-50"
                   >
                     {services.map((service, idx) => (
                       <motion.div
@@ -256,15 +278,12 @@ export function Navbar() {
                 Core Team
               </Link>
             </div>
-          </div>
 
-          {/* Right: Desktop Buttons & Mobile Menu */}
-          <div className="flex items-center gap-4">
             {/* Desktop Button */}
             <Link
               href="/contact"
               onClick={markInternalNavigation}
-              className="hidden sm:block px-6 py-2.5 bg-gradient-to-r from-[#0f2c59] to-[#2563eb] hover:from-[#1e3a8a] hover:to-[#3b82f6] rounded-lg text-white font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="hidden sm:block px-4 md:px-6 py-2 md:py-2.5 bg-gradient-to-r from-[#0f2c59] to-[#2563eb] hover:from-[#1e3a8a] hover:to-[#3b82f6] rounded-lg text-white font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Contact Us
             </Link>
@@ -272,7 +291,8 @@ export function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100"
+              className={`md:hidden p-2 rounded-lg transition-colors ${textColor} ${isDarkSection ? 'hover:bg-white/10' : 'hover:bg-gray-100'}`}
+              aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
                 <XMarkIcon className="w-6 h-6" />
@@ -289,30 +309,30 @@ export function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden pb-6 border-t border-gray-200"
+            className={`md:hidden pb-6 border-t ${borderColor}`}
           >
-            <div className="space-y-4 py-4">
-              <Link href="/" className="block text-gray-700 hover:text-[#2563eb] transition-colors font-medium px-4" onClick={markInternalNavigation}>
-                Home
-              </Link>
-
+            <div className="space-y-1 py-4">
               <div className="px-4">
                 <button 
                   onClick={() => setServicesOpen(!servicesOpen)}
-                  className="flex items-center gap-2 w-full text-gray-700 hover:text-[#2563eb] transition-colors font-medium"
+                  className={`flex items-center justify-between gap-2 w-full ${textColor} ${hoverColor} transition-colors font-medium py-3 min-h-[44px]`}
                 >
-                  Services
-                  <ChevronDownIcon className={`w-4 h-4 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
+                  <span>Services</span>
+                  <ChevronDownIcon className={`w-5 h-5 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
                 </button>
                 
                 {servicesOpen && (
-                  <motion.div className="mt-2 space-y-2 pl-4">
+                  <motion.div 
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    className="mt-1 space-y-1 pl-4"
+                  >
                     {services.map((service) => (
                       <Link
                         key={service.href}
                         href={service.href}
                         onClick={markInternalNavigation}
-                        className="block text-sm text-gray-600 hover:text-[#2563eb] transition-colors"
+                        className={`block text-sm ${textColor} opacity-80 hover:opacity-100 transition-opacity py-2 min-h-[44px] flex items-center`}
                       >
                         {service.name}
                       </Link>
@@ -324,7 +344,7 @@ export function Navbar() {
               <Link 
                 href="/core-team"
                 onClick={markInternalNavigation}
-                className="block text-gray-700 hover:text-[#2563eb] transition-colors font-medium px-4"
+                className={`block ${textColor} ${hoverColor} transition-colors font-medium px-4 py-3 min-h-[44px] flex items-center`}
               >
                 Core Team
               </Link>
@@ -332,7 +352,7 @@ export function Navbar() {
               <Link
                 href="/contact"
                 onClick={markInternalNavigation}
-                className="block mx-4 text-center px-6 py-2.5 bg-gradient-to-r from-[#0f2c59] to-[#2563eb] hover:from-[#1e3a8a] hover:to-[#3b82f6] rounded-lg text-white font-semibold text-sm transition-all duration-300"
+                className="block mx-4 mt-4 text-center px-6 py-3 bg-gradient-to-r from-[#0f2c59] to-[#2563eb] hover:from-[#1e3a8a] hover:to-[#3b82f6] rounded-lg text-white font-semibold text-sm transition-all duration-300 min-h-[44px] flex items-center justify-center"
               >
                 Contact Us
               </Link>
