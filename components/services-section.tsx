@@ -84,7 +84,7 @@ export function ServicesSection() {
     <section
       id="services"
       ref={ref}
-      className="py-12 bg-[#f5f0eb] relative overflow-hidden"
+      className="py-8 md:py-12 bg-[#f5f0eb] relative overflow-hidden"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -106,12 +106,12 @@ export function ServicesSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-8"
+          className="text-center mb-6"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#001f3f] mb-4 tracking-tight">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#001f3f] mb-3 tracking-tight">
             Our Services
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] mx-auto rounded-full mb-6" />
+          <div className="w-24 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] mx-auto rounded-full mb-4" />
         </motion.div>
 
         {/* Category Tabs */}
@@ -119,7 +119,7 @@ export function ServicesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mb-8 sm:mb-12 px-4 sm:px-0"
+          className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mb-6 sm:mb-8 px-4 sm:px-0"
         >
           <button
             onClick={() => {
@@ -153,7 +153,7 @@ export function ServicesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch"
         >
           {/* LEFT: Image Display */}
           <div className="order-2 lg:order-1">
@@ -162,7 +162,7 @@ export function ServicesSection() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4 }}
-              className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]"
+              className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[16/10]"
             >
               <div
                 className="absolute inset-0 bg-cover bg-center"
@@ -173,8 +173,8 @@ export function ServicesSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
               {/* Service info overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <h3 className="text-2xl font-bold mb-2">
+              <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                <h3 className="text-xl font-bold mb-2">
                   {currentServices[selectedService].title}
                 </h3>
                 <p className="text-sm text-gray-200 mb-4">
@@ -195,7 +195,7 @@ export function ServicesSection() {
           </div>
 
           {/* RIGHT: Service Cards */}
-          <div className="order-1 lg:order-2 space-y-4 flex flex-col">
+          <div className="order-1 lg:order-2 space-y-3 flex flex-col">
             {currentServices.map((service, idx) => {
               const IconComponent = service.icon
               const isSelected = selectedService === idx
@@ -207,22 +207,22 @@ export function ServicesSection() {
                   animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
                   transition={{ duration: 0.6, delay: 0.5 + idx * 0.15 }}
                   onClick={() => setSelectedService(idx)}
-                  className={`p-6 rounded-xl cursor-pointer transition-all duration-300 flex flex-col flex-1 ${isSelected
+                  className={`p-4 rounded-xl cursor-pointer transition-all duration-300 flex flex-col flex-1 ${isSelected
                     ? "bg-white border-2 border-[#0052cc] shadow-xl"
                     : "bg-white border-2 border-gray-200 hover:border-[#0052cc] hover:shadow-lg"
                     }`}
                 >
                   <div className="flex items-start gap-4">
                     <div
-                      className={`flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300 ${isSelected
+                      className={`flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${isSelected
                         ? "bg-[#0052cc] text-white"
                         : "bg-blue-50 text-[#0052cc]"
                         }`}
                     >
-                      <IconComponent className="w-6 h-6" />
+                      <IconComponent className="w-5 h-5" />
                     </div>
                     <div className="flex-1">
-                      <h3 className={`text-lg font-bold mb-2 transition-colors ${isSelected ? "text-[#0052cc]" : "text-[#001f3f]"
+                      <h3 className={`text-base font-bold mb-1 transition-colors ${isSelected ? "text-[#0052cc]" : "text-[#001f3f]"
                         }`}>
                         {service.title}
                       </h3>

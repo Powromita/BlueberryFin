@@ -16,7 +16,7 @@ export function AboutSection() {
   ]
 
   return (
-    <section ref={ref} className="py-24 md:py-32 bg-[#0f2c59] relative overflow-hidden" id="about">
+    <section ref={ref} className="py-12 md:py-16 bg-[#0f2c59] relative overflow-hidden" id="about">
       {/* Subtle background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-900/20 to-transparent pointer-events-none" />
       
@@ -28,7 +28,7 @@ export function AboutSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main Content - Asymmetric Two Column */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Column - 60% */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -36,21 +36,21 @@ export function AboutSection() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="lg:col-span-7"
           >
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 sm:mb-10 md:mb-12 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
               Who We Are
             </h2>
 
-            <div className="space-y-6 sm:space-y-8 text-base sm:text-lg md:text-xl text-blue-100 leading-relaxed">
+            <div className="space-y-4 text-base sm:text-lg text-blue-100 leading-relaxed">
               <p>
-                <span className="font-bold text-white">Axcelus Finserv</span> is a Capital Advisory firm, providing unbiased, tactical, strategic financial advice and investment banking services to our clients through our in-depth knowledge and expertise across industries.
+                <span className="font-bold text-white">BlueberryFin Capital</span> is a Capital Advisory firm, providing unbiased, tactical, strategic financial advice and investment banking services to our clients through our in-depth knowledge and expertise across industries.
               </p>
               <p>
                 We work with our clients through all phases of the business cycle through expert capabilities in Financing, M&A and Capital Markets.
               </p>
             </div>
 
-            <div className="mt-12">
-              <h3 className="text-2xl font-bold text-white mb-6">Our Business Philosophy</h3>
+            <div className="mt-8">
+              <h3 className="text-xl font-bold text-white mb-4">Our Business Philosophy</h3>
               {/* Key Points - Simple List */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -83,10 +83,10 @@ export function AboutSection() {
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
             className="lg:col-span-5 lg:pl-12 lg:border-l border-white/20"
           >
-            <div className="space-y-12">
-              <div className="mb-8">
-                <h3 className="text-2xl font-bold text-white mb-4">Our Vision</h3>
-                <p className="text-lg text-blue-100 italic">
+            <div className="space-y-8">
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-white mb-3">Our Vision</h3>
+                <p className="text-base text-blue-100 italic">
                   "To be the preferred capital advisory company through Leadership and Excellence"
                 </p>
               </div>
@@ -103,10 +103,10 @@ export function AboutSection() {
                   transition={{ duration: 0.6, delay: 0.4 + idx * 0.1, ease: "easeOut" }}
                   className="group"
                 >
-                  <div className="text-6xl sm:text-7xl md:text-8xl font-extrabold text-[#60a5fa] mb-2 leading-none group-hover:scale-105 transition-transform duration-300">
+                  <div className="text-5xl sm:text-6xl font-extrabold text-[#60a5fa] mb-2 leading-none group-hover:scale-105 transition-transform duration-300">
                     {stat.number}
                   </div>
-                  <div className="text-xl md:text-2xl font-bold text-white mb-1">
+                  <div className="text-lg font-bold text-white mb-1">
                     {stat.label}
                   </div>
                   <div className="text-base text-blue-200">
