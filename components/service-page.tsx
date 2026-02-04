@@ -39,10 +39,10 @@ export function ServicePage({ title, subtitle, description, whatWeDo, howWeEngag
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
                 {title}
               </h1>
-              <p className="text-xl md:text-2xl text-blue-100 max-w-3xl font-light">
+              <p className="text-lg sm:text-xl md:text-2xl text-blue-100 max-w-3xl font-light">
                 {subtitle}
               </p>
             </motion.div>

@@ -309,13 +309,13 @@ export function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className={`md:hidden pb-6 border-t ${borderColor}`}
+            className="md:hidden pb-6 border-t border-gray-200 bg-[#f5f0eb] shadow-xl absolute w-full left-0"
           >
             <div className="space-y-1 py-4">
               <div className="px-4">
                 <button
                   onClick={() => setServicesOpen(!servicesOpen)}
-                  className={`flex items-center justify-between gap-2 w-full ${textColor} ${hoverColor} transition-colors font-medium py-3 min-h-[44px]`}
+                  className="flex items-center justify-between gap-2 w-full text-[#0f2c59] hover:text-[#2563eb] transition-colors font-medium py-3 min-h-[44px]"
                 >
                   <span>Services</span>
                   <ChevronDownIcon className={`w-5 h-5 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
@@ -332,7 +332,7 @@ export function Navbar() {
                         key={service.href}
                         href={service.href}
                         onClick={markInternalNavigation}
-                        className={`block text-sm ${textColor} opacity-80 hover:opacity-100 transition-opacity py-2 min-h-[44px] flex items-center`}
+                        className="block text-sm text-[#0f2c59] opacity-80 hover:opacity-100 transition-opacity py-2 min-h-[44px] flex items-center"
                       >
                         {service.name}
                       </Link>
@@ -344,7 +344,7 @@ export function Navbar() {
               <Link
                 href="/core-team"
                 onClick={markInternalNavigation}
-                className={`block ${textColor} ${hoverColor} transition-colors font-medium px-4 py-3 min-h-[44px] flex items-center`}
+                className="block text-[#0f2c59] hover:text-[#2563eb] transition-colors font-medium px-4 py-3 min-h-[44px] flex items-center"
               >
                 Core Team
               </Link>

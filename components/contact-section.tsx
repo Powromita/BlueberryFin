@@ -218,7 +218,7 @@ export function ContactSection() {
             {/* Direct Contact Cards - Horizontal Row */}
             <div className="pt-6 sm:pt-8 border-t border-white/10 w-full">
               <p className="text-xs sm:text-sm text-blue-200 mb-4 font-medium uppercase tracking-wider">Direct Contact</p>
-              <div className="grid grid-cols-3 gap-2 sm:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
                 {contactOptions.map((option, idx) => {
                   const Icon = option.icon
                   return (
@@ -232,8 +232,8 @@ export function ContactSection() {
                       <div className="p-2 rounded-full bg-white/10 group-hover:bg-gray-100 mb-2 transition-colors">
                         <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-200 group-hover:text-inherit transition-colors" />
                       </div>
-                      <span className="text-[10px] sm:text-xs font-semibold text-white group-hover:text-gray-900 transition-colors text-center whitespace-nowrap mb-0.5">{option.title}</span>
-                      <span className="text-[9px] sm:text-[10px] text-blue-200 group-hover:text-gray-600 transition-colors text-center font-medium max-w-full truncate px-1">{option.value}</span>
+                      <span className="text-sm sm:text-xs font-semibold text-white group-hover:text-gray-900 transition-colors text-center whitespace-nowrap mb-0.5">{option.title}</span>
+                      <span className="text-xs sm:text-[10px] text-blue-200 group-hover:text-gray-600 transition-colors text-center font-medium max-w-full truncate px-1">{option.value}</span>
                     </a>
                   )
                 })}

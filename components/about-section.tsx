@@ -103,7 +103,7 @@ export function AboutSection() {
                   transition={{ duration: 0.6, delay: 0.4 + idx * 0.1, ease: "easeOut" }}
                   className="group"
                 >
-                  <div className="text-5xl sm:text-6xl font-extrabold text-[#60a5fa] mb-2 leading-none group-hover:scale-105 transition-transform duration-300">
+                  <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#60a5fa] mb-2 leading-none group-hover:scale-105 transition-transform duration-300">
                     {stat.number}
                   </div>
                   <div className="text-lg font-bold text-white mb-1">

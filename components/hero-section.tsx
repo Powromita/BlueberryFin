@@ -148,7 +148,7 @@ export function HeroSection() {
               className="text-center"
             >
               {/* Main Heading */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 md:mb-8 leading-tight drop-shadow-lg px-4 sm:px-0">
+              <h1 className="text-2xl min-[400px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 md:mb-8 leading-tight drop-shadow-lg px-4 sm:px-0">
                 Enhance your
                 <br />
                 Finance with BlueberryFin
