@@ -4,31 +4,39 @@ export default function DebtSyndicationPage() {
   return (
     <ServicePage
       title="Debt Syndication"
-      subtitle="End-to-end debt financing solutions customized for your business needs."
-      description="<p>We offer customized integrated product solutions attuned to the business needs of our clients.</p>"
+      subtitle="Tailored and integrated debt solutions aligned with your funding needs and growth objectives."
+      description="<p>We provide tailored and integrated debt solutions designed to align with the unique funding needs and growth objectives of our clients.</p><p class='mt-4'>Our debt syndication services are delivered on an end-to-end basis, helping businesses secure the most appropriate financing structures for both short-term requirements and long-term expansion plans.</p>"
       whatWeDo="
-        <p class='mb-4'>We advise our clients on the most suitable debt financing alternatives for meeting the Company’s short-term and long-term funding requirements. We advise on the right debt strategy and appropriate instruments to reduce the cost of funds while negotiating appropriate financial covenants.</p>
-        <p>Whether the fundraiser is through ECBs, NCDs, or any complex instruments, we are committed to guiding our clients through the regulatory as well as operational aspects of the transaction.</p>
+        <h3 class='text-2xl font-serif text-[#0f2c59] mb-4'>Our Debt Advisory Approach</h3>
+        <p class='mb-4'>We advise clients on selecting the right debt financing options by evaluating funding needs, cash flow dynamics, and overall capital strategy. Our focus is on optimising the cost of funds while structuring suitable financial covenants that support business flexibility and sustainability.</p>
+        <p class='mb-4'>Whether funding is raised through External Commercial Borrowings (ECBs), Non-Convertible Debentures (NCDs), or more complex debt instruments, we guide clients through both regulatory and operational aspects of the transaction.</p>
+        
+        <h3 class='text-2xl font-serif text-[#0f2c59] mb-4 mt-8'>Credit Rating Advisory</h3>
+        <p class='mb-4'>For businesses seeking debt financing, particularly at early or growth stages, we assist throughout the credit rating process. Our support includes:</p>
+        <ul class='list-disc pl-5 space-y-2 mb-4'>
+            <li>Advising on the selection of an appropriate credit rating agency</li>
+            <li>Representing the company during discussions with rating agencies</li>
+            <li>Facilitating dialogue to help achieve a suitable credit rating</li>
+        </ul>
       "
       howWeEngage="
-        <p class='mb-4'>We attain this by approaching a wide spectrum of Lenders and Investors and supporting our clients through end-to-end deal execution process involving:</p>
-        <ul class='list-disc pl-5 space-y-2 mb-4'>
-          <li>Preparation of marketing material</li>
-          <li>Negotiating a term sheet</li>
-          <li>Loan documentation</li>
-          <li>Pre-disbursement formalities</li>
-          <li>Post-deal support</li>
-        </ul>
-        <p class='mb-4'>We further also assist the company through the credit rating process, especially when the businesses are looking for debt financing in early stages of the business, by helping the company in selecting the appropriate rating agency, representing the company to the rating agencies and driving the dialogue for attaining the appropriate rating.</p>
-        <p>We are also committed to maintaining relationships with key lenders and investors post-execution of the transaction.</p>
+        <div class='mb-10'>
+            <h3 class='text-2xl font-serif text-[#0f2c59] mb-4'>End-to-End Execution Support</h3>
+            <p class='mb-4'>We work with a wide network of lenders and investors to ensure access to the most relevant financing options. Our team supports clients across the entire debt syndication process, including:</p>
+            <ul class='list-disc pl-5 space-y-2 mb-4'>
+                <li>Preparing lender and investor-facing marketing materials</li>
+                <li>Negotiating term sheets</li>
+                <li>Assisting with loan and transaction documentation</li>
+                <li>Managing pre-disbursement formalities</li>
+                <li>Providing post-transaction support</li>
+            </ul>
+        </div>
+
+        <div>
+           <h3 class='text-2xl font-serif text-[#0f2c59] mb-4'>Ongoing Lender & Investor Engagement</h3>
+           <p>Our engagement extends beyond transaction execution. We actively support clients in maintaining strong, long-term relationships with lenders and investors, ensuring continuity, transparency, and access to future funding opportunities.</p>
+        </div>
       "
-      outcomes={[
-        "Customized integrated product solutions attuned to business needs",
-        "Access to a wide spectrum of Lenders and Investors",
-        "Reduction in cost of funds through right debt strategy",
-        "End-to-end support from marketing to post-deal relationship management",
-        "Expert assistance with credit rating processes"
-      ]}
     />
   )
 }

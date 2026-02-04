@@ -45,7 +45,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/services/fundraising" className="text-white/70 hover:text-white transition-colors">
-                  Fundraising
+                  Fundraising Advisory
                 </Link>
               </li>
               <li>
@@ -55,12 +55,12 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/services/mergers-acquisitions" className="text-white/70 hover:text-white transition-colors">
-                  M&A Advisory
+                  Mergers & Acquisitions
                 </Link>
               </li>
               <li>
                 <Link href="/services/private-equity" className="text-white/70 hover:text-white transition-colors">
-                  Private Equity
+                  Private Equity Advisory
                 </Link>
               </li>
               <li>

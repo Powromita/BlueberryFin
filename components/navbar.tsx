@@ -8,10 +8,10 @@ import { ChevronDownIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outli
 import { Logo } from "./logo"
 
 const services = [
-  { name: "IPO Advisory & Readiness", href: "/services/ipo-advisory" },
-  { name: "Fundraising Service", href: "/services/fundraising" },
-  { name: "Private Equity", href: "/services/private-equity" },
-  { name: "Merger & Acquisition", href: "/services/mergers-acquisitions" },
+  { name: "IPO Advisory & Capital Markets", href: "/services/ipo-advisory" },
+  { name: "Fundraising Advisory", href: "/services/fundraising" },
+  { name: "Private Equity Advisory", href: "/services/private-equity" },
+  { name: "Mergers & Acquisitions", href: "/services/mergers-acquisitions" },
   { name: "Debt Syndication", href: "/services/debt-syndication" },
   { name: "Startup Advisory", href: "/services/startup-advisory" },
 ]
@@ -19,7 +19,7 @@ const services = [
 export function Navbar() {
   const pathname = usePathname()
   const isServicePage = pathname.includes("/services/")
-  
+
   const [servicesOpen, setServicesOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -34,7 +34,7 @@ export function Navbar() {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
       setScrolled(currentScrollY > 10)
-      
+
       // Show navbar in top section (first 300px of any page)
       const topThreshold = 300
       if (currentScrollY < topThreshold) {
@@ -50,26 +50,26 @@ export function Navbar() {
           setIsVisible(false)
         }
       }
-      
+
       // Detect if navbar is over a dark section
       const navbar = document.querySelector('nav')
       if (!navbar) return
-      
+
       const navbarRect = navbar.getBoundingClientRect()
       const navbarCenter = navbarRect.top + navbarRect.height / 2
-      
+
       const elementAtCenter = document.elementFromPoint(window.innerWidth / 2, navbarCenter + navbarRect.height)
-      
+
       if (elementAtCenter) {
         const section = elementAtCenter.closest('section')
         if (section) {
           const bgColor = window.getComputedStyle(section).backgroundColor
           // Check if background is dark (sapphire)
           const isDark = bgColor.includes('rgb(15, 44, 89)') || // #0f2c59
-                        bgColor.includes('rgb(30, 58, 138)') ||  // #1e3a8a
-                        section.classList.contains('bg-[#0f2c59]') ||
-                        section.classList.contains('bg-[#1e3a8a]') ||
-                        section.classList.contains('dark-section')
+            bgColor.includes('rgb(30, 58, 138)') ||  // #1e3a8a
+            section.classList.contains('bg-[#0f2c59]') ||
+            section.classList.contains('bg-[#1e3a8a]') ||
+            section.classList.contains('dark-section')
           setIsDarkSection(isDark)
         }
       }
@@ -79,35 +79,35 @@ export function Navbar() {
       const currentScrollY = window.scrollY
       const topThreshold = 300
       const isInTopSection = currentScrollY < topThreshold
-      
+
       // Check if mouse is within 100px of top
       const isNearTop = e.clientY < 100
       setMouseNearTop(isNearTop)
-      
+
       // Only show navbar on hover if we're below top section
       if (!isInTopSection && isNearTop) {
         setIsVisible(true)
-        
+
         // Clear existing timeout
         if (hideTimeout) {
           clearTimeout(hideTimeout)
         }
-        
+
         // Set new timeout to hide after 2 seconds if not hovering navbar
         const timeout = setTimeout(() => {
           if (!isHoveringNav) {
             setIsVisible(false)
           }
         }, 2000)
-        
+
         setHideTimeout(timeout)
       }
     }
-    
+
     handleScroll()
     window.addEventListener("scroll", handleScroll)
     window.addEventListener("mousemove", handleMouseMove)
-    
+
     return () => {
       window.removeEventListener("scroll", handleScroll)
       window.removeEventListener("mousemove", handleMouseMove)
@@ -127,11 +127,11 @@ export function Navbar() {
   // Dynamic color classes
   // On service pages: start with blue, then switch based on isDarkSection
   // On home page: start with white (hero), then switch based on isDarkSection
-  const textColor = scrolled 
-    ? (isDarkSection ? "text-white" : "text-[#2563eb]") 
+  const textColor = scrolled
+    ? (isDarkSection ? "text-white" : "text-[#2563eb]")
     : (isServicePage ? "text-[#2563eb]" : "text-white")
-  const hoverColor = scrolled 
-    ? (isDarkSection ? "hover:text-white/80" : "hover:text-[#0f2c59]") 
+  const hoverColor = scrolled
+    ? (isDarkSection ? "hover:text-white/80" : "hover:text-[#0f2c59]")
     : (isServicePage ? "hover:text-[#0f2c59]" : "hover:text-white/80")
   // Fully transparent with minimal blur
   const bgColor = "bg-transparent backdrop-blur-sm"
@@ -150,7 +150,7 @@ export function Navbar() {
         setIsHoveringNav(false)
         const currentScrollY = window.scrollY
         const isInHeroSection = currentScrollY < window.innerHeight
-        
+
         // Only auto-hide if outside hero section
         if (!isInHeroSection) {
           const timeout = setTimeout(() => {
@@ -175,10 +175,10 @@ export function Navbar() {
                   CAPITAL
                 </span>
               </div>
-              
+
               {/* Desktop Logo - Full */}
               <div className="hidden sm:flex flex-col">
-                <motion.span 
+                <motion.span
                   className={`font-bold text-lg md:text-xl tracking-tight leading-none ${isDarkSection ? 'text-white' : 'bg-clip-text text-transparent bg-gradient-to-r from-[#0f2c59] via-[#2563eb] to-[#0f2c59]'}`}
                   animate={isDarkSection ? {} : {
                     backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
@@ -194,7 +194,7 @@ export function Navbar() {
                 >
                   BLUEBERRYFIN
                 </motion.span>
-                <motion.span 
+                <motion.span
                   className={`font-medium text-xs md:text-sm tracking-wide leading-none mt-0.5 ${isDarkSection ? 'text-white/90' : 'bg-clip-text text-transparent bg-gradient-to-r from-[#0f2c59] via-[#2563eb] to-[#0f2c59]'}`}
                   animate={isDarkSection ? {} : {
                     backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
@@ -270,7 +270,7 @@ export function Navbar() {
                 )}
               </div>
 
-              <Link 
+              <Link
                 href="/core-team"
                 onClick={markInternalNavigation}
                 className={`${textColor} ${hoverColor} transition-colors font-medium text-[15px]`}
@@ -313,16 +313,16 @@ export function Navbar() {
           >
             <div className="space-y-1 py-4">
               <div className="px-4">
-                <button 
+                <button
                   onClick={() => setServicesOpen(!servicesOpen)}
                   className={`flex items-center justify-between gap-2 w-full ${textColor} ${hoverColor} transition-colors font-medium py-3 min-h-[44px]`}
                 >
                   <span>Services</span>
                   <ChevronDownIcon className={`w-5 h-5 transition-transform duration-300 ${servicesOpen ? "rotate-180" : ""}`} />
                 </button>
-                
+
                 {servicesOpen && (
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     className="mt-1 space-y-1 pl-4"
@@ -341,7 +341,7 @@ export function Navbar() {
                 )}
               </div>
 
-              <Link 
+              <Link
                 href="/core-team"
                 onClick={markInternalNavigation}
                 className={`block ${textColor} ${hoverColor} transition-colors font-medium px-4 py-3 min-h-[44px] flex items-center`}
