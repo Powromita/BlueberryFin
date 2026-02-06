@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 const financialSolutions = [
   {
@@ -54,6 +54,16 @@ export function InteractiveImageBackground() {
   })
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [windowWidth, setWindowWidth] = useState<number>(1024)
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setWindowWidth(window.innerWidth)
+      const handleResize = () => setWindowWidth(window.innerWidth)
+      window.addEventListener("resize", handleResize)
+      return () => window.removeEventListener("resize", handleResize)
+    }
+  }, [])
 
   // Calculate card width and position based on hover state
   const getCardStyle = (index: number) => {
@@ -61,11 +71,30 @@ export function InteractiveImageBackground() {
       // No hover - all cards equal width
       return "flex-1"
     } else if (hoveredIndex === index) {
-      // This card is hovered - shrink even more
+      // This card is hovered - expand
       return "flex-[0.7]"
     } else {
-      // Other cards - minimize significantly
+      // Other cards - minimize
       return "flex-[0.3]"
+    }
+  }
+
+  // Get responsive font sizes for titles based on screen width and hover state
+  const getTitleFontSize = (isHovered: boolean, isMobile: boolean, isSmall: boolean, isMinimized: boolean) => {
+    // If card is minimized (collapsed), use readable font that wraps to 2 lines
+    if (isMinimized) {
+      return '0.875rem' // 14px - allows text to wrap nicely into 2 lines
+    }
+
+    if (isMobile) {
+      // Mobile: 375px - 425px
+      return isHovered ? '0.875rem' : '0.75rem' // 14px or 12px
+    } else if (isSmall) {
+      // Small devices: 425px - 768px
+      return isHovered ? '1.125rem' : '0.875rem' // 18px or 14px
+    } else {
+      // Desktop: 768px+
+      return isHovered ? '1.875rem' : '1.5rem' // 30px or 24px
     }
   }
 
@@ -105,7 +134,7 @@ export function InteractiveImageBackground() {
         </motion.div>
 
         {/* Expandable Cards Row */}
-        <div className="flex gap-4 h-[500px]">
+        <div className="flex flex-col md:flex-row gap-3 md:gap-4 h-auto md:h-[500px]">
           {financialSolutions.map((item, idx) => (
             <motion.div
               key={idx}
@@ -117,7 +146,11 @@ export function InteractiveImageBackground() {
               }}
               onMouseEnter={() => setHoveredIndex(idx)}
               onMouseLeave={() => setHoveredIndex(null)}
-              className={`relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ease-out ${getCardStyle(idx)}`}
+              className={`relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ease-out ${
+                windowWidth < 768 
+                  ? "h-[250px] w-full" 
+                  : "h-full " + getCardStyle(idx)
+              }`}
             >
               {/* Background Image */}
               <motion.div
@@ -147,12 +180,17 @@ export function InteractiveImageBackground() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0f2c59]/90 via-[#0f2c59]/50 to-transparent" />
 
               {/* Content */}
-              <div className="absolute inset-0 flex flex-col justify-between p-6 text-white z-20 overflow-hidden">
-                {/* Title - Always visible and horizontal */}
+              <div className="absolute inset-0 flex flex-col justify-between p-3 md:p-6 text-white z-20 overflow-hidden">
+                {/* Title - Always visible and responsive */}
                 <motion.h3
-                  className="font-bold mb-4 break-words leading-tight"
+                  className="font-bold mb-2 md:mb-4 break-words leading-tight"
                   animate={{
-                    fontSize: hoveredIndex === null ? '1.875rem' : hoveredIndex === idx ? '1.875rem' : '1.5rem',
+                    fontSize: getTitleFontSize(
+                      hoveredIndex === idx,
+                      windowWidth < 426,
+                      windowWidth < 768,
+                      windowWidth >= 768 && hoveredIndex !== null && hoveredIndex !== idx
+                    ),
                   }}
                   transition={{ duration: 0.4 }}
                   style={{ 
@@ -171,12 +209,12 @@ export function InteractiveImageBackground() {
                     x: hoveredIndex === idx ? 0 : -30,
                   }}
                   transition={{ duration: 0.4 }}
-                  className="space-y-3"
+                  className="space-y-2 md:space-y-3"
                 >
                   {item.bullets.map((bullet, bulletIdx) => (
-                    <div key={bulletIdx} className="flex items-start gap-3">
-                      <div className="flex-shrink-0 w-2 h-2 rounded-full bg-white mt-1.5 ring-2 ring-white/30" />
-                      <p className="text-sm md:text-base text-white leading-relaxed">
+                    <div key={bulletIdx} className="flex items-start gap-2 md:gap-3">
+                      <div className="flex-shrink-0 w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-white mt-1 md:mt-1.5 ring-2 ring-white/30" />
+                      <p className="text-xs md:text-base text-white leading-relaxed">
                         {bullet}
                       </p>
                     </div>
