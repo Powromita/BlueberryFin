@@ -30,38 +30,6 @@ const teamMembers = [
     expertise: ["IPO Readiness", "Compliance", "Investor Relations"],
     icon: ChartBarIcon,
   },
-  {
-    name: "Amit Patel",
-    role: "Director, M&A",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop",
-    bio: "Expert in cross-border M&A and strategic partnerships. Closed 100+ deals across Asia-Pacific region.",
-    expertise: ["Deal Structuring", "Due Diligence", "Negotiations"],
-    icon: BuildingOfficeIcon,
-  },
-  {
-    name: "Sunita Reddy",
-    role: "Head of Private Equity",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=500&fit=crop",
-    bio: "20+ years managing PE investments across sectors. Portfolio companies achieved 3x average returns.",
-    expertise: ["PE Investments", "Portfolio Management", "Exit Strategy"],
-    icon: CurrencyDollarIcon,
-  },
-  {
-    name: "Vikram Singh",
-    role: "Director, Debt Syndication",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=500&fit=crop",
-    bio: "Structured $3B+ in debt financing for corporates. Deep relationships with banks and financial institutions.",
-    expertise: ["Debt Structuring", "Syndication", "Refinancing"],
-    icon: BuildingOfficeIcon,
-  },
-  {
-    name: "Ananya Desai",
-    role: "Head of Startup Advisory",
-    image: "https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400&h=500&fit=crop",
-    bio: "Mentored 100+ startups from seed to Series C. 15 portfolio companies achieved unicorn status.",
-    expertise: ["Fundraising", "Growth Strategy", "Scaling Operations"],
-    icon: RocketLaunchIcon,
-  },
 ]
 
 export default function CoreTeamPage() {
@@ -75,7 +43,7 @@ export default function CoreTeamPage() {
       <Navbar />
       
       {/* Hero Section with Animated Background */}
-      <section className="relative pt-32 pb-20 bg-[#0f2c59] overflow-hidden">
+      <section className="relative pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-16 md:pb-20 bg-[#0f2c59] overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0 opacity-10">
           <motion.div
@@ -111,31 +79,31 @@ export default function CoreTeamPage() {
               transition={{ duration: 0.5 }}
               className="inline-block mb-6"
             >
-              <UserGroupIcon className="w-20 h-20 text-[#2563eb] mx-auto" />
+              <UserGroupIcon className="w-16 h-16 sm:w-20 sm:h-20 text-[#2563eb] mx-auto" />
             </motion.div>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 px-4">
               Meet Our Leadership
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-blue-100 max-w-3xl mx-auto leading-relaxed px-4">
               A team of seasoned professionals driving financial excellence for India's leading corporates and HNIs
             </p>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="mt-8 flex justify-center gap-8 text-blue-200"
+              className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 md:gap-8 text-blue-200 px-4"
             >
               <div className="text-center">
-                <div className="text-4xl font-bold text-white">150+</div>
-                <div className="text-sm">Years Combined Experience</div>
+                <div className="text-3xl sm:text-4xl font-bold text-white">35+</div>
+                <div className="text-xs sm:text-sm">Years Combined Experience</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-white">$20B+</div>
-                <div className="text-sm">Deals Closed</div>
+                <div className="text-3xl sm:text-4xl font-bold text-white">$15B+</div>
+                <div className="text-xs sm:text-sm">Deals Closed</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-white">500+</div>
-                <div className="text-sm">Happy Clients</div>
+                <div className="text-3xl sm:text-4xl font-bold text-white">200+</div>
+                <div className="text-xs sm:text-sm">Happy Clients</div>
               </div>
             </motion.div>
           </motion.div>
@@ -143,15 +111,15 @@ export default function CoreTeamPage() {
       </section>
 
       {/* Team Grid with Staggered Animation */}
-      <section ref={ref} className="py-20 relative">
+      <section ref={ref} className="py-12 sm:py-16 md:py-20 relative">
         {/* Background decoration */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#2563eb]/5 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#0f2c59]/5 rounded-full blur-3xl" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
             {teamMembers.map((member, idx) => {
               const Icon = member.icon
               return (
@@ -166,12 +134,12 @@ export default function CoreTeamPage() {
                     {/* Gradient overlay on hover */}
                     <div className="absolute inset-0 bg-gradient-to-br from-[#2563eb]/0 to-[#0f2c59]/0 group-hover:from-[#2563eb]/10 group-hover:to-[#0f2c59]/10 transition-all duration-500 z-10 pointer-events-none" />
                     
-                    {/* Image with icon overlay */}
-                    <div className="relative h-80 overflow-hidden">
+                    {/* Image with icon overlay - NO ZOOM */}
+                    <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden">
                       <img
                         src={member.image}
                         alt={member.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        className="w-full h-full object-cover"
                       />
                       {/* Icon badge */}
                       <motion.div
@@ -183,36 +151,33 @@ export default function CoreTeamPage() {
                         <Icon className="w-6 h-6 text-[#2563eb]" />
                       </motion.div>
                       
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0f2c59]/95 via-[#0f2c59]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      
-                      {/* Expertise tags on hover */}
-                      <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500 space-y-2">
-                        {member.expertise.map((skill, i) => (
-                          <motion.div
-                            key={i}
-                            initial={{ x: -20, opacity: 0 }}
-                            whileInView={{ x: 0, opacity: 1 }}
-                            transition={{ delay: i * 0.1 }}
-                            className="inline-block bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs text-white mr-2"
-                          >
-                            {skill}
-                          </motion.div>
-                        ))}
-                      </div>
+                      {/* Gradient overlay at bottom */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                     </div>
                     
                     {/* Content */}
-                    <div className="p-6 relative z-20">
-                      <h3 className="text-2xl font-bold text-[#0f2c59] mb-2 group-hover:text-[#2563eb] transition-colors">
+                    <div className="p-4 sm:p-6 md:p-8 relative z-20">
+                      <h3 className="text-xl sm:text-2xl font-bold text-[#0f2c59] mb-2 group-hover:text-[#2563eb] transition-colors">
                         {member.name}
                       </h3>
-                      <p className="text-[#2563eb] font-semibold mb-3 text-sm uppercase tracking-wide">
+                      <p className="text-[#2563eb] font-semibold mb-4 text-sm uppercase tracking-wide">
                         {member.role}
                       </p>
-                      <p className="text-gray-600 leading-relaxed text-sm">
+                      <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-4 sm:mb-6">
                         {member.bio}
                       </p>
+                      
+                      {/* Expertise tags - Always visible */}
+                      <div className="flex flex-wrap gap-2">
+                        {member.expertise.map((skill, i) => (
+                          <div
+                            key={i}
+                            className="inline-block bg-[#f5f0eb] px-3 py-1.5 rounded-full text-xs font-medium text-[#0f2c59] border border-[#0f2c59]/20"
+                          >
+                            {skill}
+                          </div>
+                        ))}
+                      </div>
                     </div>
 
                     {/* Bottom accent line */}
