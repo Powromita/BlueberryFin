@@ -84,16 +84,29 @@ export function ContactSection() {
       return
     }
 
-    if (formData.phone) {
-      try {
-        if (!isValidPhoneNumber(formData.phone)) {
-          toast.error("Please enter a valid phone number")
-          return
-        }
-      } catch (error) {
-        toast.error("Invalid phone number format")
+    if (!formData.company.trim()) {
+      toast.error("Please enter your company name")
+      return
+    }
+
+    if (!formData.phone) {
+      toast.error("Please enter your phone number")
+      return
+    }
+
+    try {
+      if (!isValidPhoneNumber(formData.phone)) {
+        toast.error("Please enter a valid phone number")
         return
       }
+    } catch (error) {
+      toast.error("Invalid phone number format")
+      return
+    }
+
+    if (!formData.message.trim()) {
+      toast.error("Please enter your message")
+      return
     }
 
     setIsSubmitting(true)
@@ -101,26 +114,47 @@ export function ContactSection() {
     try {
       const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
       const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+      const autoReplyTemplateId = process.env.NEXT_PUBLIC_EMAILJS_AUTOREPLY_TEMPLATE_ID
       const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
 
       if (!serviceId || !templateId || !publicKey) {
         throw new Error("EmailJS configuration is missing.")
       }
 
+      // Send notification email to you
       await emailjs.send(
         serviceId,
         templateId,
         {
-          to_email: "sm091849@gmail.com",
+          to_email: "mit.mehta@blueberryfin.com",
           from_name: formData.name,
           from_email: formData.email,
-          company: formData.company || "Not provided",
-          phone: formData.phone || "Not provided",
+          company: formData.company,
+          phone: formData.phone,
           message: formData.message,
           reply_to: formData.email,
         },
         publicKey
       )
+
+      // Send auto-reply confirmation to sender
+      if (autoReplyTemplateId) {
+        try {
+          await emailjs.send(
+            serviceId,
+            autoReplyTemplateId,
+            {
+              to_email: formData.email,
+              to_name: formData.name,
+              message: formData.message,
+            },
+            publicKey
+          )
+        } catch (autoReplyError) {
+          console.error("Auto-reply failed:", autoReplyError)
+          // Don't fail the whole submission if auto-reply fails
+        }
+      }
 
       toast.success("Message sent successfully! We'll get back to you soon.")
       
@@ -151,8 +185,8 @@ export function ContactSection() {
     {
       icon: EnvelopeIcon,
       title: "Email Us",
-      value: "sm091849@gmail.com",
-      href: "mailto:sm091849@gmail.com",
+      value: "mit.mehta@blueberryfin.com",
+      href: "mailto:mit.mehta@blueberryfin.com",
       color: "hover:bg-red-50 hover:text-red-600",
       borderColor: "hover:border-red-200"
     },
@@ -287,12 +321,13 @@ export function ContactSection() {
                 <div>
                   <input
                     type="text"
-                    placeholder="Company Name"
+                    placeholder="Company Name *"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                     onFocus={() => setFocusedField("company")}
                     onBlur={() => setFocusedField(null)}
                     className="w-full px-0 py-3 border-b-2 border-gray-300 focus:border-[#2563eb] bg-transparent outline-none transition-colors text-gray-800 placeholder-gray-400"
+                    required
                   />
                 </div>
 
@@ -306,8 +341,9 @@ export function ContactSection() {
                     onFocus={() => setFocusedField("phone")}
                     onBlur={() => setFocusedField(null)}
                     className="w-full"
-                    placeholder="Phone Number"
+                    placeholder="Phone Number *"
                     limitMaxLength={true}
+                    required
                   />
                 </div>
 
