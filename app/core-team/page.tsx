@@ -102,7 +102,7 @@ export default function CoreTeamPage() {
                 <div className="text-xs sm:text-sm">Deals Closed</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl sm:text-4xl font-bold text-white">200+</div>
+                <div className="text-3xl sm:text-4xl font-bold text-white">45+</div>
                 <div className="text-xs sm:text-sm">Happy Clients</div>
               </div>
             </motion.div>

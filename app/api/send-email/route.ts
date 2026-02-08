@@ -17,7 +17,6 @@ export async function POST(request: NextRequest) {
     }
 
     // Send notification email to business
-    console.log('Sending notification email to:', 'mit.mehta@blueberryfin.com');
     const notificationEmail = await resend.emails.send({
       from: 'BlueberryFin <onboarding@resend.dev>',
       to: 'mit.mehta@blueberryfin.com',
@@ -156,15 +155,11 @@ export async function POST(request: NextRequest) {
       `,
     });
 
-    console.log('Notification email result:', notificationEmail);
-
     if (notificationEmail.error) {
-      console.error('Notification email error:', notificationEmail.error);
       throw new Error(`Failed to send notification: ${notificationEmail.error.message}`);
     }
 
     // Send auto-reply to customer
-    console.log('Sending auto-reply email to:', email);
     const autoReplyEmail = await resend.emails.send({
       from: 'BlueberryFin <onboarding@resend.dev>',
       to: email,
@@ -268,22 +263,13 @@ export async function POST(request: NextRequest) {
       `,
     });
 
-    console.log('Auto-reply email result:', autoReplyEmail);
-
-    if (autoReplyEmail.error) {
-      console.error('Auto-reply email error:', autoReplyEmail.error);
-      // Don't fail the whole request if auto-reply fails
-    }
-
     return NextResponse.json({
       success: true,
       notificationId: notificationEmail.data?.id,
       autoReplyId: autoReplyEmail.data?.id,
-      autoReplyError: autoReplyEmail.error || null,
     });
 
   } catch (error: any) {
-    console.error('Email sending error:', error);
     return NextResponse.json(
       { error: error.message || 'Failed to send email' },
       { status: 500 }

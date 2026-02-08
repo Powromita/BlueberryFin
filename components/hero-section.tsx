@@ -204,7 +204,7 @@ export function HeroSection() {
                     animate={{ scale: 1 }}
                     transition={{ delay: 1.2, type: "spring", stiffness: 200 }}
                   >
-                    ₹1000Cr+
+                    ₹1700Cr+
                   </motion.h3>
                   <p className="text-xs sm:text-sm text-gray-300 flex items-center justify-center gap-1">
                     <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

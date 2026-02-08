@@ -149,9 +149,8 @@ export function ContactSection() {
   }
 
   const benefits = [
-    "Custom recommendations. Expert guidance. Better coverage for your business.",
+    "Custom recommendations. Expert guidance.",
     "High quality financial solutions like IPO advisory, fundraising & more",
-    "Day 1 support for your team and their families. Parents covered.",
     "Setup and go live in days, not months.",
     "End-to-end deal execution with dedicated support.",
   ]
@@ -168,8 +167,8 @@ export function ContactSection() {
     {
       icon: PhoneIcon,
       title: "Call Us",
-      value: "+91 9870333395",
-      href: "tel:+919870333395",
+      value: "+91 8080199999",
+      href: "tel:+918080199999",
       color: "hover:bg-green-50 hover:text-green-600",
       borderColor: "hover:border-green-200"
     },
@@ -177,7 +176,7 @@ export function ContactSection() {
       icon: ChatBubbleLeftRightIcon,
       title: "WhatsApp",
       value: "Chat with us",
-      href: "https://wa.me/919870333395",
+      href: "https://wa.me/918080199999",
       color: "hover:bg-emerald-50 hover:text-emerald-600",
       borderColor: "hover:border-emerald-200"
     }
@@ -192,7 +191,7 @@ export function ContactSection() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-16">
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-stretch">
           {/* Left Column - Benefits & Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -224,10 +223,12 @@ export function ContactSection() {
               ))}
             </div>
 
+
+
             {/* Direct Contact Cards - Horizontal Row */}
             <div className="pt-6 sm:pt-8 border-t border-white/10 w-full">
               <p className="text-xs sm:text-sm text-blue-200 mb-4 font-medium uppercase tracking-wider">Direct Contact</p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                 {contactOptions.map((option, idx) => {
                   const Icon = option.icon
                   return (
@@ -250,6 +251,32 @@ export function ContactSection() {
             </div>
 
 
+                        {/* Office Address */}
+            <div className="pt-6 sm:pt-8 border-t border-white/10 w-full">
+              <p className="text-xs sm:text-sm text-blue-200 mb-3 font-medium uppercase tracking-wider">Office Address</p>
+              <a 
+                href="https://www.google.com/maps/place/Apurva+Estate+Compound/@19.1123382,72.8815091,18z/data=!3m1!4b1!4m6!3m5!1s0x3be7c8138fb7a2cd:0x79ab83b3eee7f5fe!8m2!3d19.1123382!4d72.8825917!16s%2Fg%2F1xpwh7j2?entry=ttu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 bg-white/5 border border-white/10 rounded-xl p-4 sm:p-5 backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-blue-300 hover:scale-[1.02] cursor-pointer group"
+              >
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-blue-300 flex-shrink-0 mt-0.5 group-hover:text-blue-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <div className="flex-1">
+                  <p className="text-white text-sm sm:text-base leading-relaxed group-hover:text-blue-100 transition-colors">
+                    Unit No.17, Apurva Industrial Estate,
+                    Makwana Road, Marol Naka, Andheri (East), Mumbai - 400 059
+                  </p>
+                </div>
+                <svg className="w-4 h-4 text-blue-300 flex-shrink-0 mt-1 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            </div>
+
+
           </motion.div>
 
           {/* Right Column - Form */}
@@ -258,12 +285,12 @@ export function ContactSection() {
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="bg-[#f5f0eb] rounded-2xl p-6 sm:p-8 md:p-10 shadow-2xl">
+            <div className="bg-[#f5f0eb] rounded-2xl p-6 sm:p-8 md:p-10 shadow-2xl h-full flex flex-col">
               <h3 className="text-xl sm:text-2xl font-serif text-[#0f2c59] mb-2">
                 Build your plan <span className="italic">with BlueberryFin</span>
               </h3>
               
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 mt-4 sm:mt-6">
+              <form onSubmit={handleSubmit} className="flex-1 flex flex-col space-y-4 sm:space-y-5 mt-4 sm:mt-6">
                 {/* Name */}
                 <div>
                   <input
@@ -373,7 +400,7 @@ export function ContactSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-8 sm:pb-12">
         <div className="w-full h-[300px] sm:h-[400px] rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative group">
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.218342263435!2d72.83244837508316!3d18.921989182250107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7d1c73a0d5cad%3A0xc70a25a7209c733c!2sGateway%20Of%20India%20Mumbai!5e0!3m2!1sen!2sin!4v1706691234567!5m2!1sen!2sin" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.6857474847716!2d72.88150907508586!3d19.112338182258855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8138fb7a2cd%3A0x79ab83b3eee7f5fe!2sApurva%20Estate%20Compound!5e0!3m2!1sen!2sin!4v1707405119000!5m2!1sen!2sin" 
             width="100%" 
             height="100%" 
             style={{ border: 0 }} 
