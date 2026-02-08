@@ -10,7 +10,6 @@ import {
   PhoneIcon, 
   ChatBubbleLeftRightIcon 
 } from "@heroicons/react/24/outline"
-import emailjs from '@emailjs/browser'
 import { toast } from "sonner"
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
@@ -112,48 +111,24 @@ export function ContactSection() {
     setIsSubmitting(true)
 
     try {
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
-      const autoReplyTemplateId = process.env.NEXT_PUBLIC_EMAILJS_AUTOREPLY_TEMPLATE_ID
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-
-      if (!serviceId || !templateId || !publicKey) {
-        throw new Error("EmailJS configuration is missing.")
-      }
-
-      // Send notification email to you
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          to_email: "mit.mehta@blueberryfin.com",
-          from_name: formData.name,
-          from_email: formData.email,
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
           company: formData.company,
           phone: formData.phone,
           message: formData.message,
-          reply_to: formData.email,
-        },
-        publicKey
-      )
+        }),
+      })
 
-      // Send auto-reply confirmation to sender
-      if (autoReplyTemplateId) {
-        try {
-          await emailjs.send(
-            serviceId,
-            autoReplyTemplateId,
-            {
-              to_email: formData.email,
-              to_name: formData.name,
-              message: formData.message,
-            },
-            publicKey
-          )
-        } catch (autoReplyError) {
-          console.error("Auto-reply failed:", autoReplyError)
-          // Don't fail the whole submission if auto-reply fails
-        }
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send email')
       }
 
       toast.success("Message sent successfully! We'll get back to you soon.")
@@ -165,9 +140,9 @@ export function ContactSection() {
         phone: "",
         message: "",
       })
-    } catch (error) {
-      console.error("EmailJS Error:", error)
-      toast.error("Failed to send message. Please try again.")
+    } catch (error: any) {
+      console.error("Email sending error:", error)
+      toast.error(error.message || "Failed to send message. Please try again.")
     } finally {
       setIsSubmitting(false)
     }
