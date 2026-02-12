@@ -134,7 +134,7 @@ export function InteractiveImageBackground() {
         </motion.div>
 
         {/* Expandable Cards Row */}
-        <div className="flex flex-col md:flex-row gap-3 md:gap-4 h-auto md:h-[500px]">
+        <div className="grid grid-cols-2 md:flex md:flex-row gap-3 md:gap-4 h-auto md:h-[500px]">
           {financialSolutions.map((item, idx) => (
             <motion.div
               key={idx}
@@ -148,7 +148,7 @@ export function InteractiveImageBackground() {
               onMouseLeave={() => setHoveredIndex(null)}
               className={`relative rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ease-out ${
                 windowWidth < 768 
-                  ? "h-[250px] w-full" 
+                  ? "h-[200px]" 
                   : "h-full " + getCardStyle(idx)
               }`}
             >
@@ -212,9 +212,9 @@ export function InteractiveImageBackground() {
                   className="space-y-2 md:space-y-3"
                 >
                   {item.bullets.map((bullet, bulletIdx) => (
-                    <div key={bulletIdx} className="flex items-start gap-2 md:gap-3">
-                      <div className="flex-shrink-0 w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-white mt-1 md:mt-1.5 ring-2 ring-white/30" />
-                      <p className="text-xs md:text-base text-white leading-relaxed">
+                    <div key={bulletIdx} className="flex items-start gap-1 md:gap-3">
+                      <div className="flex-shrink-0 w-1 h-1 md:w-2 md:h-2 rounded-full bg-white mt-1 md:mt-1.5 ring-1 md:ring-2 ring-white/30" />
+                      <p className="text-[0.65rem] sm:text-xs md:text-base text-white leading-tight sm:leading-relaxed">
                         {bullet}
                       </p>
                     </div>

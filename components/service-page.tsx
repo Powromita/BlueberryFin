@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { CheckCircleIcon, ArrowLeftIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { Navbar } from "./navbar"
+import { Footer } from "./footer"
 
 interface ServicePageProps {
   title: string
@@ -132,6 +133,7 @@ export function ServicePage({ title, subtitle, description, whatWeDo, howWeEngag
           </div>
         </div>
       </div>
+      <Footer />
     </>
   )
 }
