@@ -7,27 +7,20 @@ import { useInView } from "react-intersection-observer"
 import { 
   BriefcaseIcon, 
   ChartBarIcon, 
-  CurrencyDollarIcon,
-  BuildingOfficeIcon,
-  RocketLaunchIcon,
   UserGroupIcon
 } from "@heroicons/react/24/outline"
 
 const teamMembers = [
   {
-    name: "Rajesh Kumar",
-    role: "Founder & CEO",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=500&fit=crop",
-    bio: "15+ years in investment banking and financial advisory. Led transformative deals worth $10B+ across sectors.",
-    expertise: ["Strategic Planning", "M&A", "IPO Advisory"],
+    name: "Mit Mehta",
+    role: "Managing Director",
+    image: "/mit-mehta.jpeg",
     icon: BriefcaseIcon,
   },
   {
-    name: "Priya Sharma",
-    role: "Head of IPO Advisory",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=500&fit=crop",
-    bio: "Led 50+ successful IPO transactions worth $5B+. Expert in regulatory compliance and market positioning.",
-    expertise: ["IPO Readiness", "Compliance", "Investor Relations"],
+    name: "Rita Mehta",
+    role: "Non-Executive Director",
+    image: "/rita-mehta.jpeg",
     icon: ChartBarIcon,
   },
 ]
@@ -98,7 +91,7 @@ export default function CoreTeamPage() {
                 <div className="text-xs sm:text-sm">Years Combined Experience</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl sm:text-4xl font-bold text-white">$15B+</div>
+                <div className="text-3xl sm:text-4xl font-bold text-white">₹1700Cr+</div>
                 <div className="text-xs sm:text-sm">Deals Closed</div>
               </div>
               <div className="text-center">
@@ -135,7 +128,7 @@ export default function CoreTeamPage() {
                     <div className="absolute inset-0 bg-gradient-to-br from-[#2563eb]/0 to-[#0f2c59]/0 group-hover:from-[#2563eb]/10 group-hover:to-[#0f2c59]/10 transition-all duration-500 z-10 pointer-events-none" />
                     
                     {/* Image with icon overlay - NO ZOOM */}
-                    <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden">
+                    <div className="relative h-[420px] sm:h-[500px] md:h-[560px] overflow-hidden">
                       <img
                         src={member.image}
                         alt={member.name}
@@ -160,24 +153,9 @@ export default function CoreTeamPage() {
                       <h3 className="text-xl sm:text-2xl font-bold text-[#0f2c59] mb-2 group-hover:text-[#2563eb] transition-colors">
                         {member.name}
                       </h3>
-                      <p className="text-[#2563eb] font-semibold mb-4 text-sm uppercase tracking-wide">
+                      <p className="text-[#2563eb] font-semibold text-sm uppercase tracking-wide">
                         {member.role}
                       </p>
-                      <p className="text-gray-600 leading-relaxed text-sm sm:text-base mb-4 sm:mb-6">
-                        {member.bio}
-                      </p>
-                      
-                      {/* Expertise tags - Always visible */}
-                      <div className="flex flex-wrap gap-2">
-                        {member.expertise.map((skill, i) => (
-                          <div
-                            key={i}
-                            className="inline-block bg-[#f5f0eb] px-3 py-1.5 rounded-full text-xs font-medium text-[#0f2c59] border border-[#0f2c59]/20"
-                          >
-                            {skill}
-                          </div>
-                        ))}
-                      </div>
                     </div>
 
                     {/* Bottom accent line */}
