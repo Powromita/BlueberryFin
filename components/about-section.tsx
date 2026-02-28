@@ -93,7 +93,7 @@ export function AboutSection() {
               
               {[
                  { number: "20+", label: "Years Experience", sublabel: "In Financial Management" },
-                 { number: "12k+", label: "Crores Raised", sublabel: "(USD $1.8bn+)" },
+                 { number: "1700+", label: "Crores Raised", sublabel: "(USD $1.8bn+)" },
                  { number: "360°", label: "Perspective", sublabel: "Corporate & Banking" },
               ].map((stat, idx) => (
                 <motion.div
