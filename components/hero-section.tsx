@@ -161,8 +161,7 @@ export function HeroSection() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
               >
-                Driving results through data-informed and <br className="hidden sm:block" />
-                client-focused financial strategies for corporates and HNIs
+                Partnering for Growth, Powered by Capital <br className="hidden sm:block" />
               </motion.p>
 
               {/* CTA Button */}

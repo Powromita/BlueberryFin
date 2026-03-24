@@ -42,16 +42,23 @@ export function AboutSection() {
 
             <div className="space-y-4 text-base sm:text-lg text-blue-100 leading-relaxed">
               <p>
-                <span className="font-bold text-white">BlueberryFin Capital</span> is a Capital Advisory firm, providing unbiased, tactical, strategic financial advice and investment banking services to our clients through our in-depth knowledge and expertise across industries.
+                Relationship-Driven Excellence from Private Equity to Public Markets
+              </p>
+
+              <p>
+                <span className="font-bold text-white">BlueberryFin Capital</span> is a capital advisory and investment banking firm delivering strategic, unbiased financial guidance across the entire capital lifecycle.
               </p>
               <p>
-                We work with our clients through all phases of the business cycle through expert capabilities in Financing, M&A and Capital Markets.
+                We partner with businesses over the long term supporting them from early-stage private equity funding to public market transactions. Our approach is rooted in deep relationships, disciplined execution, and a strong understanding of capital markets.
+              </p>
+              <p>
+                With expertise spanning fundraising, mergers &amp; acquisitions, and capital markets, we enable clients to navigate complex financial decisions and achieve sustainable growth.
               </p>
             </div>
 
-            <div className="mt-8">
+            {/* <div className="mt-8">
               <h3 className="text-xl font-bold text-white mb-4">Our Business Philosophy</h3>
-              {/* Key Points - Simple List */}
+              {/* Key Points - Simple List *
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -59,10 +66,10 @@ export function AboutSection() {
                 className="space-y-4"
               >
                 {[
-                  { title: "Excellence", desc: "We strive to achieve our goals through excellence." },
-                  { title: "Integrity", desc: "We exhibit honesty and integrity at all times." },
-                  { title: "Ingenuity", desc: "We are committed to new innovation." },
-                  { title: "Leadership", desc: "We lead by example." }
+                  { title: "Excellence", desc: "We maintain high standards in execution and outcomes." },
+                  { title: "Integrity", desc: "We operate with transparency and accountability." },
+                  { title: "Ingenuity", desc: "We apply thoughtful, adaptive financial strategies." },
+                  { title: "Leadership", desc: "We take ownership and lead with conviction." }
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-4 group">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#60a5fa] mt-2.5 group-hover:scale-150 transition-transform duration-300 flex-shrink-0" />
@@ -73,7 +80,7 @@ export function AboutSection() {
                   </div>
                 ))}
               </motion.div>
-            </div>
+            </div> */}
           </motion.div>
 
           {/* Right Column - 40% - Stats */}
@@ -87,14 +94,14 @@ export function AboutSection() {
               <div className="mb-6">
                 <h3 className="text-xl font-bold text-white mb-3">Our Vision</h3>
                 <p className="text-base text-blue-100 italic">
-                  "To be the preferred capital advisory company through Leadership and Excellence"
+                  "To be a trusted capital advisory firm known for leadership, discipline, and consistent execution.
                 </p>
               </div>
               
               {[
                  { number: "20+", label: "Years Experience", sublabel: "In Financial Management" },
                  { number: "1700+", label: "Crores Raised", sublabel: "(USD $1.8bn+)" },
-                 { number: "360°", label: "Perspective", sublabel: "Corporate & Banking" },
+                 //{ number: "360°", label: "Perspective", sublabel: "Corporate & Banking" },
               ].map((stat, idx) => (
                 <motion.div
                   key={idx}
