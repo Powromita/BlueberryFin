@@ -90,7 +90,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-6 sm:pt-8 text-center text-xs sm:text-sm text-white/70">
-          <p>&copy; {currentYear} BlueberryFin Capital. All rights reserved. GSTIN: 27XXXXXXXXXXXXX </p>
+          <p>&copy; {currentYear} BlueberryFin Capital. All rights reserved. GSTIN: 27AAOCB1459P1ZZ </p>
         </div>
       </div>
     </footer>
