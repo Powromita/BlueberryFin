@@ -2,40 +2,48 @@
 
 import { motion } from "framer-motion"
 import {
-  SparklesIcon,
-  CheckCircleIcon,
-  LightBulbIcon,
-  UserGroupIcon,
+  ArrowTrendingUpIcon,
+  HandRaisedIcon,
+  BuildingLibraryIcon,
+  RocketLaunchIcon,
+  LockClosedIcon,
 } from "@heroicons/react/24/outline"
 
 const features = [
   {
-    icon: SparklesIcon,
-    title: "Premium Analytics",
-    description: "Real-time insights and comprehensive financial analytics to make informed decisions",
+    icon: ArrowTrendingUpIcon,
+    title: "End-to-End Expertise",
+    description: "From private equity fundraising to IPO execution and post-listing strategy all under one roof.",
     color: "from-[#0f2c59] to-[#2563eb]",
     number: "01",
   },
   {
-    icon: CheckCircleIcon,
-    title: "Verified Expertise",
-    description: "Industry-leading professionals with proven track records in financial advisory",
+    icon: HandRaisedIcon,
+    title: "Relationship-Driven Advisory",
+    description: "Long-term partners to founders and boards, not just transaction-only advisors.",
     color: "from-[#2563eb] to-[#60a5fa]",
     number: "02",
   },
   {
-    icon: LightBulbIcon,
-    title: "Strategic Planning",
-    description: "Customized strategies tailored to your unique business goals and challenges",
+    icon: BuildingLibraryIcon,
+    title: "Indian Markets Expertise",
+    description: "Seasoned expertise in SEBI regulations, listing requirements, and investor expectations.",
     color: "from-[#0f2c59] to-[#003366]",
     number: "03",
   },
   {
-    icon: UserGroupIcon,
-    title: "Dedicated Support",
-    description: "Personal relationship managers available 24/7 for your financial needs",
+    icon: RocketLaunchIcon,
+    title: "Beyond Fundraising",
+    description: "We align your capital strategy with long-term growth, governance, and investor narrative.",
     color: "from-[#2563eb] to-[#003366]",
     number: "04",
+  },
+  {
+    icon: LockClosedIcon,
+    title: "Founder-Centric Approach",
+    description: "Bespoke, discreet advice tailored to your growth story, sector, and stakeholders.",
+    color: "from-[#0f2c59] to-[#2563eb]",
+    number: "05",
   },
 ]
 
@@ -66,7 +74,7 @@ export function FeaturesHighlight() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 lg:gap-12">
           {features.map((feature, idx) => {
             const IconComponent = feature.icon
             
