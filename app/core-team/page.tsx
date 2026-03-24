@@ -87,7 +87,7 @@ export default function CoreTeamPage() {
               className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 md:gap-8 text-blue-200 px-4"
             >
               <div className="text-center">
-                <div className="text-3xl sm:text-4xl font-bold text-white">35+</div>
+                <div className="text-3xl sm:text-4xl font-bold text-white">20+</div>
                 <div className="text-xs sm:text-sm">Years Combined Experience</div>
               </div>
               <div className="text-center">
@@ -95,7 +95,7 @@ export default function CoreTeamPage() {
                 <div className="text-xs sm:text-sm">Deals Closed</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl sm:text-4xl font-bold text-white">45+</div>
+                <div className="text-3xl sm:text-4xl font-bold text-white">50+</div>
                 <div className="text-xs sm:text-sm">Happy Clients</div>
               </div>
             </motion.div>
