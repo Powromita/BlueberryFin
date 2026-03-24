@@ -149,9 +149,9 @@ export function HeroSection() {
             >
               {/* Main Heading */}
               <h1 className="text-2xl min-[400px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 md:mb-8 leading-tight drop-shadow-lg px-4 sm:px-0">
-                Enhance your
+                Enhance your Finance
                 <br />
-                Finance with BlueberryFin
+                with BlueberryFin Capital
               </h1>
 
               {/* Subtext */}
@@ -188,13 +188,13 @@ export function HeroSection() {
                     animate={{ scale: 1 }}
                     transition={{ delay: 1.1, type: "spring", stiffness: 200 }}
                   >
-                    75K+
+                    50+
                   </motion.h3>
                   <p className="text-xs sm:text-sm text-gray-300 flex items-center justify-center gap-1">
                     <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
-                    Users
+                    Corporate Clients
                   </p>
                 </div>
                 <div className="text-center">
@@ -220,13 +220,13 @@ export function HeroSection() {
                     animate={{ scale: 1 }}
                     transition={{ delay: 1.3, type: "spring", stiffness: 200 }}
                   >
-                    500+
+                    10+
                   </motion.h3>
                   <p className="text-xs sm:text-sm text-gray-300 flex items-center justify-center gap-1">
                     <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    Deals
+                    SMEs
                   </p>
                 </div>
                 <div className="text-center">
@@ -236,13 +236,13 @@ export function HeroSection() {
                     animate={{ scale: 1 }}
                     transition={{ delay: 1.4, type: "spring", stiffness: 200 }}
                   >
-                    92%
+                    20+
                   </motion.h3>
                   <p className="text-xs sm:text-sm text-gray-300 flex items-center justify-center gap-1">
                     <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                     </svg>
-                    Satisfaction
+                    Mid-Scale Businesses
                   </p>
                 </div>
               </motion.div>
