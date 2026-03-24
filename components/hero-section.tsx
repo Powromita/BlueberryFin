@@ -4,6 +4,12 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import { Logo } from "./logo"
+import {
+  BuildingOffice2Icon,
+  CurrencyRupeeIcon,
+  RocketLaunchIcon,
+  BuildingStorefrontIcon,
+} from "@heroicons/react/24/outline"
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false)
@@ -190,9 +196,7 @@ export function HeroSection() {
                     50+
                   </motion.h3>
                   <p className="text-xs sm:text-sm text-gray-300 flex items-center justify-center gap-1">
-                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                    </svg>
+                    <BuildingOffice2Icon className="w-3 h-3 sm:w-4 sm:h-4" />
                     Corporate Clients
                   </p>
                 </div>
@@ -206,9 +210,7 @@ export function HeroSection() {
                     ₹1700Cr+
                   </motion.h3>
                   <p className="text-xs sm:text-sm text-gray-300 flex items-center justify-center gap-1">
-                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <CurrencyRupeeIcon className="w-3 h-3 sm:w-4 sm:h-4" />
                     Managed
                   </p>
                 </div>
@@ -222,9 +224,7 @@ export function HeroSection() {
                     10+
                   </motion.h3>
                   <p className="text-xs sm:text-sm text-gray-300 flex items-center justify-center gap-1">
-                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                    <RocketLaunchIcon className="w-3 h-3 sm:w-4 sm:h-4" />
                     SMEs
                   </p>
                 </div>
@@ -238,9 +238,7 @@ export function HeroSection() {
                     20+
                   </motion.h3>
                   <p className="text-xs sm:text-sm text-gray-300 flex items-center justify-center gap-1">
-                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
-                    </svg>
+                    <BuildingStorefrontIcon className="w-3 h-3 sm:w-4 sm:h-4" />
                     Mid-Scale Businesses
                   </p>
                 </div>
