@@ -49,14 +49,14 @@ const features = [
 
 export function FeaturesHighlight() {
   return (
-    <section className="relative bg-[#f5f0eb] py-16 sm:py-24 overflow-hidden">
+    <section className="relative bg-[#0f2c59] py-16 sm:py-24 overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-[#0f2c59]/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#2563eb]/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-5">
           <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, #0f2c59 1px, transparent 0)',
+            backgroundImage: 'radial-gradient(circle at 2px 2px, #60a5fa 1px, transparent 0)',
             backgroundSize: '40px 40px'
           }} />
         </div>
@@ -65,10 +65,10 @@ export function FeaturesHighlight() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0f2c59] mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
             Why Choose BlueberryFin?
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-blue-100 max-w-3xl mx-auto">
             Experience world-class financial advisory with cutting-edge technology
           </p>
         </div>
@@ -96,7 +96,7 @@ export function FeaturesHighlight() {
                 className="group relative"
               >
                 {/* Large background number */}
-                <div className="absolute -top-4 -right-4 text-[#0f2c59]/5 text-[120px] font-bold select-none pointer-events-none">
+                <div className="absolute -top-4 -right-4 text-white/5 text-[120px] font-bold select-none pointer-events-none">
                   {feature.number}
                 </div>
 
@@ -106,17 +106,17 @@ export function FeaturesHighlight() {
                 </div>
 
                 {/* Feature number badge */}
-                <div className="inline-block px-3 py-1 bg-[#0f2c59]/10 rounded-full text-[#0f2c59] text-xs font-bold mb-3">
+                <div className="inline-block px-3 py-1 bg-white/10 rounded-full text-blue-200 text-xs font-bold mb-3">
                   Feature {feature.number}
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl sm:text-2xl font-bold text-[#0f2c59] mb-3">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
                   {feature.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                <p className="text-sm sm:text-base text-blue-100 leading-relaxed">
                   {feature.description}
                 </p>
               </motion.div>

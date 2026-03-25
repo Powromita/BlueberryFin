@@ -16,14 +16,14 @@ export function AboutSection() {
   ]
 
   return (
-    <section ref={ref} className="py-12 md:py-16 bg-[#0f2c59] relative overflow-hidden" id="about">
+    <section ref={ref} className="py-12 md:py-16 bg-[#f5f0eb] relative overflow-hidden" id="about">
       {/* Subtle background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-900/20 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-100/20 to-transparent pointer-events-none" />
       
       {/* Animated background elements */}
-      <div className="absolute inset-0 pointer-events-none opacity-10">
-        <div className="absolute top-20 right-20 w-96 h-96 bg-blue-400 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-purple-400 rounded-full blur-3xl" />
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 right-20 w-96 h-96 bg-[#0f2c59]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-96 h-96 bg-[#2563eb]/5 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -36,17 +36,17 @@ export function AboutSection() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="lg:col-span-7"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0f2c59] mb-6 leading-tight">
               Who We Are
             </h2>
 
-            <div className="space-y-4 text-base sm:text-lg text-blue-100 leading-relaxed">
+            <div className="space-y-4 text-base sm:text-lg text-gray-600 leading-relaxed">
               <p>
                 Relationship-Driven Excellence from Private Equity to Public Markets
               </p>
 
               <p>
-                <span className="font-bold text-white">BlueberryFin Capital</span> is a capital advisory and investment banking firm delivering strategic, unbiased financial guidance across the entire capital lifecycle.
+                <span className="font-bold text-[#0f2c59]">BlueberryFin Capital</span> is a capital advisory and investment banking firm delivering strategic, unbiased financial guidance across the entire capital lifecycle.
               </p>
               <p>
                 We partner with businesses over the long term supporting them from early-stage private equity funding to public market transactions. Our approach is rooted in deep relationships, disciplined execution, and a strong understanding of capital markets.
@@ -88,12 +88,12 @@ export function AboutSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-            className="lg:col-span-5 lg:pl-12 lg:border-l border-white/20"
+            className="lg:col-span-5 lg:pl-12 lg:border-l border-[#0f2c59]/20"
           >
             <div className="space-y-8">
               <div className="mb-6">
-                <h3 className="text-xl font-bold text-white mb-3">Our Vision</h3>
-                <p className="text-base text-blue-100 italic">
+                <h3 className="text-xl font-bold text-[#0f2c59] mb-3">Our Vision</h3>
+                <p className="text-base text-gray-600 italic">
                   "To be a trusted capital advisory firm known for leadership, discipline, and consistent execution.
                 </p>
               </div>
@@ -110,13 +110,13 @@ export function AboutSection() {
                   transition={{ duration: 0.6, delay: 0.4 + idx * 0.1, ease: "easeOut" }}
                   className="group"
                 >
-                  <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#60a5fa] mb-2 leading-none group-hover:scale-105 transition-transform duration-300">
+                  <div className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#2563eb] mb-2 leading-none group-hover:scale-105 transition-transform duration-300">
                     {stat.number}
                   </div>
-                  <div className="text-lg font-bold text-white mb-1">
+                  <div className="text-lg font-bold text-[#0f2c59] mb-1">
                     {stat.label}
                   </div>
-                  <div className="text-base text-blue-200">
+                  <div className="text-base text-gray-500">
                     {stat.sublabel}
                   </div>
                 </motion.div>
