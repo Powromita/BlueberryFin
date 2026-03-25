@@ -6,6 +6,7 @@ import { HeroSection } from "@/components/hero-section"
 import { InteractiveImageBackground } from "@/components/interactive-image-background"
 import { AboutSection } from "@/components/about-section"
 import { ServicesSection } from "@/components/services-section"
+import { ServicesGrid } from "@/components/services-grid"
 import { ClientsSection } from "@/components/clients-section"
 import { EndingSection } from "@/components/ending-section"
 import { Footer } from "@/components/footer"
@@ -86,11 +87,12 @@ export default function Home() {
         <main className="min-h-screen">
           <Navbar />
           <HeroSection />
-          <InteractiveImageBackground />
+          {/* <InteractiveImageBackground /> */}
           <AboutSection />
           <FeaturesHighlight />
           {/* <ProcessTimeline /> */}
           <ServicesSection />
+          <ServicesGrid />
           {/* <ClientsSection /> */}
           <EndingSection />
           <Footer />
