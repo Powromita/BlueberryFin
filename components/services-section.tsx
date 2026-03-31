@@ -14,60 +14,56 @@ import {
   RocketLaunchIcon,
 } from "@heroicons/react/24/outline"
 
-const serviceCategories = {
-  "Corporate Finance": [
-    {
-      title: "IPO Advisory & Capital Markets",
-      description: "Guiding businesses through one of the most critical phases of their growth journey.",
-      briefInfo: "Guide companies through IPO process, regulatory compliance, and market positioning",
-      icon: ChartBarIcon,
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-      href: "/services/ipo-advisory",
-    },
-    {
-      title: "Fundraising Advisory",
-      description: "Strategic support for assessing readiness and securing capital.",
-      briefInfo: "End-to-end fundraising support from readiness to post-funding",
-      icon: CurrencyDollarIcon,
-      image: "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=800&h=600&fit=crop",
-      href: "/services/fundraising",
-    },
-    {
-      title: "Debt Syndication",
-      description: "Customized debt solutions for growth and expansion.",
-      briefInfo: "Structuring optimal debt with end-to-end execution support",
-      icon: CreditCardIcon,
-      image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop",
-      href: "/services/debt-syndication",
-    },
-  ],
-  "Strategic Transactions": [
-    {
-      title: "Mergers & Acquisitions (M&A)",
-      description: "End-to-end support for complex mergers, acquisitions, and strategic partnerships.",
-      briefInfo: "Complete advisory from strategy formulation to transaction closure",
-      icon: UserGroupIcon,
-      image: "/mergers-acquisitions-prepartion-tips.jpg",
-      href: "/services/mergers-acquisitions",
-    },
-    {
-      title: "Private Equity Advisory",
-      description: "Unlocking value and connecting businesses with the right partners.",
-      briefInfo: "End-to-end transaction advisory, pre-deal support, and post-investment integration",
-      icon: BuildingOfficeIcon,
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
-      href: "/services/private-equity",
-    },
-    {
-      title: "Startup Advisory",
-      description: "Helping founders build strong foundations and scale sustainably.",
-      briefInfo: "Strategic guidance for early-stage companies and growth readiness",
-      icon: RocketLaunchIcon,
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
-      href: "/services/startup-advisory",
-    },
-  ],
-}
+const services = [
+  {
+    title: "Private Equity Advisory",
+    description: "BlueberryFin Capital offers elite-tier private equity advisory, designed for high-growth companies and sophisticated sponsors.",
+    briefInfo: "Investor-grade deal structuring, selective high-value placements, and IPO-aligned PE round planning",
+    icon: BuildingOfficeIcon,
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
+    href: "/services/private-equity",
+  },
+  {
+    title: "IPO Advisory & Capital Markets",
+    description: "BlueberryFin Capital offers elite-grade IPO advisory solutions for companies transitioning from private to public markets.",
+    briefInfo: "End-to-end IPO roadmap, SEBI/listing compliance, governance improvements, and valuation narrative",
+    icon: ChartBarIcon,
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+    href: "/services/ipo-advisory",
+  },
+  {
+    title: "Mergers & Acquisitions (M&A)",
+    description: "BlueberryFin Capital offers elite-tier M&A advisory for founders, promoters, and institutions aiming strategic growth or value realisation.",
+    briefInfo: "Strategic deal origination, detailed evaluation, and end-to-end transaction advisory from valuation to integration",
+    icon: UserGroupIcon,
+    image: "/mergers-acquisitions-prepartion-tips.jpg",
+    href: "/services/mergers-acquisitions",
+  },
+  {
+    title: "Fundraising Advisory",
+    description: "Strategic support for assessing readiness and securing capital.",
+    briefInfo: "End-to-end fundraising support from readiness to post-funding",
+    icon: CurrencyDollarIcon,
+    image: "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=800&h=600&fit=crop",
+    href: "/services/fundraising",
+  },
+  {
+    title: "Debt Syndication",
+    description: "Customized debt solutions for growth and expansion.",
+    briefInfo: "Structuring optimal debt with end-to-end execution support",
+    icon: CreditCardIcon,
+    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop",
+    href: "/services/debt-syndication",
+  },
+  {
+    title: "Startup Advisory",
+    description: "Helping founders build strong foundations and scale sustainably.",
+    briefInfo: "Strategic guidance for early-stage companies and growth readiness",
+    icon: RocketLaunchIcon,
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+    href: "/services/startup-advisory",
+  },
+]
 
 export function ServicesSection() {
   const { ref, inView } = useInView({
@@ -75,10 +71,9 @@ export function ServicesSection() {
     triggerOnce: true,
   })
 
-  const [activeCategory, setActiveCategory] = useState<"Corporate Finance" | "Strategic Transactions">("Corporate Finance")
   const [selectedService, setSelectedService] = useState(0)
 
-  const currentServices = serviceCategories[activeCategory]
+  const currentServices = services
 
   return (
     <section
@@ -114,42 +109,10 @@ export function ServicesSection() {
           <div className="w-24 h-1 bg-gradient-to-r from-[#001f3f] via-[#0052cc] to-[#001f3f] mx-auto rounded-full mb-4" />
         </motion.div>
 
-        {/* Category Tabs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mb-6 sm:mb-8 px-4 sm:px-0"
-        >
-          <button
-            onClick={() => {
-              setActiveCategory("Corporate Finance")
-              setSelectedService(0)
-            }}
-            className={`px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base min-h-[44px] ${activeCategory === "Corporate Finance"
-              ? "bg-[#0f2c59] text-white shadow-lg"
-              : "bg-[#f5f0eb] text-[#001f3f] border-2 border-gray-200 hover:border-[#0052cc]"
-              }`}
-          >
-            Corporate Finance
-          </button>
-          <button
-            onClick={() => {
-              setActiveCategory("Strategic Transactions")
-              setSelectedService(0)
-            }}
-            className={`px-6 sm:px-8 py-3 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base min-h-[44px] ${activeCategory === "Strategic Transactions"
-              ? "bg-[#0f2c59] text-white shadow-lg"
-              : "bg-[#f5f0eb] text-[#001f3f] border-2 border-gray-200 hover:border-[#0052cc]"
-              }`}
-          >
-            Strategic Transactions
-          </button>
-        </motion.div>
 
         {/* Main Content Area */}
         <motion.div
-          key={activeCategory}
+          key={selectedService}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
