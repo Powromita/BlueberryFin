@@ -8,12 +8,12 @@ import { ChevronDownIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outli
 import { Logo } from "./logo"
 
 const services = [
-  { name: "IPO Advisory & Capital Markets", href: "/services/ipo-advisory" },
-  { name: "Fundraising Advisory", href: "/services/fundraising" },
   { name: "Private Equity Advisory", href: "/services/private-equity" },
+  { name: "IPO Advisory & Capital Markets", href: "/services/ipo-advisory" },
   { name: "Mergers & Acquisitions", href: "/services/mergers-acquisitions" },
-  { name: "Debt Syndication", href: "/services/debt-syndication" },
   { name: "Startup Advisory", href: "/services/startup-advisory" },
+  { name: "Fundraising Advisory", href: "/services/fundraising" },
+  { name: "Debt Syndication", href: "/services/debt-syndication" },
 ]
 
 export function Navbar() {
