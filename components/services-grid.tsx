@@ -16,11 +16,32 @@ import {
 
 const allServices = [
   {
+    title: "Private Equity Advisory",
+    description: "Unlocking value and connecting businesses with the right partners. Our private equity advisory services cover end-to-end transaction advisory, pre-deal structuring, investor identification, and post-investment integration support.",
+    icon: BuildingOfficeIcon,
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
+    href: "/services/private-equity",
+  },
+  {
     title: "IPO Advisory & Capital Markets",
     description: "Guiding businesses through one of the most critical phases of their growth journey. Our IPO and capital markets advisory services offer structured, detail-driven, and outcome-focused support across every stage of the IPO lifecycle — from early-stage readiness to post-listing strategy.",
     icon: ChartBarIcon,
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
     href: "/services/ipo-advisory",
+  },
+  {
+    title: "Mergers & Acquisitions",
+    description: "End-to-end support for complex mergers, acquisitions, and strategic partnerships. We guide clients through the full M&A lifecycle — from strategy formulation and target identification to due diligence, negotiation, and transaction closure.",
+    icon: UserGroupIcon,
+    image: "/mergers-acquisitions-prepartion-tips.jpg",
+    href: "/services/mergers-acquisitions",
+  },
+  {
+    title: "Startup Advisory",
+    description: "Helping founders build strong foundations and scale sustainably. We work with early-stage companies to assess growth readiness, build investor narratives, and structure capital raises tailored to the startup's stage and sector.",
+    icon: RocketLaunchIcon,
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+    href: "/services/startup-advisory",
   },
   {
     title: "Fundraising Advisory",
@@ -35,27 +56,6 @@ const allServices = [
     icon: CreditCardIcon,
     image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop",
     href: "/services/debt-syndication",
-  },
-  {
-    title: "Mergers & Acquisitions",
-    description: "End-to-end support for complex mergers, acquisitions, and strategic partnerships. We guide clients through the full M&A lifecycle — from strategy formulation and target identification to due diligence, negotiation, and transaction closure.",
-    icon: UserGroupIcon,
-    image: "/mergers-acquisitions-prepartion-tips.jpg",
-    href: "/services/mergers-acquisitions",
-  },
-  {
-    title: "Private Equity Advisory",
-    description: "Unlocking value and connecting businesses with the right partners. Our private equity advisory services cover end-to-end transaction advisory, pre-deal structuring, investor identification, and post-investment integration support.",
-    icon: BuildingOfficeIcon,
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
-    href: "/services/private-equity",
-  },
-  {
-    title: "Startup Advisory",
-    description: "Helping founders build strong foundations and scale sustainably. We work with early-stage companies to assess growth readiness, build investor narratives, and structure capital raises tailored to the startup's stage and sector.",
-    icon: RocketLaunchIcon,
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
-    href: "/services/startup-advisory",
   },
 ]
 

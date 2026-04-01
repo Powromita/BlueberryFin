@@ -91,7 +91,7 @@ export default function Home() {
           <AboutSection />
           <FeaturesHighlight />
           {/* <ProcessTimeline /> */}
-          <ServicesSection />
+          { /*<ServicesSection /> */}
           <ServicesGrid />
           {/* <ClientsSection /> */}
           <EndingSection />

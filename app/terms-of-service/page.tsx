@@ -54,7 +54,7 @@ export default function TermsOfServicePage() {
 
           <h2 className="text-2xl font-bold text-[#0f2c59] mt-8 mb-4">8. Contact Information</h2>
           <p className="text-gray-600 mb-6">
-            If you have any questions about these Terms, please contact us at legal@blueberryfin.com
+            If you have any questions about these Terms, please contact us at mit.mehta@blueberryfin.com
           </p>
         </div>
       </div>

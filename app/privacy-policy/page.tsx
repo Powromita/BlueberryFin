@@ -49,7 +49,7 @@ export default function PrivacyPolicyPage() {
 
           <h2 className="text-2xl font-bold text-[#0f2c59] mt-8 mb-4">6. Contact Us</h2>
           <p className="text-gray-600 mb-6">
-            If you have any questions about this Privacy Policy, please contact us at privacy@blueberryfin.com
+            If you have any questions about this Privacy Policy, please contact us at mit.mehta@blueberryfin.com
           </p>
         </div>
       </div>
