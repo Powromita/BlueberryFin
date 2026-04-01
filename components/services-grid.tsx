@@ -17,45 +17,45 @@ import {
 const allServices = [
   {
     title: "Private Equity Advisory",
-    description: "Unlocking value and connecting businesses with the right partners. Our private equity advisory services cover end-to-end transaction advisory, pre-deal structuring, investor identification, and post-investment integration support.",
+    description: "BlueberryFin Capital offers elite-tier private equity advisory, designed for high-growth companies and sophisticated sponsors. Investor-grade deal structuring, selective high-value placements, and IPO-aligned PE round planning.",
     icon: BuildingOfficeIcon,
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
     href: "/services/private-equity",
   },
   {
     title: "IPO Advisory & Capital Markets",
-    description: "Guiding businesses through one of the most critical phases of their growth journey. Our IPO and capital markets advisory services offer structured, detail-driven, and outcome-focused support across every stage of the IPO lifecycle — from early-stage readiness to post-listing strategy.",
+    description: "BlueberryFin Capital offers elite-grade IPO advisory solutions for companies transitioning from private to public markets. End-to-end IPO roadmap with SEBI/listing compliance, governance readiness, and valuation narrative.",
     icon: ChartBarIcon,
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
     href: "/services/ipo-advisory",
   },
   {
     title: "Mergers & Acquisitions",
-    description: "End-to-end support for complex mergers, acquisitions, and strategic partnerships. We guide clients through the full M&A lifecycle — from strategy formulation and target identification to due diligence, negotiation, and transaction closure.",
+    description: "BlueberryFin Capital offers elite-tier M&A advisory for founders, promoters, and institutions seeking strategic growth or value realisation. Strategic origination, mapping, and end-to-end transaction support from valuation to integration.",
     icon: UserGroupIcon,
     image: "/mergers-acquisitions-prepartion-tips.jpg",
     href: "/services/mergers-acquisitions",
   },
   {
-    title: "Startup Advisory",
-    description: "Helping founders build strong foundations and scale sustainably. We work with early-stage companies to assess growth readiness, build investor narratives, and structure capital raises tailored to the startup's stage and sector.",
-    icon: RocketLaunchIcon,
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
-    href: "/services/startup-advisory",
-  },
-  {
     title: "Fundraising Advisory",
-    description: "Strategic support for assessing readiness and securing capital. We support businesses through every stage of their fundraising journey — helping them articulate their value proposition, identify the right investors, and raise capital on the right terms, at the right time.",
+    description: "Strategic support for assessing readiness and securing capital. We support businesses through every stage of fundraising — articulating value, identifying investors, and raising capital on the right terms.",
     icon: CurrencyDollarIcon,
     image: "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=800&h=600&fit=crop",
     href: "/services/fundraising",
   },
   {
     title: "Debt Syndication",
-    description: "Customised debt solutions aligned with your funding needs and growth objectives. We provide tailored and integrated debt solutions designed to align with the unique funding needs of our clients, delivered on an end-to-end basis.",
+    description: "Customized debt solutions aligned with growth objectives. Tailored structures, integrated execution, and long-term capital optimization.",
     icon: CreditCardIcon,
     image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop",
     href: "/services/debt-syndication",
+  },
+  {
+    title: "Startup Advisory",
+    description: "Helping founders build strong foundations and scale sustainably. We work with early-stage companies to assess readiness, shape investor narratives, and structure growth capital raises.",
+    icon: RocketLaunchIcon,
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+    href: "/services/startup-advisory",
   },
 ]
 
