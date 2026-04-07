@@ -84,15 +84,11 @@ export default function CoreTeamPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 md:gap-8 text-blue-200 px-4"
+              className="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center gap-8 sm:gap-16 md:gap-24 text-blue-200 px-4"
             >
               <div className="text-center">
                 <div className="text-3xl sm:text-4xl font-bold text-white">20+</div>
                 <div className="text-xs sm:text-sm">Years Combined Experience</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl sm:text-4xl font-bold text-white">₹1700Cr+</div>
-                <div className="text-xs sm:text-sm">Deals Closed</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl sm:text-4xl font-bold text-white">50+</div>

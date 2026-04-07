@@ -94,14 +94,12 @@ export function AboutSection() {
               <div className="mb-6">
                 <h3 className="text-xl font-bold text-[#0f2c59] mb-3">Our Vision</h3>
                 <p className="text-base text-gray-600 italic">
-                  "To be a trusted capital advisory firm known for leadership, discipline, and consistent execution.
+                  "To be a trusted capital advisory firm known for leadership, discipline, and consistent execution."
                 </p>
               </div>
               
               {[
                  { number: "20+", label: "Years Experience", sublabel: "In Financial Management" },
-                 { number: "1700+", label: "Crores Raised", sublabel: "($180M+)" },
-                 //{ number: "360°", label: "Perspective", sublabel: "Corporate & Banking" },
               ].map((stat, idx) => (
                 <motion.div
                   key={idx}

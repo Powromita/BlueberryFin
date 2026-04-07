@@ -6,7 +6,6 @@ import Link from "next/link"
 import { Logo } from "./logo"
 import {
   BuildingOffice2Icon,
-  CurrencyRupeeIcon,
   RocketLaunchIcon,
   BuildingStorefrontIcon,
 } from "@heroicons/react/24/outline"
@@ -184,7 +183,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.9, duration: 0.8 }}
-                className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto px-4 sm:px-0"
+                className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-10 max-w-3xl mx-auto px-4 sm:px-0"
               >
                 <div className="text-center">
                   <motion.h3
@@ -207,20 +206,6 @@ export function HeroSection() {
                     animate={{ scale: 1 }}
                     transition={{ delay: 1.2, type: "spring", stiffness: 200 }}
                   >
-                    ₹1700Cr+
-                  </motion.h3>
-                  <p className="text-xs sm:text-sm text-gray-300 flex items-center justify-center gap-1">
-                    <CurrencyRupeeIcon className="w-3 h-3 sm:w-4 sm:h-4" />
-                    Managed
-                  </p>
-                </div>
-                <div className="text-center">
-                  <motion.h3
-                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 sm:mb-2"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 1.3, type: "spring", stiffness: 200 }}
-                  >
                     10+
                   </motion.h3>
                   <p className="text-xs sm:text-sm text-gray-300 flex items-center justify-center gap-1">
@@ -233,7 +218,7 @@ export function HeroSection() {
                     className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 sm:mb-2"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    transition={{ delay: 1.4, type: "spring", stiffness: 200 }}
+                    transition={{ delay: 1.3, type: "spring", stiffness: 200 }}
                   >
                     20+
                   </motion.h3>
